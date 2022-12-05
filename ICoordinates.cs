@@ -10,5 +10,10 @@ namespace TableGame
     {
         public int PosX { get; }
         public int PosY { get; }
+
+        public string GetCoordinates(ICoordinates o)
+        {
+            return PosX.ToString() + "," + PosY.ToString();
+        }
     }
 }
