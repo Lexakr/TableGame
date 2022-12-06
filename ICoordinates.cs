@@ -11,7 +11,7 @@ namespace TableGame
         public int PosX { get; }
         public int PosY { get; }
 
-        public string GetCoordinates(ICoordinates o)
+        string GetLocation()
         {
             return PosX.ToString() + "," + PosY.ToString();
         }

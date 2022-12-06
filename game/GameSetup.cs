@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TableGame.map;
 
-namespace TableGame
+namespace TableGame.game
 {
-    internal class Game
+    internal class GameSetup
     {
-        public Map GameMap { get; set; }
+
     }
 }

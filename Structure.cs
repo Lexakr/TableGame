@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TableGame
 {
-    internal class Structure : ICoordinates
+    internal class Structure : MapObject
     {
-        public int PosX { get; }
-        public int PosY { get; }
+
+
     }
 }

@@ -8,5 +8,6 @@ namespace TableGame.abilities
 {
     abstract internal class Ability
     {
+        public string Name { get; set; }
     }
 }

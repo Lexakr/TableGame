@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TableGame
+namespace TableGame.units
 {
-    internal interface IMapObject : ICoordinates
+    internal class SoldierOrks : Soldier
     {
 
     }

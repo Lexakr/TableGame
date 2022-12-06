@@ -8,7 +8,13 @@ namespace TableGame.units
 {
     internal class Soldier : Unit
     {
+        public Soldier() 
+        {
+            PosX = 1;
+            PosY = 1;
+            Name = "Soldier";
 
+        }
     }
 
 

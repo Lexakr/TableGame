@@ -4,35 +4,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TableGame.abilities;
+using TableGame.units;
+using TableGame.map;
+using TableGame.fractions;
 
 namespace TableGame.units
 {
-    internal class Unit : ICoordinates
+    internal abstract class Unit : MapObject
     {
-        private int posY;
-        public string Name { get; set; }
-        public string Fraction { get; set; }
-        public string Race { get; set; }
-        public int Health { get; set; }
-        public int MaxHealth { get; }
+        public string UnitFraction { get; set; } // 
+        public int Health { get; set; } // а надо ли?
+        public int MaxHealth { get; } // количество урона, которое модель выдержит и не погибнет
         public int Price { get; } // "стоимость" юнита в очках
-
         public bool IsMelee { get; set; } // может ли ближний бой
         public bool IsRange { get; set; } // может ли дальний бой
         public int Power { get; set; } // физическая сила модели и вероятность нанесения урона в рукопашном бою
-        public int Durability { get; set; } //сопротивляемость модели физическому урону.
-        public int Wounds { get; set; } // количество урона, которое модель выдержит и не погибнет
         public int MeleeAttacks { get; set; } // Количество ударов, которые модель может нанести в рукопашном бою
         public int Defense { get; set; } // защита, которую броня даёт модели.
-
-        public int PosX { get; set; }
-        public int PosY { get => posY; set => posY = value; }
+        public int MovePoints { get; set; }
         public List<Ability>? Abilities { get; set; }
+
+        /// <summary>
+        /// Юнит по умолчанию соответствует Imperium Soldier
+        /// </summary>
         public Unit()
         {
-            // by default
-            Name = "Unit";
-            Fraction = "Neutral";
+            MaxHealth = 4;
+            Health = MaxHealth; // полное здоровье
+            Price = 50;
+            IsMelee = true;
+            IsRange = true;
+            Power = 4;
+            MeleeAttacks = 2;
+            Defense = 3;
+            MovePoints = 7;
+        }
+
+        /// <summary>
+        /// Перемещение Unit на новый Tile
+        /// </summary>
+        /// <param name="t">Тайл на который перемещаемся</param>
+        public void MoveTo(Tile t)
+        {
+            if (UnitUtility.IsMovable(t))
+            {
+                CurrentLocation = t;
+                PosX = t.PosX;
+                PosY = t.PosY;
+            }
+            else
+                Console.WriteLine("Location is busy.");
+            
+        }
+
+        public void Attack()
+        {
+
         }
     }
 }

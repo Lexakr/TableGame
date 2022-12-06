@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TableGame.units;
 
 namespace TableGame.fractions
 {
     abstract internal class Fraction
     {
         public string Name { get; set; }
-        public List<string> UnitsList { get; set; }
-        protected Fraction() 
-        {
-            Name = "Fraction";
-        }
+        public List<Unit> FractionUnits { get; set; }
 
-        public void FractionInfo()
+        public void ShowFractionUnits()
         {
             Console.WriteLine("Fraction: " + Name);
         }
@@ -26,7 +23,12 @@ namespace TableGame.fractions
     {
         public Imperium()
         {
-            Name = "Imperium of Man";
+            Name = "Imperium";
+            FractionUnits = new List<Unit>
+            {
+                new SoldierImperium(),
+                // ...
+            };
         }
     }
 
@@ -35,6 +37,10 @@ namespace TableGame.fractions
         public Orks()
         {
             Name = "Orks";
+            FractionUnits = new List<Unit> 
+            { 
+                new SoldierOrks(), 
+            };
         }
         
     }

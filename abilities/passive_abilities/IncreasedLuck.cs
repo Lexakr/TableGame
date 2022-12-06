@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TableGame
+namespace TableGame.abilities.passive_abilities
 {
-    internal class GameStat
+    internal class IncreasedLuck : PassiveAbility
     {
-        public int Points { get; }
+
     }
 }

@@ -11,4 +11,8 @@
     <Compile Remove="UnitStats.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="abilities\active_abilities\" />
+  </ItemGroup>
+
 </Project>

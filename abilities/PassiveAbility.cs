@@ -8,6 +8,10 @@ namespace TableGame.abilities
 {
     internal class PassiveAbility : Ability, IAbility
     {
+        public PassiveAbility() 
+        {
+            Name = "Passive Ability";
+        }
 
     }
 }
