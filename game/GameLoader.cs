@@ -1,70 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using TableGame.game;
+﻿using System.Text.Json;
 
 namespace TableGame.game
 {
+    /// <summary>
+    /// Класс для загрузки и сохранения игровых сессий.
+    /// </summary>
     internal static class GameLoader
     {
         /// <summary>
         /// Загрузка игровой сессии. JSON десериализация из массива байтов UTF-8.
         /// </summary>
-        /// <param name="fileName">Имя файла</param>
-        /// <returns></returns>
-        public static Game LoadGame(string fileName)
+        public static Game? LoadGame(string fileName)
         {
             try
             {
+                using var stream = new FileStream(fileName, FileMode.Open);
+                // Обрабатывать поля, использовать конвертер для 2D массивов
                 var options = new JsonSerializerOptions
                 {
                     Converters = { new Array2DConverter() },
+                    IncludeFields = true
                 };
-                string jsonUtf8Bytes = File.ReadAllText(fileName);
-                // перегрузка десериализации (из документации)
-                //var utf8Reader = new Utf8JsonReader(jsonUtf8Bytes);
-                Game loadedGame = JsonSerializer.Deserialize<Game>(jsonUtf8Bytes, options);
-                return loadedGame;
+                return JsonSerializer.Deserialize<Game>(stream, options);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                // Возвращаем null как неудачу операции
                 return null;
             }
         }
-
         /// <summary>
-        /// Сохранение игровой сессии. JSON сериализация в массив байтов UTF-8.
+        /// Сохранение игровой сессии. JSON сериализация в текст UTF-8.
         /// </summary>
-        /// <remarks>
-        /// UTF-8 сокращает временные затраты на 5-10%.
-        /// </remarks>
-        /// <param name="o">Сессия для сохранения</param>
-        /// <param name="fileName">Имя файла</param>
-        /// <returns></returns>
         public static bool SaveGame(Game o, string fileName)
         {
-            //_ = new JsonSerializerOptions { IncludeFields = true };
             var options = new JsonSerializerOptions
             {
+                IncludeFields = true,
                 Converters = { new Array2DConverter() },
             };
             try
             {
-                string jsonString = JsonSerializer.Serialize(o, options);
-                //byte[] jsonString = JsonSerializer.SerializeToUtf8Bytes(o, options);
-                File.WriteAllText(fileName, jsonString);
+                using var stream = new FileStream(fileName, FileMode.Create);
+                JsonSerializer.Serialize(stream, o, options);
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception in serialization: " + e.Message);
+                Console.WriteLine(e.Message);
                 return false;
             }
         }
