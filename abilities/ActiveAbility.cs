@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TableGame.abilities
 {
-    internal class ActiveAbility : Ability, IAbility
+    internal class ActiveAbility : Ability
     {
-
+        public ActiveAbility(string Name) : base(Name)
+        {
+        }
     }
 }

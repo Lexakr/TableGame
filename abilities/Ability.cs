@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace TableGame.abilities
 {
-    abstract internal class Ability
+    internal class Ability
     {
         public string Name { get; set; }
+
+        [System.Text.Json.Serialization.JsonConstructor]
+        public Ability(string Name)
+        {
+            this.Name = Name;
+        }
+
     }
 }

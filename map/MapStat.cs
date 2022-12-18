@@ -11,14 +11,18 @@ namespace TableGame.map
     {
         public string Size { get; set; }
         public List<Unit?> Units { get; set; }
-        public MapStat()
-        {
 
-        }
         public MapStat(Map map) 
         {
             Size = "Map size: " + map.Size_x + "*" + map.Size_y;
             Units = new List<Unit?>();
+        }
+
+        [System.Text.Json.Serialization.JsonConstructor]
+        public MapStat(string Size, List<Unit?> Units)
+        { 
+            this.Size = Size;
+            this.Units = Units;
         }
         public void ShowMapStats(Map map)
         {

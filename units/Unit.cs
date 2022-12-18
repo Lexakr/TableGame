@@ -10,7 +10,7 @@ using TableGame.fractions;
 
 namespace TableGame.units
 {
-    internal abstract class Unit : MapObject
+    internal class Unit : MapObject
     {
         public string UnitFraction { get; set; } // 
         public int Health { get; set; } // а надо ли?
@@ -38,6 +38,33 @@ namespace TableGame.units
             MeleeAttacks = 2;
             Defense = 3;
             MovePoints = 7;
+            UnitFraction = "Fraction";
+        }
+/*        Name = "Name";
+            PosX = -1;
+            PosY = -1;
+            CurrentLocation = null;*/
+
+        [System.Text.Json.Serialization.JsonConstructor]
+        public Unit(string Name, int PosX, int PosY, Tile? CurrentLocation, string UnitFraction, int Health, int MaxHealth, int Price, 
+            bool IsMelee, bool IsRange, int Power, int MeleeAttacks, int Defense, 
+            int MovePoints, List<Ability>? Abilities)
+        {
+            this.Name = Name;
+            this.PosX = PosX;
+            this.PosY = PosY;
+            this.CurrentLocation = CurrentLocation;
+            this.UnitFraction = UnitFraction;
+            this.Health = Health;
+            this.MaxHealth = MaxHealth;
+            this.Price = Price;
+            this.IsMelee = IsMelee;
+            this.IsRange = IsRange;
+            this.Power = Power;
+            this.MeleeAttacks = MeleeAttacks;
+            this.Defense = Defense;
+            this.MovePoints = MovePoints;
+            this.Abilities = Abilities;
         }
 
         /// <summary>
@@ -45,7 +72,8 @@ namespace TableGame.units
         /// </summary>
         /// <param name="t">Тайл на который перемещаемся</param>
         public void MoveTo(Tile t)
-        {
+        { 
+            ((ICoordinates)t).GetLocation(); // Приведение к интерфейсу
             if (UnitUtility.IsMovable(t))
             {
                 CurrentLocation = t;

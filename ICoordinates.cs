@@ -16,4 +16,14 @@ namespace TableGame
             return PosX.ToString() + "," + PosY.ToString();
         }
     }
+
+    internal interface IMovable
+    {
+        public (int, int) Location { get; set; }
+        // Метод, изменяющий расположение исходя из направления и скорости движения
+        public void Move()
+        {
+            ///
+        }
+    }
 }

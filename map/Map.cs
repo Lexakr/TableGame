@@ -36,6 +36,16 @@ namespace TableGame.map
             coordinates = TileCreator(size_x, size_y);
         }
 
+        [System.Text.Json.Serialization.JsonConstructor]
+        public Map(int size_x, int size_y, string name, Tile[,] coordinates)
+        {
+            this.name = name;
+            this.size_x = size_x;
+            this.size_y = size_y;
+            this.coordinates = coordinates;
+        }
+
+        //public Map()
         public Tile[,] TileCreator(int size_x, int size_y)
         {
             Tile[,] newMap = new Tile[size_x, size_y];

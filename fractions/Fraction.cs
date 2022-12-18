@@ -12,6 +12,14 @@ namespace TableGame.fractions
         public string Name { get; set; }
         public List<Unit> FractionUnits { get; set; }
 
+        public Fraction() { }
+        [System.Text.Json.Serialization.JsonConstructor]
+        public Fraction (string name, List<Unit> fractionUnits)
+        {
+            Name = name;
+            FractionUnits = fractionUnits;
+        }
+
         public void ShowFractionUnits()
         {
             Console.WriteLine("Fraction: " + Name);

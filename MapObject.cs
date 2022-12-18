@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TableGame
 {
-    internal abstract class MapObject : ICoordinates
+    internal class MapObject : ICoordinates
     {
         public string Name { get; set; }
         public int PosX { get; set; }
@@ -23,6 +23,15 @@ namespace TableGame
             PosX = -1;
             PosY = -1;
             CurrentLocation = null;
+        }
+
+        [System.Text.Json.Serialization.JsonConstructor]
+        public MapObject(string name, int posX, int posY, Tile? currentLocation)
+        {
+            Name = name;
+            PosX = posX;
+            PosY = posY;
+            CurrentLocation = currentLocation;
         }
     }
 }

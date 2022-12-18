@@ -8,6 +8,8 @@ namespace TableGame.abilities.passive_abilities
 {
     internal class IncreasedLuck : PassiveAbility
     {
-
+        public IncreasedLuck(string Name) : base(Name)
+        {
+        }
     }
 }

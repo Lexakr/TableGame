@@ -14,12 +14,18 @@ namespace TableGame.units
         public SoldierImperium()
         {
             Name = "Imperium Soldier";
-            UnitFraction = new Imperium().Name;
+            UnitFraction = "Imperium";
             Abilities = new List<Ability>
             {
-                new IncreasedLuck(),
+                new IncreasedLuck("Lucker"),
             };
-
+        }
+        [System.Text.Json.Serialization.JsonConstructor]
+        public SoldierImperium(string name, string unitfraction, List<Ability>? abilities)
+        {
+            Name =name;
+            UnitFraction = unitfraction;
+            Abilities = abilities;
         }
     }
 }

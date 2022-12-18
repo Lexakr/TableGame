@@ -30,6 +30,15 @@ namespace TableGame
             this.posY = posY;
         }
 
+        [System.Text.Json.Serialization.JsonConstructor]
+        public Tile(int posX, int posY, MapObject? tileObject, bool Passability)
+        {
+            this.posX = posX;
+            this.posY = posY;
+            this.tileObject = tileObject;
+            this.Passability = Passability;
+        }
+
         public void AddObj(MapObject e) => tileObject = e;
         public void RemoveObj() => tileObject = null;
     }

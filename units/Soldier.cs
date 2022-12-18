@@ -12,8 +12,13 @@ namespace TableGame.units
         {
             PosX = 1;
             PosY = 1;
-            Name = "Soldier";
+        }
 
+        [System.Text.Json.Serialization.JsonConstructor]
+        public Soldier(int posX, int posY)
+        {
+            PosX= posX;
+            PosY= posY;
         }
     }
 

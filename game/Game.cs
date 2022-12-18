@@ -13,15 +13,22 @@ namespace TableGame.game
     /// </summary>
     internal class Game
     {
-        public Game() { }
-
+        
         public Game(Map gameMap, GameStat gameStats, List<Player> players)
         {
             this.gameMap = gameMap;
             mapStats = new(gameMap);
             this.gameStats = gameStats;
             this.players = players;
-            
+        }
+
+        [System.Text.Json.Serialization.JsonConstructor]
+        public Game(Map gameMap, MapStat mapStats, GameStat gameStats, List<Player> players)
+        {
+            this.gameMap = gameMap;
+            this.mapStats = mapStats;
+            this.gameStats = gameStats;
+            this.players = players;
         }
 
         private readonly Map gameMap;
@@ -29,17 +36,17 @@ namespace TableGame.game
         private readonly GameStat gameStats;
         private readonly List<Player> players;
         
-        public Map GMap { get => gameMap; }
+        public Map GameMap { get => gameMap; }
         public MapStat MapStats { get => mapStats; }
         public GameStat GameStats { get => gameStats; }
         public List<Player> Players { get => players; }
 
-        public Game CreateGame()
+/*        public Game CreateGame()
         {
             Game _game = new();
 
 
             return _game;
-        }
+        }*/
     }
 }

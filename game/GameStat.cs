@@ -15,5 +15,12 @@ namespace TableGame.game
             MovesNum = movesNum;
             Points = 0;
         }
+
+        [System.Text.Json.Serialization.JsonConstructor]
+        public GameStat(int MovesNum, int Points)
+        {
+            this.MovesNum = MovesNum;
+            this.Points = Points;
+        }
     }
 }

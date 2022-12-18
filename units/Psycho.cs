@@ -8,5 +8,6 @@ namespace TableGame.units
 {
     internal class Psycho : Unit
     {
+
     }
 }

@@ -1,19 +1,18 @@
-﻿// See https://aka.ms/new-console-template for more information
-using TableGame;
+﻿using TableGame;
 using TableGame.game;
 using TableGame.map;
 
-Map _map = null;
-MapStat _mapStat = null;
-GameStat _gameStat = null;
-List<Player> _players = null;
-Game _game = null;
+Map? _map = null;
+MapStat? _mapStat = null;
+GameStat? _gameStat = null;
+List<Player>? _players = null;
+Game? _game = null;
 
 Menu menu = new();
 string userInput;
 
 // Главное меню
-while(true)
+while (true)
 {
     menu.DrawMainMenu();
     userInput = Console.ReadKey().KeyChar.ToString();
@@ -91,9 +90,9 @@ while (true)
     }
 }
 
-Console.WriteLine(_game.GMap.Name);
+Console.WriteLine(_game.GameMap.Name);
 GameLoader.SaveGame(_game, "game");
 _game = null;
 _game = GameLoader.LoadGame("game");
-Console.WriteLine(_game.GMap.Name);
+Console.WriteLine(_game.MapStats.ShowMapStats);
 Console.ReadKey();
