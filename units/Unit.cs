@@ -82,7 +82,6 @@ namespace TableGame.units
             }
             else
                 Console.WriteLine("Location is busy.");
-            
         }
 
         public void Attack()
