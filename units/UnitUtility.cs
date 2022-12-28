@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TableGame.units
+namespace TableGame.Units
 {
     internal static class UnitUtility
     {

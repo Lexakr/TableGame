@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TableGame.abilities;
-using TableGame.units;
-using TableGame.map;
-using TableGame.fractions;
+using TableGame.Abilities;
+using TableGame.Units;
+using TableGame.MapServices;
+using TableGame.Fractions;
 
-namespace TableGame.units
+namespace TableGame.Units
 {
     internal class Unit : MapObject
     {

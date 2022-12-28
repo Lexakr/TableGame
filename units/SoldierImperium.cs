@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TableGame.abilities;
-using TableGame.abilities.passive_abilities;
-using TableGame.fractions;
+using TableGame.Abilities;
+using TableGame.Abilities.Passive_abilities;
+using TableGame.Fractions;
 
-namespace TableGame.units
+namespace TableGame.Units
 {
     internal class SoldierImperium : Soldier
     {

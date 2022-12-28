@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TableGame.units;
+using TableGame.Units;
 
-namespace TableGame.fractions
+namespace TableGame.Fractions
 {
     abstract internal class Fraction
     {

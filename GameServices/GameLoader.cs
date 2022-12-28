@@ -1,6 +1,8 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.IO;
+using System.Text.Json;
 
-namespace TableGame.game
+namespace TableGame.GameServices
 {
     /// <summary>
     /// Класс для загрузки и сохранения игровых сессий.

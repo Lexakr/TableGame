@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TableGame.abilities.passive_abilities
+namespace TableGame.Abilities.Passive_abilities
 {
     internal class IncreasedLuck : PassiveAbility
     {

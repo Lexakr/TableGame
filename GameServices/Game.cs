@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TableGame.map;
+using TableGame.MapServices;
 
-namespace TableGame.game
+namespace TableGame.GameServices
 {
     /// <summary>
     /// Game хранит в себе всю логику игры, включая объект карты,

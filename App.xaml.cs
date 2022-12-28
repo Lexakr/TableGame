@@ -12,17 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TableGame.Views
+namespace TableGame
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Interaction logic for App.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class App : Application
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-                
-        }
     }
 }

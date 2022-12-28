@@ -1,4 +1,4 @@
-﻿using TableGame;
+﻿/*using TableGame;
 using TableGame.game;
 using TableGame.map;
 
@@ -95,4 +95,4 @@ GameLoader.SaveGame(_game, "game");
 _game = null;
 _game = GameLoader.LoadGame("game");
 Console.WriteLine(_game.MapStats.ShowMapStats);
-Console.ReadKey();
+Console.ReadKey();*/
