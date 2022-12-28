@@ -28,9 +28,28 @@ namespace TableGame
             this.PlayerUnits = PlayerUnits;
         }
 
-        public void PlayerMove()
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <param name="tile"></param>
+        public void Action(Unit unit, Tile tile)
+        {
+            //
+            MoveUnit(unit, tile);
+        }
+
+        /// <summary>
+        /// Переместить выделенного юнита на выбранную клетку
+        /// </summary>
+        /// <param name="unit">Выделенный на карте юнит</param>
+        /// <param name="tile">Выбранный на карте тайл</param>
+        public void MoveUnit(Unit unit, Tile tile)
         {
 
+            tile.AddObj(unit); 
+            unit.CurrentLocation = tile;
         }
 
     }

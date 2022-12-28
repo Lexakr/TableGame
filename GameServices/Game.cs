@@ -13,40 +13,59 @@ namespace TableGame.GameServices
     /// </summary>
     internal class Game
     {
-        
-        public Game(Map gameMap, GameStat gameStats, List<Player> players)
+        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer)
         {
             this.gameMap = gameMap;
             mapStats = new(gameMap);
             this.gameStats = gameStats;
-            this.players = players;
+            this.firstPlayer = firstPlayer;
+            this.secondPlayer = secondPlayer;
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
-        public Game(Map gameMap, MapStat mapStats, GameStat gameStats, List<Player> players)
+        public Game(Map gameMap, MapStat mapStats, GameStat gameStats, Player firstPlayer, Player secondPlayer)
         {
             this.gameMap = gameMap;
             this.mapStats = mapStats;
             this.gameStats = gameStats;
-            this.players = players;
+            this.firstPlayer = firstPlayer;
+            this.secondPlayer = secondPlayer;
         }
 
         private readonly Map gameMap;
         private readonly MapStat mapStats;
         private readonly GameStat gameStats;
-        private readonly List<Player> players;
-        
+
+        private readonly Player firstPlayer;
+        private readonly Player secondPlayer;
+
         public Map GameMap { get => gameMap; }
         public MapStat MapStats { get => mapStats; }
         public GameStat GameStats { get => gameStats; }
-        public List<Player> Players { get => players; }
+        public Player FirstPlayer { get => firstPlayer; }
+        public Player SecondPlayer { get => secondPlayer; }
+        public int CurrentStep { get; set; } = 0;
+        public int TotalSteps { get; set; } = 0;
+        public Player ActivePlayer { get; set; }
 
-/*        public Game CreateGame()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        public void NextStep()
         {
-            Game _game = new();
+            if (ActivePlayer == FirstPlayer)
+                ActivePlayer = SecondPlayer;
+            else
+                ActivePlayer = FirstPlayer;
+        }
 
+        public void Play()
+        {
+            for(int i = 0; i < TotalSteps; i++)
+            {
 
-            return _game;
-        }*/
+            }
+        }
     }
 }
