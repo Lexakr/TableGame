@@ -26,7 +26,7 @@ namespace TableGame.MapServices
         }
         public void ShowMapStats(Map map)
         {
-            Units = GetUnits(map);
+            /*Units = GetUnits(map);
             Console.WriteLine(Size);
             // TODO нормальный вывод объектов
             Console.WriteLine("Units on map: " + GetUnits(map).Count());
@@ -37,12 +37,12 @@ namespace TableGame.MapServices
                     Console.WriteLine("Unit {0} location: " + i.GetLocation(), unit.Name);
                 }
                 
-            }
+            }*/
             
         }
 
         // Получение списка всех Unit на карте
-        public List<Unit?> GetUnits(Map map)
+        /*public List<Unit?> GetUnits(Map map)
         {
             // реализовать через LINQ, мб в одну строку
             List<Unit?> tmp = new();
@@ -54,7 +54,7 @@ namespace TableGame.MapServices
                 }
             }
             return tmp;
-            /*            return map.Tiles
+            *//*            return map.Tiles
                             .Where(x => x.TileObject != null)
                             .ToList();*/
 
@@ -67,7 +67,7 @@ namespace TableGame.MapServices
                         Units.Add(ob);
                 }
             }
-            return Units;*/
-        }
+            return Units;*//*
+        }*/
     }
 }

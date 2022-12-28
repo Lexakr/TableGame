@@ -9,11 +9,9 @@
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-                    <MenuItem Header="_Open"/>
-                    <MenuItem Header="_Close"/>
-                    <MenuItem Header="_Save"/>
-                </MenuItem>
+                <MenuItem Header="Start new game"/>
+                <MenuItem Header="Save game"/>
+                <MenuItem Header="Load game"/>
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>

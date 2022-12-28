@@ -15,7 +15,10 @@
 
   <ItemGroup>
     <Folder Include="Abilities\active_abilities\" />
-    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview3" />
   </ItemGroup>
 
 </Project>
