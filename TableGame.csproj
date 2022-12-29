@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abilities\active_abilities\" />
+    <Folder Include="Abilities\Active_abilities\" />
   </ItemGroup>
 
   <ItemGroup>

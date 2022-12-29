@@ -49,23 +49,20 @@ namespace TableGame.GameServices
         public Player ActivePlayer { get; set; }
 
         /// <summary>
-        /// 
+        /// Передача хода другому игроку
         /// </summary>
         /// <param name="p"></param>
         public void NextStep()
         {
             if (ActivePlayer == FirstPlayer)
-                ActivePlayer = SecondPlayer;
-            else
-                ActivePlayer = FirstPlayer;
-        }
-
-        public void Play()
-        {
-            for(int i = 0; i < TotalSteps; i++)
             {
-
+                ActivePlayer = SecondPlayer;
             }
+            else
+            {
+                ActivePlayer = FirstPlayer;
+            }
+            CurrentStep++;
         }
     }
 }
