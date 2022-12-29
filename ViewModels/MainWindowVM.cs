@@ -10,6 +10,7 @@ using TableGame.MapServices;
 using Windows.Networking.Sockets;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using TableGame.Views;
 
 namespace TableGame.ViewModels
 {
@@ -29,6 +30,8 @@ namespace TableGame.ViewModels
         [ObservableProperty]
         private Game currentGame;
 
+        private GameLogic gameLogic;
+
 
         public MainWindowVM()
         {
@@ -38,6 +41,9 @@ namespace TableGame.ViewModels
                 new GameStat(16),
                 new Player(),
                 new Player());
+
+            gameLogic = new GameLogic();
+            gameLogic.OpenMenu += OpenChooseMenu;
         }
 
 
@@ -61,15 +67,24 @@ namespace TableGame.ViewModels
         {
             Debug.WriteLine($"Command ClickMapButton: x:{tile.PosX} y:{tile.PosY} Hash:{tile.Hash}");
 
-            
+            gameLogic.TileAction(ref tile, ref tile);
+
+            if (!tile.IsInteractable())
+                return;
+
+            Debug.WriteLine($"IsInteractable");
+
 
             // здесь должен быть метод Move и обработкой 2х тайлов
-            
+
         }
 
-        private void ChooseAction()
+        private int OpenChooseMenu(List<string> choices)
         {
+            var menuWindow = new ChooseActionsWindow(choices);
+            menuWindow.ShowDialog();
 
+            return menuWindow.ResultChoice;
         }
 
 
