@@ -8,7 +8,7 @@ namespace TableGame.Units
 {
     internal static class UnitUtility
     {
-        public static bool IsMovable(Tile t)
+        public static bool IsMovable(this Tile t)
         {
             if (t.Passability && t.TileObject == null)
                 return true;

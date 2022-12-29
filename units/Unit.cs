@@ -12,7 +12,7 @@ namespace TableGame.Units
 {
     internal class Unit : MapObject
     {
-        public string UnitFraction { get; set; } // 
+        public string Fraction { get; set; } // 
         public int Health { get; set; } // а надо ли?
         public int MaxHealth { get; } // количество урона, которое модель выдержит и не погибнет
         public int Price { get; } // "стоимость" юнита в очках
@@ -38,7 +38,7 @@ namespace TableGame.Units
             MeleeAttacks = 2;
             Defense = 3;
             MovePoints = 7;
-            UnitFraction = "Fraction";
+            Fraction = "Fraction";
         }
 /*        Name = "Name";
             PosX = -1;
@@ -54,7 +54,7 @@ namespace TableGame.Units
             this.PosX = PosX;
             this.PosY = PosY;
             this.CurrentLocation = CurrentLocation;
-            this.UnitFraction = UnitFraction;
+            this.Fraction = UnitFraction;
             this.Health = Health;
             this.MaxHealth = MaxHealth;
             this.Price = Price;
