@@ -21,9 +21,9 @@
 
         <DataTemplate x:Key="DataTemplate_Level2">
             <ItemsControl ItemsSource="{Binding CurrentGame.GameMap.Tiles}">
-                <Button Content="{Binding StringCoordinates}" Height="40" Width="50" Margin="4,4,4,4"
+                <Button Content="{Binding StringCoordinates}" Height="20" Width="20" Margin="0,0,0,0"
                         Command="{Binding Source={ x:Reference Name=MainWindowName}, Path=DataContext.ClickMapButtonCommand }"
-                        CommandParameter="{Binding}"/>
+                        CommandParameter="{Binding}" Background="Pink" BorderBrush="{x:Null}" />
             </ItemsControl>
         </DataTemplate>
     </Window.Resources>
@@ -31,7 +31,7 @@
         <StackPanel Orientation="Vertical">
             <DockPanel>
                 <Menu DockPanel.Dock="Top">
-                    <MenuItem Header="Start new game"/>
+                    <MenuItem Header="Start new game" Command="{Binding StartGameCommand}"/>
                     <Separator />
                     <MenuItem Header="Save game"/>
                     <Separator />
@@ -39,10 +39,10 @@
                 </Menu>
             </DockPanel>
 
-            <Canvas Background="Gray">
+            <!--<Canvas Background="Gray">
                 <Rectangle Stroke="Black" Width="10" Height="10" Fill="Pink" />
 
-            </Canvas>
+            </Canvas>-->
 
             <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
 

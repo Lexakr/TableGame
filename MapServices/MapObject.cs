@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TableGame
+namespace TableGame.MapServices
 {
     internal class MapObject : ICoordinates
     {

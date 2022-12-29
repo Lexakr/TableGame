@@ -31,7 +31,7 @@ namespace TableGame.ViewModels
 
         public MainWindowVM()
         {
-            var newMap = new Map(16, 16, "test_map");
+            var newMap = new Map(32, 32, "test_map");
 
             currentGame = new Game(newMap,
                 new GameStat(16),
@@ -43,6 +43,13 @@ namespace TableGame.ViewModels
         [RelayCommand]
         private void StartGame()
         {
+
+            var newMap = new Map(16, 16, "game_map");
+
+            CurrentGame = new Game(newMap,
+                new GameStat(16),
+                new Player(),
+                new Player());
 
 
 

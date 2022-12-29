@@ -60,12 +60,6 @@ namespace TableGame.GameServices
                 ActivePlayer = FirstPlayer;
         }
 
-        public void Play()
-        {
-            for(int i = 0; i < TotalSteps; i++)
-            {
 
-            }
-        }
     }
 }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TableGame.GameServices
+namespace TableGame.MapServices
 {
-    internal class GameSetup
+    internal class Structure : MapObject
     {
+
 
     }
 }
