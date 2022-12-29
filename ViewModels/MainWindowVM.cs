@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using TableGame.GameServices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TableGame.MapServices;
+using Windows.Networking.Sockets;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace TableGame.ViewModels
 {
@@ -15,9 +19,9 @@ namespace TableGame.ViewModels
     internal partial class MainWindowVM : ObservableValidator
     {
 
-        // Выделенный тайл
         [ObservableProperty]
-        private Tile activeTile;
+        [NotifyCanExecuteChangedFor(nameof(ClickMapButtonCommand))]
+        private Tile? selectedMapButton;
 
         // Текущая игра
         // Там и карта лежит - Map -Tiles
@@ -25,10 +29,19 @@ namespace TableGame.ViewModels
         private Game currentGame;
 
 
+        public MainWindowVM()
+        {
+            var newMap = new Map(16, 16, "test_map");
+
+            currentGame = new Game(newMap,
+                new GameStat(16),
+                new Player(),
+                new Player());
+        }
 
 
         [RelayCommand]
-        private void Start()
+        private void StartGame()
         {
 
 
@@ -36,9 +49,9 @@ namespace TableGame.ViewModels
         }
 
         [RelayCommand]
-        private void PressOnTile()
+        private void ClickMapButton(Tile tile)
         {
-
+            Debug.WriteLine($"Command ClickMapButton: x:{tile.PosX} y:{tile.PosY} Hash:{tile.Hash}");
 
 
         }

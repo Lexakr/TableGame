@@ -22,12 +22,22 @@ namespace TableGame
         public MapObject? TileObject { get => tileObject; set => tileObject = value; } // TODO обработка если тайлобжекта нет
         public bool Passability { get; set; } // флаг проходимости тайла, заготовка на будущее?
 
+#if DEBUG
+        public string Hash { set;  get; }
+#endif
+
+        public string StringCoordinates { get { return $"{PosX},{PosY}"; } }
+
         public Tile(int posX, int posY)
         {
             tileObject = null;
             Passability = true; // пустой тайл всегда проходим
             this.posX = posX;
             this.posY = posY;
+
+#if DEBUG
+            Hash = this.GetHashCode().ToString();
+#endif
         }
 
         [System.Text.Json.Serialization.JsonConstructor]

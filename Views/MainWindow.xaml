@@ -3,19 +3,49 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TableGame.Views"
+        xmlns:local="clr-namespace:TableGame.Views" xmlns:viewmodels="clr-namespace:TableGame.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowVM}"
+        Title="MainWindow" Height="450" Width="800"
+        x:Name="MainWindowName">
+    <Window.Resources>
+        <DataTemplate x:Key="DataTemplate_Level1">
+            <ItemsControl ItemsSource="{Binding }" ItemTemplate="{DynamicResource DataTemplate_Level2}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DataTemplate_Level2">
+            <ItemsControl ItemsSource="{Binding CurrentGame.GameMap.Tiles}">
+                <Button Content="{Binding StringCoordinates}" Height="40" Width="50" Margin="4,4,4,4"
+                        Command="{Binding Source={ x:Reference Name=MainWindowName}, Path=DataContext.ClickMapButtonCommand }"
+                        CommandParameter="{Binding}"/>
+            </ItemsControl>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Start new game"/>
-                <MenuItem Header="Save game"/>
-                <MenuItem Header="Load game"/>
-            </Menu>
-            <StackPanel></StackPanel>
-        </DockPanel>
+        <StackPanel Orientation="Vertical">
+            <DockPanel>
+                <Menu DockPanel.Dock="Top">
+                    <MenuItem Header="Start new game"/>
+                    <Separator />
+                    <MenuItem Header="Save game"/>
+                    <Separator />
+                    <MenuItem Header="Load game"/>
+                </Menu>
+            </DockPanel>
 
+            <Canvas Background="Gray">
+                <Rectangle Stroke="Black" Width="10" Height="10" Fill="Pink" />
 
+            </Canvas>
+
+            <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
+
+        </StackPanel>
     </Grid>
 </Window>

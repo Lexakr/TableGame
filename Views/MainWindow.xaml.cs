@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TableGame.ViewModels;
 
 namespace TableGame.Views
 {
@@ -24,23 +25,7 @@ namespace TableGame.Views
         {
             InitializeComponent();
 
-            var grid = new UniformGrid();
-
-            grid.Columns = 32;
-            grid.Rows = 32;
-
-            for (int row = 0; row < 32; row++)
-            {
-                for (int column = 0; column < 32; column++)
-                {
-                    
-
-                   
-                   //grid.Children.Add();
-                }
-            }
-
-            Content = grid;
+            DataContext = new MainWindowVM();
 
         }
     }
