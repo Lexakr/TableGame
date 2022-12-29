@@ -14,9 +14,9 @@ namespace TableGame.GameServices
         /// </summary>
         /// <param name="unit"></param>
         /// <param name="tile"></param>
-        public static void TileAction(Unit unit, ref Tile startTile, ref Tile endTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
+        public static void TileAction(ref Tile startTile, ref Tile endTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
         {
-            // Если тайл свободен - перемещаем туда юнита.
+            /*// Если тайл свободен - перемещаем туда юнита.
             if (endTile.Passability == true)
             {
                 // TODO: проверка, дойдет ли до туда юнит за ход. или не тут?
@@ -33,7 +33,7 @@ namespace TableGame.GameServices
                 {
                     AttackTargetUnit(unit, targetUnit);
                 }
-            }
+            }*/
 
             // TODO: Возможно какое-то действие, если выбранный тайл занят препятствием
         }

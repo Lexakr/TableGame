@@ -19,6 +19,7 @@ namespace TableGame.ViewModels
     internal partial class MainWindowVM : ObservableValidator
     {
 
+
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ClickMapButtonCommand))]
         private Tile? selectedMapButton;
@@ -60,10 +61,16 @@ namespace TableGame.ViewModels
         {
             Debug.WriteLine($"Command ClickMapButton: x:{tile.PosX} y:{tile.PosY} Hash:{tile.Hash}");
 
+            
 
+            // здесь должен быть метод Move и обработкой 2х тайлов
+            
         }
 
+        private void ChooseAction()
+        {
 
+        }
 
 
 
