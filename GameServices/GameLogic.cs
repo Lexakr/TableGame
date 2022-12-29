@@ -20,7 +20,7 @@ namespace TableGame.GameServices
             if (endTile.Passability == true)
             {
                 // TODO: проверка, дойдет ли до туда юнит за ход. или не тут?
-                MoveUnit(unit, ref startTile, ref endTile); // TODO: REF проверить что передается ссылка на место в памяти!!!
+                MoveUnit(startTile.unit, ref startTile, ref endTile); // TODO: REF проверить что передается ссылка на место в памяти!!!
             }
 
             // Если на тайле объект чужой фракции, атакуем его

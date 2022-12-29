@@ -52,5 +52,17 @@ namespace TableGame
 
         public void AddObj(MapObject e) => tileObject = e;
         public void RemoveObj() => tileObject = null;
+
+        public bool IsInteractable()
+        {
+            if (this.tileObject is Unit)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
