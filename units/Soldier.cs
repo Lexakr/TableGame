@@ -20,6 +20,11 @@ namespace TableGame.Units
             PosX= posX;
             PosY= posY;
         }
+
+        public override void Attack()
+        {
+
+        }
     }
 
 
