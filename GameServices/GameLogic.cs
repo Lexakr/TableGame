@@ -16,7 +16,7 @@ namespace TableGame.GameServices
     /// </summary>
     internal class GameLogic
     {
-        //private Game currentGame;
+        private List<Tile> tilesToClear = new();
         /// <summary>
         /// Нужен для синглтона
         /// </summar
@@ -49,7 +49,7 @@ namespace TableGame.GameServices
             tileUnit = new SoldierImperium();
             tileUnit.PosX = startTile.PosX;
             tileUnit.PosY = startTile.PosY;
-            ShowActionTiles(ref tileUnit);
+            SetActionTiles(ref tileUnit);
             return true;
             // Ожидание следующего клика игрока
 
