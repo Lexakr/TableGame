@@ -38,7 +38,6 @@ namespace TableGame.ViewModels
 
         private GameLogic gameLogic;
 
-
         public MainWindowVM()
         {
             var newMap = new Map(32, 32, "test_map");
@@ -64,8 +63,6 @@ namespace TableGame.ViewModels
                 new GameStat(16),
                 new Player(),
                 new Player());
-
-
 
         }
 
