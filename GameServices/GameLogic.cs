@@ -16,7 +16,7 @@ namespace TableGame.GameServices
     /// </summary>
     internal class GameLogic
     {
-        //private Game currentGame;
+        private List<Tile> tilesToClear = new();
         /// <summary>
         /// Нужен для синглтона
         /// </summar
@@ -48,7 +48,7 @@ namespace TableGame.GameServices
             tileUnit = new SoldierImperium();
             tileUnit.PosX = startTile.PosX;
             tileUnit.PosY = startTile.PosY;
-            ShowActionTiles(ref tileUnit);
+            SetActionTiles(ref tileUnit);
             return true;
             // Ожидание следующего клика игрока
 
@@ -127,7 +127,11 @@ namespace TableGame.GameServices
             // void Attack(this unit, targetUnit);
         }
 
-        private void ShowActionTiles(ref Unit unit)
+        /// <summary>
+        /// Отображение тайлов вокруг выбранного юнита, на которые он может походить или атаковать
+        /// </summary>
+        /// <param name="unit"></param>
+        private void SetActionTiles(ref Unit unit)
         {
             // Определение границ
             int left = (unit.PosX - unit.MovePoints) > 0 ? unit.PosX - unit.MovePoints : 0;
@@ -143,13 +147,26 @@ namespace TableGame.GameServices
                     {
                         // green state
                         CurrentGame.GameMap.Tiles[left][top].State = TileStates.CanMove;
+                        tilesToClear.Add(CurrentGame.GameMap.Tiles[left][top]);
                     }
                     else if (CurrentGame.GameMap.Tiles[left][top].TileObject is Unit && (CurrentGame.GameMap.Tiles[left][top].TileObject as Unit).Fraction != unit.Fraction)
                     {
                         // red staet
                         CurrentGame.GameMap.Tiles[left][top].State = TileStates.CanAttack;
+                        tilesToClear.Add(CurrentGame.GameMap.Tiles[left][top]);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Очистка окрашенных тайлов после завершения хода юнитом
+        /// </summary>
+        private void ClearActionTiles()
+        {
+            foreach (Tile t in tilesToClear)
+            {
+                t.State = TileStates.Default;
             }
         }
     }
