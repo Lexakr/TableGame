@@ -1,0 +1,17 @@
+﻿<Window x:Class="TableGame.Views.ChooseActionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TableGame.Views"
+        mc:Ignorable="d"
+        Title="Выбор действия" Height="200" Width="300">
+    <Grid>
+        <StackPanel Name="MainStackPanel"
+                    Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <!--WILL CREATE BUTTONS IN CODE BEHIND -->
+        </StackPanel>
+    </Grid>
+</Window>
