@@ -25,6 +25,12 @@ namespace TableGame.ViewModels
         [NotifyCanExecuteChangedFor(nameof(ClickMapButtonCommand))]
         private Tile? selectedMapButton;
 
+        /// <summary>
+        /// Логика обработки 1го поля и второго поля на которое нажмёт игрок
+        /// Если поле = null = это первый клик на поле, если есть = начать взаимодействие с вторым
+        /// </summary>
+        private Tile previosTile;
+
         // Текущая игра
         // Там и карта лежит - Map -Tiles
         [ObservableProperty]
@@ -67,15 +73,28 @@ namespace TableGame.ViewModels
         {
             Debug.WriteLine($"Command ClickMapButton: x:{tile.PosX} y:{tile.PosY} Hash:{tile.Hash}");
 
-            gameLogic.TileAction(ref tile, ref tile);
+            // ТРИГГЕРНАЯ СИСИТЕМА:
+            //
+            // Если это первый клик игрока будет null (ранее не выбирал юнита для действия)
+            if (previosTile == null)
+            {
+                // записываем начальный (стартовый) объект триггер
+                previosTile = tile;
 
-            if (!tile.IsInteractable())
-                return;
-
-            Debug.WriteLine($"IsInteractable");
-
-
-            // здесь должен быть метод Move и обработкой 2х тайлов
+                if (!gameLogic.TileAction(ref tile))
+                {
+                    // действие с юнитом совершено: можно обнулить триггер
+                    previosTile = null;
+                    return;
+                }
+            }
+            // если игроку нужно выбирает уже вторую клетку для взаимодействия
+            else
+            {
+                // отправляем запрос на взаимодейсвтвие этих двух клеток
+                if (gameLogic.TileAction(ref tile, ref previosTile))
+                    previosTile = null;
+            }
 
         }
 
@@ -86,8 +105,6 @@ namespace TableGame.ViewModels
 
             return menuWindow.ResultChoice;
         }
-
-
 
 
 
