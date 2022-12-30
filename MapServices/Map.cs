@@ -57,9 +57,7 @@ namespace TableGame.MapServices
 
                 for (int y = 0; y < size_y; y++)
                 {
-                    //newMap[i, j] = new Tile(i, j);
-                    //tiles.Add(newMap[i, j]);
-                    newListX.Add(new Tile(x, y));
+                    newListX.Add(new Tile(x+1, y+1));
                 }
 
                 newMap.Add(newListX);

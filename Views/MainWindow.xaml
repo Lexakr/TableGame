@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TableGame.Views" xmlns:viewmodels="clr-namespace:TableGame.ViewModels"
+        xmlns:local="clr-namespace:TableGame.Views"
+        xmlns:converters="clr-namespace:TableGame.Views.Converters"
+        xmlns:viewmodels="clr-namespace:TableGame.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowVM}"
         Title="MainWindow" Height="450" Width="800"
         x:Name="MainWindowName">
     <Window.Resources>
+        <converters:EnumToColorConverter x:Key="enumToColorConverter" />
+        
         <DataTemplate x:Key="DataTemplate_Level1">
             <ItemsControl ItemsSource="{Binding }" ItemTemplate="{DynamicResource DataTemplate_Level2}">
                 <ItemsControl.ItemsPanel>
@@ -20,10 +24,13 @@
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_Level2">
-            <ItemsControl ItemsSource="{Binding CurrentGame.GameMap.Tiles}">
-                <Button Content="{Binding StringCoordinates}" Height="20" Width="20" Margin="0,0,0,0"
+            <ItemsControl ItemsSource="{Binding }">
+                <Button Content="{Binding StringCoordinates}" Height="40" Width="40" Margin="0,0,0,0"
                         Command="{Binding Source={ x:Reference Name=MainWindowName}, Path=DataContext.ClickMapButtonCommand }"
-                        CommandParameter="{Binding}" Background="Pink" BorderBrush="{x:Null}" />
+                        CommandParameter="{Binding}"
+                        Background="Gray"
+                        BorderBrush="{Binding Path=State, Converter={StaticResource enumToColorConverter}}" BorderThickness="5">
+                </Button>
             </ItemsControl>
         </DataTemplate>
     </Window.Resources>
@@ -44,7 +51,7 @@
 
             </Canvas>-->
 
-            <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
 
         </StackPanel>
     </Grid>

@@ -20,7 +20,6 @@ namespace TableGame.ViewModels
     internal partial class MainWindowVM : ObservableValidator
     {
 
-
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ClickMapButtonCommand))]
         private Tile? selectedMapButton;
@@ -50,6 +49,9 @@ namespace TableGame.ViewModels
             gameLogic = new GameLogic();
             gameLogic.CurrentGame = currentGame;
             gameLogic.OpenMenu += OpenChooseMenu;
+
+            Debug.WriteLine("INSIDE GAMELOGIC" + CurrentGame.GetHashCode().ToString());
+
         }
 
 
@@ -103,8 +105,5 @@ namespace TableGame.ViewModels
 
             return menuWindow.ResultChoice;
         }
-
-
-
     }
 }

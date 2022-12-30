@@ -36,6 +36,7 @@ namespace TableGame.GameServices
         /// <param name="tile"></param>
         public bool TileAction(ref Tile startTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
         {
+            Debug.WriteLine("INSIDE GAMELOGIC" + CurrentGame.GetHashCode().ToString());
 /*            if (!startTile.IsInteractable())
             {
                 return false;
@@ -83,6 +84,10 @@ namespace TableGame.GameServices
         /// <param name="endTile"></param>
         public bool TileAction(ref Tile startTile, ref Tile endTile)
         {
+            //TODO: перенести ниже. Это для теста:
+            ClearActionOnMap();
+            return true;
+
             // клетка препятствие
             if (!endTile.IsInteractable())
             {
@@ -127,30 +132,81 @@ namespace TableGame.GameServices
             // void Attack(this unit, targetUnit);
         }
 
-        private void ShowActionTiles(ref Unit unit)
+        private void ClearActionOnMap()
         {
-            // Определение границ
-            int left = (unit.PosX - unit.MovePoints) > 0 ? unit.PosX - unit.MovePoints : 0;
-            int top = (unit.PosY - unit.MovePoints) > 0 ? unit.PosY - unit.MovePoints : 0;
-            int right = (unit.PosX + unit.MovePoints) > CurrentGame.GameMap.Size_x ? CurrentGame.GameMap.Size_x : unit.PosX + unit.MovePoints;
-            int bottom = (unit.PosY + unit.MovePoints) > CurrentGame.GameMap.Size_y ? CurrentGame.GameMap.Size_y : unit.PosY + unit.MovePoints;
-
-            for (; left < right; left++)
+            foreach(var item1 in CurrentGame.GameMap.Tiles)
             {
-                for (; top < bottom; top++)
+                foreach(var item2 in item1)
                 {
-                    if (CurrentGame.GameMap.Tiles[left][top].Passability)
-                    {
-                        // green state
-                        CurrentGame.GameMap.Tiles[left][top].State = TileStates.CanMove;
-                    }
-                    else if (CurrentGame.GameMap.Tiles[left][top].TileObject is Unit && (CurrentGame.GameMap.Tiles[left][top].TileObject as Unit).Fraction != unit.Fraction)
-                    {
-                        // red staet
-                        CurrentGame.GameMap.Tiles[left][top].State = TileStates.CanAttack;
-                    }
+                    item2.State = TileStates.Default;
                 }
             }
+        }
+
+        private void ShowActionTiles(ref Unit unit)
+        {
+
+            Debug.WriteLine($"unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePoints}");
+
+            // List INDEX
+            int left = unit.PosX - 1 - unit.MovePoints;
+            int right = unit.PosX - 1 + unit.MovePoints;
+            int top = unit.PosY - 1 + unit.MovePoints;
+            int bottom = unit.PosY - 1 - unit.MovePoints;
+
+            // кол-во шагов - спиралей
+            for(int i = 0; i < unit.MovePoints; i++)
+            {
+                // left-right
+                for (int x = left; x <= right; x++)
+                {
+                    // заполнение
+                    ChangeStateForAction(x, top, unit);
+                    ChangeStateForAction(x, bottom, unit);
+                }
+
+                // top-bottom
+                for (int y = bottom; y <= top; y++)
+                {
+                    // заполненеие
+                    ChangeStateForAction(left, y, unit);
+                    ChangeStateForAction(right, y, unit);
+                }
+
+                top -= 1;
+                bottom += 1;
+                left += 1;
+                right -= 1;
+            }
+
+        }
+
+        /// <summary>
+        /// Сменить состояние тайла на соответствующий для взаимодействия с юнитом
+        /// </summary>
+        /// <param name="x">ИНДЕКС объекта на карте</param>
+        /// <param name="y">ИНДЕКС ОБЪЕКТА НА КАРТЕ</param>
+        /// <param name="unit"></param>
+        private void ChangeStateForAction(int x, int y, Unit unit)
+        {
+            if (x < 0 || y < 0 || x >= CurrentGame.GameMap.Size_x || y >= CurrentGame.GameMap.Size_y)
+                return;
+
+            Debug.WriteLine($"Обрабатываю клетку в ренже: {x},{y}");
+
+            var tile = CurrentGame.GameMap.Tiles[x][y];
+
+            if (tile.Passability)
+            {
+                // green state
+                tile.State = TileStates.CanMove;
+            }
+            else if (tile.TileObject is Unit && (tile.TileObject as Unit).Fraction != unit.Fraction)
+            {
+                // red staet
+                tile.State = TileStates.CanAttack;
+            }
+            
         }
     }
 }
