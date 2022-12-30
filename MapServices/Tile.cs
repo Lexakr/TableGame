@@ -35,7 +35,20 @@ namespace TableGame
 
         public TileStates State { get; set; } 
         public MapObject? TileObject { get => tileObject; set => tileObject = value; } // TODO обработка если тайлобжекта нет
-        public bool Passability { get; set; } // флаг проходимости тайла, заготовка на будущее?
+
+        /// <summary>
+        /// Флаг проходимости тайла
+        /// </summary>
+        public bool Passability
+        {
+            get
+            {
+                if (TileObject == null) 
+                    return true;
+                else
+                    return false;
+            }
+        }
 
 #if DEBUG
         public string Hash { set;  get; }
@@ -46,7 +59,6 @@ namespace TableGame
         public Tile(int posX, int posY)
         {
             tileObject = null;
-            Passability = true; // пустой тайл всегда проходим
             this.posX = posX;
             this.posY = posY;
             State = TileStates.Default;
@@ -62,7 +74,6 @@ namespace TableGame
             this.posX = posX;
             this.posY = posY;
             this.tileObject = tileObject;
-            this.Passability = Passability;
             State = TileStates.Default;
         }
 

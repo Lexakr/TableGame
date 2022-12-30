@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TableGame.MapServices
 {
-    internal class MapObject : ICoordinates
+    internal abstract class MapObject : ICoordinates
     {
         public string Name { get; set; }
         public int PosX { get; set; }
@@ -20,8 +20,6 @@ namespace TableGame.MapServices
         public MapObject()
         {
             Name = "Name";
-            PosX = -1;
-            PosY = -1;
             CurrentLocation = null;
         }
 
@@ -33,5 +31,10 @@ namespace TableGame.MapServices
             PosY = posY;
             CurrentLocation = currentLocation;
         }
+
+        /// <summary>
+        /// Описание объекта и его характеристики
+        /// </summary>
+        //TODO: public abstract string Desciption { get; set; }
     }
 }

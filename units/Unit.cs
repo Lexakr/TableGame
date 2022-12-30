@@ -37,7 +37,7 @@ namespace TableGame.Units
             Power = 4;
             MeleeAttacks = 2;
             Defense = 3;
-            MovePoints = 7;
+            MovePoints = 3;
             Fraction = "Fraction";
         }
 /*        Name = "Name";

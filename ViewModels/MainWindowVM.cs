@@ -49,6 +49,7 @@ namespace TableGame.ViewModels
                 new Player());
 
             gameLogic = new GameLogic();
+            gameLogic.CurrentGame = currentGame;
             gameLogic.OpenMenu += OpenChooseMenu;
         }
 

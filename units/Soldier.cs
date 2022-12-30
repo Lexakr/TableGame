@@ -10,8 +10,7 @@ namespace TableGame.Units
     {
         public Soldier() 
         {
-            PosX = 1;
-            PosY = 1;
+
         }
 
         [System.Text.Json.Serialization.JsonConstructor]

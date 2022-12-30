@@ -16,6 +16,7 @@ namespace TableGame.GameServices
     /// </summary>
     internal class GameLogic
     {
+        //private Game currentGame;
         /// <summary>
         /// Нужен для синглтона
         /// </summar
@@ -26,11 +27,7 @@ namespace TableGame.GameServices
         public delegate int MenuChoise(List<string> list);
 
         public event MenuChoise OpenMenu;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Map CurrentMap { get; set; }
+        public Game CurrentGame { get; set; }
 
         /// <summary>
         /// Обработка первого клика игрока
@@ -39,12 +36,19 @@ namespace TableGame.GameServices
         /// <param name="tile"></param>
         public bool TileAction(ref Tile startTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
         {
-            if (!startTile.IsInteractable())
+/*            if (!startTile.IsInteractable())
             {
                 return false;
-            }
+            }*/
+
+            // проверка фракции юнита в тайле и фракции игрока
 
             // красим тайлы кого атаковать можно и куда дойти можно
+            var tileUnit = startTile.TileObject as Unit;
+            tileUnit = new SoldierImperium();
+            tileUnit.PosX = startTile.PosX;
+            tileUnit.PosY = startTile.PosY;
+            ShowActionTiles(ref tileUnit);
             return true;
             // Ожидание следующего клика игрока
 
@@ -121,6 +125,32 @@ namespace TableGame.GameServices
         {
             // что-то типа targetUnit.OnAttack(unit); наоборот
             // void Attack(this unit, targetUnit);
+        }
+
+        private void ShowActionTiles(ref Unit unit)
+        {
+            // Определение границ
+            int left = (unit.PosX - unit.MovePoints) > 0 ? unit.PosX - unit.MovePoints : 0;
+            int top = (unit.PosY - unit.MovePoints) > 0 ? unit.PosY - unit.MovePoints : 0;
+            int right = (unit.PosX + unit.MovePoints) > CurrentGame.GameMap.Size_x ? CurrentGame.GameMap.Size_x : unit.PosX + unit.MovePoints;
+            int bottom = (unit.PosY + unit.MovePoints) > CurrentGame.GameMap.Size_y ? CurrentGame.GameMap.Size_y : unit.PosY + unit.MovePoints;
+
+            for (; left < right; left++)
+            {
+                for (; top < bottom; top++)
+                {
+                    if (CurrentGame.GameMap.Tiles[left][top].Passability)
+                    {
+                        // green state
+                        CurrentGame.GameMap.Tiles[left][top].State = TileStates.CanMove;
+                    }
+                    else if (CurrentGame.GameMap.Tiles[left][top].TileObject is Unit && (CurrentGame.GameMap.Tiles[left][top].TileObject as Unit).Fraction != unit.Fraction)
+                    {
+                        // red staet
+                        CurrentGame.GameMap.Tiles[left][top].State = TileStates.CanAttack;
+                    }
+                }
+            }
         }
     }
 }
