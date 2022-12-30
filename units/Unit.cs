@@ -10,7 +10,7 @@ using TableGame.Fractions;
 
 namespace TableGame.Units
 {
-    internal class Unit : MapObject
+    internal abstract class Unit : MapObject
     {
         public string Fraction { get; set; } // 
         public int Health { get; set; } // а надо ли?
@@ -84,9 +84,6 @@ namespace TableGame.Units
                 Console.WriteLine("Location is busy.");
         }
 
-        public void Attack()
-        {
-
-        }
+        public abstract void Attack();
     }
 }
