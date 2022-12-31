@@ -7,7 +7,7 @@ using TableGame.Units;
 
 namespace TableGame.Fractions
 {
-    abstract internal class Fraction
+    abstract public class Fraction
     {
         public string Name { get; set; }
         public List<Unit> FractionUnits { get; set; }

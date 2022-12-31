@@ -49,7 +49,7 @@ namespace TableGame.GameServices
             tileUnit = new SoldierImperium();
             tileUnit.PosX = startTile.PosX;
             tileUnit.PosY = startTile.PosY;
-            SetActionTiles(ref tileUnit);
+            ShowActionTiles(ref tileUnit);
             return true;
             // Ожидание следующего клика игрока
 
@@ -146,7 +146,7 @@ namespace TableGame.GameServices
         private void ShowActionTiles(ref Unit unit)
         {
 
-            Debug.WriteLine($"unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePoints}");
+            Debug.WriteLine($"Show action: unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePoints}");
 
             // List INDEX
             int left = unit.PosX - 1 - unit.MovePoints;
@@ -192,7 +192,7 @@ namespace TableGame.GameServices
             if (x < 0 || y < 0 || x >= CurrentGame.GameMap.Size_x || y >= CurrentGame.GameMap.Size_y)
                 return;
 
-            Debug.WriteLine($"Обрабатываю клетку в ренже: {x},{y}");
+            //Debug.WriteLine($"Обрабатываю клетку в ренже: {x},{y}");
 
             var tile = CurrentGame.GameMap.Tiles[x][y];
 

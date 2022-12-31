@@ -37,13 +37,14 @@ namespace TableGame.ViewModels
 
         private GameLogic gameLogic;
 
-        public MainWindowVM()
+        public MainWindowVM(Player player)
         {
+
             var newMap = new Map(32, 32, "test_map");
 
             currentGame = new Game(newMap,
                 new GameStat(16),
-                new Player(),
+                player,
                 new Player());
 
             gameLogic = new GameLogic();
@@ -51,7 +52,6 @@ namespace TableGame.ViewModels
             gameLogic.OpenMenu += OpenChooseMenu;
 
             Debug.WriteLine("INSIDE GAMELOGIC" + CurrentGame.GetHashCode().ToString());
-
         }
 
 

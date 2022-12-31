@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TableGame.MapServices
 {
-    internal abstract class MapObject : ICoordinates
+    public abstract class MapObject : ICoordinates
     {
         public string Name { get; set; }
         public int PosX { get; set; }

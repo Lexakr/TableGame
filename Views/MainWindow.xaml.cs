@@ -21,11 +21,11 @@ namespace TableGame.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(Player player)
         {
             InitializeComponent();
 
-            DataContext = new MainWindowVM();
+            DataContext = new MainWindowVM(player);
 
         }
     }

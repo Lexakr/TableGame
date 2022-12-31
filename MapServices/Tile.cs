@@ -14,7 +14,7 @@ namespace TableGame
     /// Состояние клетки для TileAction метода.
     /// Может ли с ней взаимодействовать выделенный юнит
     /// </summary>
-    enum TileStates
+    public enum TileStates
     {
         Default,
         /// <summary>Подсветка зеленым тайла, в который может дойти юнит</summary>
@@ -26,7 +26,7 @@ namespace TableGame
     /// <summary>
     /// Игровая клетка. В текущей версии вмещает в себя только 1 объект (юнит или структуру).
     /// </summary>
-    internal partial class Tile : ObservableObject, ICoordinates
+    public partial class Tile : ObservableObject, ICoordinates
     {
         private readonly int posX, posY; // координаты тайла
         private MapObject? tileObject; // объект на тайле
