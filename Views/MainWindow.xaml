@@ -15,6 +15,7 @@
 
     <Window.Resources>
         <converters:EnumToColorConverter x:Key="enumToColorConverter" />
+        <converters:TileNullToRandomFloreConverter x:Key="tileNullFloreRandom" />
 
         <DataTemplate x:Key="DataTemplate_Level1">
             <ItemsControl ItemsSource="{Binding }" ItemTemplate="{DynamicResource DataTemplate_Level2}">
@@ -28,11 +29,14 @@
 
         <DataTemplate x:Key="DataTemplate_Level2">
             <ItemsControl ItemsSource="{Binding }">
-                <Button Content="{Binding StringCoordinates}" FontSize="8" Height="25" Width="25" Margin="0,0,0,0"
+                <Button FontSize="8" Height="25" Width="25" Margin="0,0,0,0"
                         Command="{Binding Source={ x:Reference Name=MainWindowName}, Path=DataContext.ClickMapButtonCommand }"
                         CommandParameter="{Binding}"
-                        Background="Gray"
-                        BorderBrush="{Binding Path=State, Converter={StaticResource enumToColorConverter}}" BorderThickness="2">
+                        BorderBrush="{Binding Path=State, Converter={StaticResource enumToColorConverter}}" BorderThickness="{Binding Path=State, Converter={StaticResource enumToColorConverter}}">
+                    <Image Source="{Binding TileObject.Icon}" />
+                    <Button.Background>
+                        <ImageBrush ImageSource="{Binding Picture, Converter={StaticResource tileNullFloreRandom}}" />
+                    </Button.Background>
                 </Button>
             </ItemsControl>
         </DataTemplate>

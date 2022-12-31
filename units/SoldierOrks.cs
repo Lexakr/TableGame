@@ -3,11 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TableGame.Abilities.Passive_abilities;
+using TableGame.Abilities;
 
 namespace TableGame.Units
 {
     internal class SoldierOrks : Soldier
     {
+        public string Icon { get { return "/Resources/enemyTest3.png"; } }
 
+        public SoldierOrks()
+        {
+            Name = "Orks Soldier";
+
+            FractionName = "Orks";
+
+            Abilities = new List<Ability>
+            {
+                new IncreasedLuck("Fucker"),
+            };
+        }
+        [System.Text.Json.Serialization.JsonConstructor]
+        public SoldierOrks(string name, string unitfraction, List<Ability>? abilities)
+        {
+            Name = name;
+            FractionName = unitfraction;
+            Abilities = abilities;
+        }
     }
 }

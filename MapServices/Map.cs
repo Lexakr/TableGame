@@ -57,7 +57,19 @@ namespace TableGame.MapServices
 
                 for (int y = 0; y < size_y; y++)
                 {
-                    newListX.Add(new Tile(x+1, y+1));
+                    // DEBUG - PLEASE DELETE
+                    if(y == 6)
+                    {
+                        newListX.Add(new Tile(x + 1, y + 1) { TileObject = new SoldierImperium() });
+                        continue;
+                    }
+                    if (y == 8)
+                    {
+                        newListX.Add(new Tile(x + 1, y + 1) { TileObject = new SoldierOrks() });
+                        continue;
+                    }
+
+                    newListX.Add(new Tile(x + 1, y + 1));
                 }
 
                 newMap.Add(newListX);

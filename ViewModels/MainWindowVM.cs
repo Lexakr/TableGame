@@ -11,6 +11,7 @@ using Windows.Networking.Sockets;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using TableGame.Views;
+using TableGame.Units;
 
 namespace TableGame.ViewModels
 {

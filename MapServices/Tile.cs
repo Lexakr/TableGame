@@ -38,6 +38,8 @@ namespace TableGame
         private TileStates state; 
         public MapObject? TileObject { get => tileObject; set => tileObject = value; } // TODO обработка если тайлобжекта нет
 
+        public string Picture { get; set; }
+
         /// <summary>
         /// Флаг проходимости тайла
         /// </summary>

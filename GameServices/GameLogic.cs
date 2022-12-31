@@ -49,7 +49,7 @@ namespace TableGame.GameServices
             tileUnit = new SoldierImperium();
             tileUnit.PosX = startTile.PosX;
             tileUnit.PosY = startTile.PosY;
-            SetActionTiles(ref tileUnit);
+            ShowActionTiles(ref tileUnit);
             return true;
             // Ожидание следующего клика игрока
 

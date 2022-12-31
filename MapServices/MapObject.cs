@@ -12,7 +12,7 @@ namespace TableGame.MapServices
         public int PosX { get; set; }
         public int PosY { get; set; }
         public Tile? CurrentLocation { get; set; } // ref to Tile
-        public string Picture { get; set; }
+        public string Icon { get; set; }
 
         /// <summary>
         /// Конструктор для любого объекта по умолчанию. Отрицательные координаты

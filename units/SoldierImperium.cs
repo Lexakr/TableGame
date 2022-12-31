@@ -11,6 +11,8 @@ namespace TableGame.Units
 {
     internal class SoldierImperium : Soldier
     {
+        public string Icon { get { return "/Resources/enemyTest1.png"; } }
+
         public SoldierImperium()
         {
             Name = "Imperium Soldier";
