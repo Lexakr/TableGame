@@ -9,6 +9,7 @@
     
     <Grid Background="Wheat">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="GAME" FontSize="100" HorizontalAlignment="Center" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50">
                     <TextBlock Text="Введите имя игрока" FontSize="20"/>
