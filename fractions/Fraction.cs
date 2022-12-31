@@ -7,49 +7,25 @@ using TableGame.Units;
 
 namespace TableGame.Fractions
 {
-    abstract public class Fraction
+    public abstract class Fraction
     {
+        /// <summary>
+        /// Имя фракции
+        /// </summary>
         public string Name { get; set; }
-        public List<Unit> FractionUnits { get; set; }
+
+        /// <summary>
+        /// Список типов юнитов фракции
+        /// </summary>
+        public List<Type> FractionUnits { get; set; }
 
         public Fraction() { }
+
         [System.Text.Json.Serialization.JsonConstructor]
-        public Fraction (string name, List<Unit> fractionUnits)
+        public Fraction (string name, List<Type> fractionUnits)
         {
             Name = name;
             FractionUnits = fractionUnits;
         }
-
-        public void ShowFractionUnits()
-        {
-            Console.WriteLine("Fraction: " + Name);
-        }
-
-    }
-
-    internal class Imperium : Fraction
-    {
-        public Imperium()
-        {
-            Name = "Imperium";
-            FractionUnits = new List<Unit>
-            {
-                new SoldierImperium(),
-                // ...
-            };
-        }
-    }
-
-    internal class Orks : Fraction 
-    {
-        public Orks()
-        {
-            Name = "Orks";
-            FractionUnits = new List<Unit> 
-            { 
-                new SoldierOrks(), 
-            };
-        }
-        
     }
 }

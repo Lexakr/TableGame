@@ -25,7 +25,6 @@ namespace TableGame
         {
             PlayerName = playerName;
             PlayerFraction = playerFraction;
-
         }
 
         [System.Text.Json.Serialization.JsonConstructor]

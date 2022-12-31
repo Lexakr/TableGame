@@ -14,7 +14,9 @@ namespace TableGame.Units
         public SoldierImperium()
         {
             Name = "Imperium Soldier";
-            Fraction = "Imperium";
+
+            FractionName = "Imperium";
+
             Abilities = new List<Ability>
             {
                 new IncreasedLuck("Lucker"),
@@ -24,7 +26,7 @@ namespace TableGame.Units
         public SoldierImperium(string name, string unitfraction, List<Ability>? abilities)
         {
             Name =name;
-            Fraction = unitfraction;
+            FractionName = unitfraction;
             Abilities = abilities;
         }
     }

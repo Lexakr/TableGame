@@ -201,7 +201,7 @@ namespace TableGame.GameServices
                 // green state
                 tile.State = TileStates.CanMove;
             }
-            else if (tile.TileObject is Unit && (tile.TileObject as Unit).Fraction != unit.Fraction)
+            else if (tile.TileObject is Unit && (tile.TileObject as Unit).FractionName != unit.FractionName)
             {
                 // red staet
                 tile.State = TileStates.CanAttack;
