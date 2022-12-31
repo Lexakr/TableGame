@@ -14,13 +14,14 @@ namespace TableGame.GameServices
     /// </summary>
     internal partial class Game : ObservableObject
     {
-        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer)
+        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer, int totalSteps)
         {
             this.gameMap = gameMap;
             mapStats = new(gameMap);
             this.gameStats = gameStats;
             this.firstPlayer = firstPlayer;
             this.secondPlayer = secondPlayer;
+            TotalSteps = totalSteps;
         }
 
         [System.Text.Json.Serialization.JsonConstructor]

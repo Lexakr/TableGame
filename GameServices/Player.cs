@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TableGame.Fractions;
 using TableGame.Units;
 
-namespace TableGame
+namespace TableGame.GameServices
 {
     public class Player
     {

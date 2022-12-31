@@ -9,14 +9,27 @@
     
     <Grid Background="Wheat">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Введите имя игрока" FontSize="20"/>
-            <TextBox />
-            <TextBlock Text="Выбор стороны" FontSize="20"/>
-            <ComboBox />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50">
+                    <TextBlock Text="Введите имя игрока" FontSize="20"/>
+                    <TextBox Name="TextBoxPlayerName1" />
+                    <TextBlock Text="Выбор стороны" FontSize="20"/>
+                    <ComboBox Name="ComboBoxPlayer1" SelectionChanged="ComboBoxPlayer1_SelectionChanged" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50">
+                    <TextBlock Text="Введите имя игрока" FontSize="20"/>
+                    <TextBox Name="TextBoxPlayerName2" />
+                    <TextBlock Text="Выбор стороны" FontSize="20"/>
+                    <ComboBox Name="ComboBoxPlayer2" SelectionChanged="ComboBoxPlayer2_SelectionChanged" />
+                </StackPanel>
+            </StackPanel>
             <TextBlock Text="Введите количество ходов" FontSize="20"/>
-            <TextBox />
+            
+        
+        <TextBox Name="TextBoxTotalSteps" />
 
-            <Button Content="Начать игру" Margin="0,20,0,20" Click="ButtonStart_Click"/>
+        <Button Content="Начать игру" Margin="0,20,0,20" Click="ButtonStart_Click"/>
+            
         </StackPanel>
     </Grid>
 </Window>

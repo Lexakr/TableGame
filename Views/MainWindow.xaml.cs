@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TableGame.GameServices;
 using TableGame.ViewModels;
 
 namespace TableGame.Views
@@ -21,11 +22,11 @@ namespace TableGame.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(Player player)
+        public MainWindow(Player player1, Player player2, int totalSteps)
         {
             InitializeComponent();
 
-            DataContext = new MainWindowVM(player);
+            DataContext = new MainWindowVM(player1, player2, totalSteps);
 
         }
 

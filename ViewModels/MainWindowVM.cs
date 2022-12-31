@@ -38,15 +38,16 @@ namespace TableGame.ViewModels
 
         private GameLogic gameLogic;
 
-        public MainWindowVM(Player player)
+        public MainWindowVM(Player player1, Player player2, int totalSteps)
         {
 
             var newMap = new Map(32, 32, "test_map");
 
             currentGame = new Game(newMap,
                 new GameStat(16),
-                player,
-                new Player());
+                player1,
+                player2,
+                totalSteps);
 
             gameLogic = new GameLogic();
             gameLogic.CurrentGame = currentGame;
@@ -65,7 +66,8 @@ namespace TableGame.ViewModels
             CurrentGame = new Game(newMap,
                 new GameStat(16),
                 new Player(),
-                new Player());
+                new Player(),
+                200);
 
         }
 
