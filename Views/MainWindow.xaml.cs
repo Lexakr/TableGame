@@ -28,5 +28,11 @@ namespace TableGame.Views
             DataContext = new MainWindowVM(player);
 
         }
+
+        private void MenuItemStartNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            new StartMenuWindow().Show();
+            this.Close();
+        }
     }
 }

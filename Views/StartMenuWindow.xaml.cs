@@ -23,7 +23,7 @@ namespace TableGame.Views
         {
             InitializeComponent();
 
-            // DEBUG
+            // DEBUG TEMP = NEW GAME = DOES NOT WORK
             ButtonStart_Click(null, null);
         }
 
