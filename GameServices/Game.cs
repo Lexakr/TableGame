@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace TableGame.GameServices
     /// Game хранит в себе всю логику игры, включая объект карты,
     /// ее статистику, статистику игры и самих игроков. 
     /// </summary>
-    internal class Game
+    internal partial class Game : ObservableObject
     {
         public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer)
         {
@@ -44,9 +45,15 @@ namespace TableGame.GameServices
         public GameStat GameStats { get => gameStats; }
         public Player FirstPlayer { get => firstPlayer; }
         public Player SecondPlayer { get => secondPlayer; }
-        public int CurrentStep { get; set; } = 0;
-        public int TotalSteps { get; set; } = 0;
-        public Player ActivePlayer { get; set; }
+
+        [ObservableProperty]
+        private int currentStep = 0;
+
+        [ObservableProperty]
+        private int totalSteps = 200;
+        
+        [ObservableProperty]
+        private Player activePlayer;
 
         /// <summary>
         /// Передача хода другому игроку

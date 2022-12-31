@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TableGame.Abilities
 {
-    internal class Ability
+    public class Ability
     {
         public string Name { get; set; }
 

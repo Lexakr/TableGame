@@ -3,12 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TableGame.Views" xmlns:viewmodels="clr-namespace:TableGame.ViewModels"
+        xmlns:local="clr-namespace:TableGame.Views"
+        xmlns:converters="clr-namespace:TableGame.Views.Converters"
+        xmlns:viewmodels="clr-namespace:TableGame.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowVM}"
         Title="MainWindow" Height="450" Width="800"
-        x:Name="MainWindowName">
+        x:Name="MainWindowName"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight">
+
     <Window.Resources>
+        <converters:EnumToColorConverter x:Key="enumToColorConverter" />
+
         <DataTemplate x:Key="DataTemplate_Level1">
             <ItemsControl ItemsSource="{Binding }" ItemTemplate="{DynamicResource DataTemplate_Level2}">
                 <ItemsControl.ItemsPanel>
@@ -20,32 +27,53 @@
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_Level2">
-            <ItemsControl ItemsSource="{Binding CurrentGame.GameMap.Tiles}">
-                <Button Content="{Binding StringCoordinates}" Height="20" Width="20" Margin="0,0,0,0"
+            <ItemsControl ItemsSource="{Binding }">
+                <Button Content="{Binding StringCoordinates}" FontSize="8" Height="25" Width="25" Margin="0,0,0,0"
                         Command="{Binding Source={ x:Reference Name=MainWindowName}, Path=DataContext.ClickMapButtonCommand }"
-                        CommandParameter="{Binding}" Background="Pink" BorderBrush="{x:Null}" />
+                        CommandParameter="{Binding}"
+                        Background="Gray"
+                        BorderBrush="{Binding Path=State, Converter={StaticResource enumToColorConverter}}" BorderThickness="2">
+                </Button>
             </ItemsControl>
         </DataTemplate>
     </Window.Resources>
+
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <DockPanel>
-                <Menu DockPanel.Dock="Top">
-                    <MenuItem Header="Start new game" Command="{Binding StartGameCommand}"/>
-                    <Separator />
-                    <MenuItem Header="Save game"/>
-                    <Separator />
-                    <MenuItem Header="Load game"/>
-                </Menu>
-            </DockPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Start new game" Click="MenuItemStartNewGame_Click"/>
+                <Separator />
+                <MenuItem Header="Save game"/>
+                <Separator />
+                <MenuItem Header="Load game"/>
+            </Menu>
+        </DockPanel>
 
-            <!--<Canvas Background="Gray">
-                <Rectangle Stroke="Black" Width="10" Height="10" Fill="Pink" />
 
-            </Canvas>-->
+        <StackPanel Grid.Row="1" Orientation="Vertical" >
 
-            <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
-
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10"/>
+                <TextBlock Text="{Binding CurrentGame.TotalSteps, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
+                <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10" />
+            </StackPanel>
         </StackPanel>
+
+        <ScrollViewer Grid.Row="2"
+            HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
+            <!--<Viewbox Stretch="UniformToFill">-->
+            <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
+            <!--</Viewbox>-->
+        </ScrollViewer>
+
     </Grid>
+
 </Window>

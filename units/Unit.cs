@@ -10,7 +10,7 @@ using TableGame.Fractions;
 
 namespace TableGame.Units
 {
-    internal abstract class Unit : MapObject
+    public abstract class Unit : MapObject
     {
         public string Fraction { get; set; } // 
         public int Health { get; set; } // а надо ли?
