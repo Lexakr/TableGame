@@ -44,36 +44,11 @@ namespace TableGame.GameServices
             // проверка фракции юнита в тайле и фракции игрока
 
             // красим тайлы кого атаковать можно и куда дойти можно
-            var tileUnit = startTile.TileObject as Unit;
-            tileUnit = new SoldierImperium();
-            tileUnit.PosX = startTile.PosX;
-            tileUnit.PosY = startTile.PosY;
-            ShowActionTiles(ref tileUnit);
+            ShowActionTiles(ref startTile);
             return true;
             // Ожидание следующего клика игрока
 
-           /* var result = OpenMenu(new List<string>() { "test", "test2" });
-
-            // Если тайл свободен - перемещаем туда юнита.
-            if (endTile.Passability == true)
-            {
-                // TODO: проверка, дойдет ли до туда юнит за ход. или не тут? ПРОВЕРКА ЧТО ЮНИТ ФРАКЦИИ ИГРОКА ДЕЛАЮЩЕГО ХОД
-                MoveUnit(startTile.TileObject as Unit, ref startTile, ref endTile); // TODO: REF проверить что передается ссылка на место в памяти!!!
-            }
-
-            // Если на тайле объект чужой фракции, атакуем его
-            else if (endTile.TileObject != null && endTile.TileObject is Unit)
-            {
-                var targetUnit = endTile.TileObject as Unit;
-                var unit = startTile.TileObject as Unit;
-
-                if (targetUnit.Fraction != unit.Fraction)
-                {
-                    AttackTargetUnit(unit, targetUnit);
-                }
-            }*/
-
-            // TODO: Возможно какое-то действие, если выбранный тайл занят препятствием
+           /* var result = OpenMenu(new List<string>() { "test", "test2" }); */
         }
 
         /// <summary>
@@ -137,9 +112,9 @@ namespace TableGame.GameServices
             // void Attack(this unit, targetUnit);
         }
 
-        private void ShowActionTiles(ref Unit unit)
+        private void ShowActionTiles(ref Tile tile)
         {
-
+            var unit = tile.TileObject as Unit;
             Debug.WriteLine($"Show action: unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePoints}");
 
             // List INDEX
