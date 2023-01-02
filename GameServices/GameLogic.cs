@@ -41,6 +41,11 @@ namespace TableGame.GameServices
                 return false;
             }
 
+            if (((Unit)startTile.TileObject).FractionName != CurrentGame.ActivePlayer.PlayerFraction.Name)
+            {
+                return false;
+            }
+
             // проверка фракции юнита в тайле и фракции игрока
 
             // красим тайлы кого атаковать можно и куда дойти можно
