@@ -36,44 +36,67 @@ namespace TableGame.ViewModels
         [ObservableProperty]
         private Game currentGame;
 
+        
+        [ObservableProperty]
+        private Unit listBoxSelectedItem;
+
         private GameLogic gameLogic;
 
         public MainWindowVM(Player player1, Player player2, int totalSteps)
         {
-
             var newMap = new Map(32, 32, "test_map");
+            var counter = new StepCounter(totalSteps);
+
+            player1.PlayerUnits.Add(new SoldierImperium()); // TEMP
 
             currentGame = new Game(newMap,
                 new GameStat(16),
                 player1,
                 player2,
-                totalSteps);
+                counter);
 
             gameLogic = new GameLogic();
             gameLogic.CurrentGame = currentGame;
             gameLogic.OpenMenu += OpenChooseMenu;
 
-            Debug.WriteLine("INSIDE GAMELOGIC" + CurrentGame.GetHashCode().ToString());
+            counter.GameEnded += GameOver;
+
+            StartGame();
+            
         }
 
+        private void StartGame()
+        {   
+            if(RollDice("Выбор игрока/чей ход\n\n(Игрок 1: 1-3\nИгрок 2: 4-6)") > 3)
+            {
+                CurrentGame.ActivePlayer = CurrentGame.FirstPlayer;
+            }
+            else
+            {
+                CurrentGame.ActivePlayer = CurrentGame.SecondPlayer;
+            }
+
+            Debug.Write("ACTIVE PLAYER: " + CurrentGame.ActivePlayer.PlayerName);
+
+
+            // назначение первого игрока? (вызов окна костей в диалоге)
+
+            // TODO: вызов магазина в диалоговом окне + в последовательности активного игрока
+
+            // TODO: ЛОГИКА ИГРЫ - если шаг 0 - выбор юнитов чтобы ставить
+        }
 
         [RelayCommand]
-        private void StartGame()
+        private void NextStep()
         {
-
-            var newMap = new Map(16, 16, "game_map");
-
-            CurrentGame = new Game(newMap,
-                new GameStat(16),
-                new Player(),
-                new Player(),
-                200);
-
+            CurrentGame.NextStep();
         }
 
         [RelayCommand]
         private void ClickMapButton(Tile tile)
         {
+            
+
             Debug.WriteLine($"Command ClickMapButton: x:{tile.PosX} y:{tile.PosY} Hash:{tile.Hash}");
 
             // ТРИГГЕРНАЯ СИСИТЕМА:
@@ -81,6 +104,13 @@ namespace TableGame.ViewModels
             // Если это первый клик игрока будет null (ранее не выбирал юнита для действия)
             if (previosTile == null)
             {
+                if (CurrentGame.CurrentStep < 2 & ListBoxSelectedItem != null)
+                {
+                    gameLogic.PutUnitOnMap(ref listBoxSelectedItem, ref tile);
+                    ListBoxSelectedItem = null;
+                    return;
+                }
+
                 // записываем начальный (стартовый) объект триггер
                 previosTile = tile;
 
@@ -94,6 +124,7 @@ namespace TableGame.ViewModels
             // если игроку нужно выбирает уже вторую клетку для взаимодействия
             else
             {
+
                 // отправляем запрос на взаимодейсвтвие этих двух клеток
                 if (gameLogic.TileAction(ref tile, ref previosTile))
                     previosTile = null;
@@ -107,6 +138,20 @@ namespace TableGame.ViewModels
             menuWindow.ShowDialog();
 
             return menuWindow.ResultChoice;
+        }
+
+        private int RollDice(string nameOfEvent)
+        {
+            var diceWindow = new RollDiceWindow(nameOfEvent);
+            diceWindow.ShowDialog();
+
+            return diceWindow.RollResult;
+        }
+
+        // TODO: some window?
+        private void GameOver()
+        {
+
         }
     }
 }

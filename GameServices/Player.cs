@@ -13,19 +13,20 @@ namespace TableGame.GameServices
     {
         public string PlayerName { get; set; }
         public Fraction PlayerFraction { get; set; }
-        public List<Unit>? PlayerUnits { get; set; }
-        
-        public Player() 
+
+        [ObservableProperty]
+        private List<Unit> playerUnits;
+
+        public List<string> PlayerUnitNames
         {
-            PlayerName = "Player1";
-            //PlayerFraction = "Imperium"; // REFACT
-            PlayerUnits = new List<Unit> { new SoldierImperium() };
+            get => PlayerUnits.Select(x => x.Name).ToList();
         }
 
         public Player(string playerName, Fraction playerFraction)
         {
             PlayerName = playerName;
             PlayerFraction = playerFraction;
+            PlayerUnits = new List<Unit> { new SoldierImperium(), new SoldierOrks() }; // TODO: CLEAR TEMP | Solder FOR TEST
         }
 
         [System.Text.Json.Serialization.JsonConstructor]

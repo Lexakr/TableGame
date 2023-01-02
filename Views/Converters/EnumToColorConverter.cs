@@ -31,6 +31,10 @@ namespace TableGame.Views.Converters
                     color = "#FF3737";
                     borderThickness = 3;
                     break;
+                case TileStates.Ally:
+                    color = "#00df98";
+                    borderThickness = 3;
+                    break;
             }
 
             if (targetType.GetTypeInfo().Name == typeof(Thickness).Name)

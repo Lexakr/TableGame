@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,18 +20,25 @@ namespace TableGame.Views
     /// </summary>
     public partial class RollDiceWindow : Window
     {
-        public RollDiceWindow()
+        public int RollResult { get; set; } = 0;
+
+        public RollDiceWindow(string textToTitle)
         {
             InitializeComponent();
-        }
 
-        private void RollButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TASK FOR ROLL
+            TopText.Text = textToTitle;
 
+            new Thread (() =>
+            {
+                Thread.Sleep(1000);
 
-            // after you did roll, disable next try
-            this.RollButton.IsEnabled = false;
+                Dispatcher.Invoke(() => {
+                    RollResult = new Random().Next(1, 6);
+                    DiceText.Text = RollResult.ToString();
+                });
+
+            }).Start();
+
         }
     }
 }

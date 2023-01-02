@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TableGame.Fractions;
 using TableGame.GameServices;
 
 namespace TableGame.Views
@@ -35,6 +36,14 @@ namespace TableGame.Views
                 ComboBoxPlayer1.Items.Add(fraction);
                 ComboBoxPlayer2.Items.Add(fraction);
             }
+
+#if DEBUG
+            TextBoxPlayerName1.Text = "first";
+            TextBoxPlayerName2.Text = "second";
+            TextBoxTotalSteps.Text = "100";
+            ComboBoxPlayer1.SelectedValue = "Orks";
+            ComboBoxPlayer2.SelectedValue = "Imperium";
+#endif
         }
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
@@ -50,8 +59,8 @@ namespace TableGame.Views
                 return;
             }
 
-            var p1 = new Player(TextBoxPlayerName1.Text, ComboBoxPlayer1.SelectedValue.ToString(), new List<Units.Unit>());
-            var p2 = new Player(TextBoxPlayerName2.Text, ComboBoxPlayer2.SelectedValue.ToString(), new List<Units.Unit>());
+            var p1 = new Player(TextBoxPlayerName1.Text, ComboBoxPlayer1.SelectedValue.ToString() == "Orks" ? new Orks() : new Imperium());
+            var p2 = new Player(TextBoxPlayerName2.Text, ComboBoxPlayer2.SelectedValue.ToString() == "Orks" ? new Orks() : new Imperium());
 
             var totalSteps = 0;
 

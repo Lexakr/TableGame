@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TableGame.Views"
         mc:Ignorable="d"
-        Title="RollDiceWindow" Height="250" Width="400"
+        Title="RollDiceWindow" Height="311" Width="490"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-            <TextBlock Name="TopText" Text="Demo text" FontSize="30" Margin="0,0,0,50"/>
-            <TextBlock Name="DiceText" Text="Dice text" FontSize="30" Margin="0,0,0,50" />
-            <Button x:Name="RollButton" Content="Кинуть кубик" FontSize="20" Click="RollButton_Click" />
+            <TextBlock Name="TopText" Text="Кубик брошен" HorizontalAlignment="Center" FontSize="30" Margin="0,0,0,50"/>
+            <TextBlock Name="DiceText" Text="TODO: Dice images" FontSize="30" Margin="0,0,0,50" />
         </StackPanel>
     </Grid>
 </Window>
