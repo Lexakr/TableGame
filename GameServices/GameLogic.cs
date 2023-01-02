@@ -25,7 +25,6 @@ namespace TableGame.GameServices
 
 
         public delegate int MenuChoise(List<string> list);
-
         public event MenuChoise OpenMenu;
         public Game CurrentGame { get; set; }
 
@@ -85,7 +84,7 @@ namespace TableGame.GameServices
         public bool TileAction(ref Tile startTile, ref Tile endTile)
         {
             //TODO: перенести ниже. Это для теста:
-            ClearActionOnMap();
+            ClearActionTiles();
             return true;
 
             // клетка препятствие
@@ -99,6 +98,7 @@ namespace TableGame.GameServices
             // клетка пустая
 
             // клетка с врагом
+            // melee/range attack
 
             // клетка изначальная
 
@@ -112,13 +112,12 @@ namespace TableGame.GameServices
         /// <param name="unit">Выделенный на карте юнит</param>
         /// <param name="startTile">Текущий тайл выделенного юнита</param>
         /// <param name="endTile">Выбранный на карте тайл</param>
-        public void MoveUnit(Unit unit, ref Tile startTile, ref Tile endTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
+        public void MoveUnit(ref Unit unit, ref Tile startTile, ref Tile endTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
         {
             if (endTile.IsMovable())
             {
                 startTile.RemoveObj();
-                endTile.AddObj(unit);
-                unit.CurrentLocation = endTile;
+                unit.MoveTo(ref endTile);
             }
             else
             {
@@ -126,21 +125,10 @@ namespace TableGame.GameServices
             }
         }
 
-        public void AttackTargetUnit(Unit unit, Unit targetUnit)
+        public void AttackTargetUnit(ref Unit unit, ref Unit targetUnit)
         {
             // что-то типа targetUnit.OnAttack(unit); наоборот
             // void Attack(this unit, targetUnit);
-        }
-
-        private void ClearActionOnMap()
-        {
-            foreach(var item1 in CurrentGame.GameMap.Tiles)
-            {
-                foreach(var item2 in item1)
-                {
-                    item2.State = TileStates.Default;
-                }
-            }
         }
 
         private void ShowActionTiles(ref Unit unit)
@@ -161,16 +149,16 @@ namespace TableGame.GameServices
                 for (int x = left; x <= right; x++)
                 {
                     // заполнение
-                    ChangeStateForAction(x, top, unit);
-                    ChangeStateForAction(x, bottom, unit);
+                    ChangeStateForAction(x, top, ref unit);
+                    ChangeStateForAction(x, bottom, ref unit);
                 }
 
                 // top-bottom
                 for (int y = bottom; y <= top; y++)
                 {
                     // заполненеие
-                    ChangeStateForAction(left, y, unit);
-                    ChangeStateForAction(right, y, unit);
+                    ChangeStateForAction(left, y, ref unit);
+                    ChangeStateForAction(right, y, ref unit);
                 }
 
                 top -= 1;
@@ -187,7 +175,7 @@ namespace TableGame.GameServices
         /// <param name="x">ИНДЕКС объекта на карте</param>
         /// <param name="y">ИНДЕКС ОБЪЕКТА НА КАРТЕ</param>
         /// <param name="unit"></param>
-        private void ChangeStateForAction(int x, int y, Unit unit)
+        private void ChangeStateForAction(int x, int y, ref Unit unit)
         {
             if (x < 0 || y < 0 || x >= CurrentGame.GameMap.Size_x || y >= CurrentGame.GameMap.Size_y)
                 return;
@@ -200,11 +188,13 @@ namespace TableGame.GameServices
             {
                 // green state
                 tile.State = TileStates.CanMove;
+                tilesToClear.Add(tile);
             }
             else if (tile.TileObject is Unit && (tile.TileObject as Unit).FractionName != unit.FractionName)
             {
                 // red staet
                 tile.State = TileStates.CanAttack;
+                tilesToClear.Add(tile);
             }
             
         }
@@ -219,6 +209,31 @@ namespace TableGame.GameServices
                 t.State = TileStates.Default;
             }
             tilesToClear.Clear();
+        }
+
+        /// <summary>
+        /// Принудительная очистка всех тайлов
+        /// </summary>
+        private void ClearAllTilesOnMap()
+        {
+            foreach (var item1 in CurrentGame.GameMap.Tiles)
+            {
+                foreach (var item2 in item1)
+                {
+                    item2.State = TileStates.Default;
+                }
+            }
+        }
+
+        public bool PutUnitOnMap(ref Unit unit, ref Tile tile)
+        {
+            // TODO: проверка на участок карты, выделен ли он под стартовое размещение юнитов
+            if (tile.IsMovable())
+            {
+                unit.MoveTo(ref tile);
+                return true;
+            }
+            return false;
         }
     }
 }
