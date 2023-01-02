@@ -106,8 +106,7 @@ namespace TableGame.ViewModels
                 {
                     if (gameLogic.PutUnitOnMap(ref listBoxSelectedItem, ref tile))
                     {
-                        CurrentGame.ActivePlayer.PlayerUnits.Remove(ListBoxSelectedItem);
-                        ListBoxSelectedItem = null;
+                        var result = CurrentGame.ActivePlayer.PlayerUnits.Remove(ListBoxSelectedItem);
                         previosTile = null;
                         return;
                     }
