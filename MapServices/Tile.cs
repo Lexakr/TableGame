@@ -20,7 +20,9 @@ namespace TableGame
         /// <summary>Подсветка зеленым тайла, в который может дойти юнит</summary>
         CanMove,
         /// <summary>Подсветка красным тайла, который может атаковать юнит</summary>
-        CanAttack
+        CanAttack,
+        /// <summary>В клетке союзник</summary>
+        Ally
     }
 
     /// <summary>

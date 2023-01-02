@@ -36,10 +36,10 @@ namespace TableGame.GameServices
         public bool TileAction(ref Tile startTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
         {
             Debug.WriteLine("INSIDE GAMELOGIC" + CurrentGame.GetHashCode().ToString());
-/*            if (!startTile.IsInteractable())
+            if (!startTile.IsInteractable())
             {
                 return false;
-            }*/
+            }
 
             // проверка фракции юнита в тайле и фракции игрока
 
@@ -57,7 +57,7 @@ namespace TableGame.GameServices
             // Если тайл свободен - перемещаем туда юнита.
             if (endTile.Passability == true)
             {
-                // TODO: проверка, дойдет ли до туда юнит за ход. или не тут?
+                // TODO: проверка, дойдет ли до туда юнит за ход. или не тут? ПРОВЕРКА ЧТО ЮНИТ ФРАКЦИИ ИГРОКА ДЕЛАЮЩЕГО ХОД
                 MoveUnit(startTile.TileObject as Unit, ref startTile, ref endTile); // TODO: REF проверить что передается ссылка на место в памяти!!!
             }
 
@@ -83,26 +83,38 @@ namespace TableGame.GameServices
         /// <param name="endTile"></param>
         public bool TileAction(ref Tile startTile, ref Tile endTile)
         {
-            //TODO: перенести ниже. Это для теста:
-            ClearActionTiles();
-            return true;
-
-            // клетка препятствие
-            if (!endTile.IsInteractable())
+            if (endTile.State != TileStates.Default)
             {
+                ClearActionTiles();
                 return false;
             }
 
-            // клетка вне радиуса
-
             // клетка пустая
+            if (endTile.IsMovable())
+            {
+                MoveUnit(ref startTile, ref endTile);
+            }
 
             // клетка с врагом
-            // melee/range attack
+            if (endTile.State == TileStates.CanAttack)
+            {
+                // TODO: melee/range attack атака требует MovePoints и обнуляет их
+            }
+
+            // клетка с союзником
+            if (endTile.State == TileStates.Ally)
+            {
+                // TODO: интеракт с союзником
+            }
 
             // клетка изначальная
+            // TODO: Выделение активного юнита белым цветом, add Tilestate.SelectedUnit
+            if (startTile == endTile)
+            {
+                // меню что можно делать юниту с самим собой
+            }
 
-            
+            ClearActionTiles();
             return true;
         }
 
@@ -112,17 +124,11 @@ namespace TableGame.GameServices
         /// <param name="unit">Выделенный на карте юнит</param>
         /// <param name="startTile">Текущий тайл выделенного юнита</param>
         /// <param name="endTile">Выбранный на карте тайл</param>
-        public void MoveUnit(ref Unit unit, ref Tile startTile, ref Tile endTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
+        public void MoveUnit(ref Tile startTile, ref Tile endTile)
         {
-            if (endTile.IsMovable())
-            {
-                startTile.RemoveObj();
-                unit.MoveTo(ref endTile);
-            }
-            else
-            {
-                // TODO: Какая-то реакция, если эндТайл это препятствие или занят союзным юнитом
-            }
+            ((Unit)startTile.TileObject).MoveTo(ref endTile);
+            // TODO: отнимать MovePoints
+            startTile.RemoveObj();
         }
 
         public void AttackTargetUnit(ref Unit unit, ref Unit targetUnit)
