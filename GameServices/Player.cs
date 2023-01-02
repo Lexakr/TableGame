@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,24 @@ using TableGame.Units;
 
 namespace TableGame.GameServices
 {
-    public class Player
+    public partial class Player : ObservableObject
     {
         public string PlayerName { get; set; }
         public Fraction PlayerFraction { get; set; }
-        public List<Unit>? PlayerUnits { get; set; }
-        
-        public Player() 
+
+        [ObservableProperty]
+        private List<Unit> playerUnits;
+
+        public List<string> PlayerUnitNames
         {
-            PlayerName = "Player1";
-            //PlayerFraction = "Imperium"; // REFACT
-            PlayerUnits = new List<Unit> { new SoldierImperium() };
+            get => PlayerUnits.Select(x => x.Name).ToList();
         }
 
         public Player(string playerName, Fraction playerFraction)
         {
             PlayerName = playerName;
             PlayerFraction = playerFraction;
+            PlayerUnits = new List<Unit> { new SoldierImperium(), new SoldierOrks() }; // TODO: CLEAR TEMP | Solder FOR TEST
         }
 
         [System.Text.Json.Serialization.JsonConstructor]

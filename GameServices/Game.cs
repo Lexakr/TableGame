@@ -14,14 +14,14 @@ namespace TableGame.GameServices
     /// </summary>
     internal partial class Game : ObservableObject
     {
-        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer, int totalSteps)
+        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer, StepCounter counter)
         {
             this.gameMap = gameMap;
             mapStats = new(gameMap);
             this.gameStats = gameStats;
             this.firstPlayer = firstPlayer;
             this.secondPlayer = secondPlayer;
-            TotalSteps = totalSteps;
+            this.counter = counter;
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
@@ -48,11 +48,8 @@ namespace TableGame.GameServices
         public Player SecondPlayer { get => secondPlayer; }
 
         [ObservableProperty]
-        private int currentStep = 0;
+        private StepCounter counter;
 
-        [ObservableProperty]
-        private int totalSteps = 200;
-        
         [ObservableProperty]
         private Player activePlayer;
 
@@ -70,7 +67,7 @@ namespace TableGame.GameServices
             {
                 ActivePlayer = FirstPlayer;
             }
-            CurrentStep++;
+            counter.NextStep();
         }
     }
 }

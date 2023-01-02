@@ -29,6 +29,8 @@ namespace TableGame
     public partial class Tile : ObservableObject, ICoordinates
     {
         private readonly int posX, posY; // координаты тайла
+
+        [ObservableProperty]
         private MapObject? tileObject; // объект на тайле
 
         public int PosX { get => posX; }
@@ -36,7 +38,6 @@ namespace TableGame
 
         [ObservableProperty]
         private TileStates state; 
-        public MapObject? TileObject { get => tileObject; set => tileObject = value; } // TODO обработка если тайлобжекта нет
 
         public string Picture { get; set; }
 
@@ -81,8 +82,8 @@ namespace TableGame
             State = TileStates.Default;
         }
 
-        public void AddObj(MapObject e) => tileObject = e;
-        public void RemoveObj() => tileObject = null;
+        public void AddObj(MapObject e) => TileObject = e;
+        public void RemoveObj() => TileObject = null;
 
         public bool IsInteractable()
         {

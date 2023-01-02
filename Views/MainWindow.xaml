@@ -16,6 +16,7 @@
     <Window.Resources>
         <converters:EnumToColorConverter x:Key="enumToColorConverter" />
         <converters:TileNullToRandomFloreConverter x:Key="tileNullFloreRandom" />
+        <converters:UnitNameFromListConverter x:Key="unitNameFromListConverter" />
 
         <DataTemplate x:Key="DataTemplate_Level1">
             <ItemsControl ItemsSource="{Binding }" ItemTemplate="{DynamicResource DataTemplate_Level2}">
@@ -40,6 +41,19 @@
                 </Button>
             </ItemsControl>
         </DataTemplate>
+    
+
+    <DataTemplate x:Key="UnitList">
+            <ItemsControl ItemsSource="{Binding }">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+    </DataTemplate>
     </Window.Resources>
 
     <Grid>
@@ -65,19 +79,38 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
+                <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerName, StringFormat=Текущий игрок: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
                 <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10"/>
                 <TextBlock Text="{Binding CurrentGame.TotalSteps, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
                 <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10" />
+
+                <Button Content="Следующий ход" Command="{Binding NextStepCommand}" />
             </StackPanel>
         </StackPanel>
 
-        <ScrollViewer Grid.Row="2"
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+
+            <StackPanel Orientation="Vertical">
+                <ListBox MinWidth="150"
+                         ItemsSource="{Binding CurrentGame.ActivePlayer.PlayerUnits}"
+                         SelectedItem="{Binding ListBoxSelectedItem}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            </StackPanel>
+
+            <ScrollViewer 
             HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
             <!--<Viewbox Stretch="UniformToFill">-->
             <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
             <!--</Viewbox>-->
         </ScrollViewer>
-
+        </StackPanel>
     </Grid>
 
 </Window>

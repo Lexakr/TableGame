@@ -225,6 +225,8 @@ namespace TableGame.GameServices
             }
         }
 
+        // TODO: IMPORTANT - ADD func for MOVE unit on start game
+
         public bool PutUnitOnMap(ref Unit unit, ref Tile tile)
         {
             // TODO: проверка на участок карты, выделен ли он под стартовое размещение юнитов
