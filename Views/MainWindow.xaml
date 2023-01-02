@@ -92,8 +92,8 @@
 
             <StackPanel Orientation="Vertical">
                 <ListBox MinWidth="150"
-                         ItemsSource="{Binding CurrentGame.ActivePlayer.PlayerUnits}"
-                         SelectedItem="{Binding ListBoxSelectedItem}">
+                         ItemsSource="{Binding CurrentGame.ActivePlayer.PlayerUnits, UpdateSourceTrigger=PropertyChanged}"
+                         SelectedItem="{Binding ListBoxSelectedItem, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

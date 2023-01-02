@@ -95,8 +95,6 @@ namespace TableGame.ViewModels
         [RelayCommand]
         private void ClickMapButton(Tile tile)
         {
-            
-
             Debug.WriteLine($"Command ClickMapButton: x:{tile.PosX} y:{tile.PosY} Hash:{tile.Hash}");
 
             // ТРИГГЕРНАЯ СИСИТЕМА:
@@ -104,15 +102,17 @@ namespace TableGame.ViewModels
             // Если это первый клик игрока будет null (ранее не выбирал юнита для действия)
             if (previosTile == null)
             {
-                if (CurrentGame.CurrentStep < 2 & ListBoxSelectedItem != null)
+                if (CurrentGame.Counter.Current < 2 & ListBoxSelectedItem != null)
                 {
-                    gameLogic.PutUnitOnMap(ref listBoxSelectedItem, ref tile);
-                    ListBoxSelectedItem = null;
+                    if (gameLogic.PutUnitOnMap(ref listBoxSelectedItem, ref tile))
+                    {
+                        CurrentGame.ActivePlayer.PlayerUnits.Remove(ListBoxSelectedItem);
+                        ListBoxSelectedItem = null;
+                        previosTile = null;
+                        return;
+                    }
                     return;
                 }
-
-                // записываем начальный (стартовый) объект триггер
-                previosTile = tile;
 
                 if (!gameLogic.TileAction(ref tile))
                 {
@@ -120,13 +120,15 @@ namespace TableGame.ViewModels
                     previosTile = null;
                     return;
                 }
+
+                // записываем начальный (стартовый) объект триггер
+                previosTile = tile;
             }
             // если игроку нужно выбирает уже вторую клетку для взаимодействия
             else
             {
-
                 // отправляем запрос на взаимодейсвтвие этих двух клеток
-                if (gameLogic.TileAction(ref tile, ref previosTile))
+                    gameLogic.TileAction(ref previosTile, ref tile);
                     previosTile = null;
             }
 
