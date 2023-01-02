@@ -58,16 +58,19 @@ namespace TableGame.GameServices
         /// <param name="endTile"></param>
         public bool TileAction(ref Tile startTile, ref Tile endTile)
         {
-            if (endTile.State != TileStates.Default)
+            if (endTile.State == TileStates.Default)
             {
                 ClearActionTiles();
                 return false;
             }
 
             // клетка пустая
+            
             if (endTile.IsMovable())
             {
                 MoveUnit(ref startTile, ref endTile);
+                ClearActionTiles();
+                return true;
             }
 
             // клетка с врагом
@@ -171,11 +174,20 @@ namespace TableGame.GameServices
                 tile.State = TileStates.CanMove;
                 tilesToClear.Add(tile);
             }
-            else if (tile.TileObject is Unit && (tile.TileObject as Unit).FractionName != unit.FractionName)
+            else if (tile.TileObject is Unit)
             {
-                // red staet
+                // проверка на врага
+                if((tile.TileObject as Unit).FractionName != unit.FractionName)
+                {
                 tile.State = TileStates.CanAttack;
                 tilesToClear.Add(tile);
+                }
+                // если юнит не враг = друг
+                else
+                {
+                    tile.State = TileStates.Ally;
+                    tilesToClear.Add(tile);
+                }
             }
             
         }

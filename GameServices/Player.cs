@@ -17,11 +17,6 @@ namespace TableGame.GameServices
         [ObservableProperty]
         private List<Unit> playerUnits;
 
-        public List<string> PlayerUnitNames
-        {
-            get => PlayerUnits.Select(x => x.Name).ToList();
-        }
-
         public Player(string playerName, Fraction playerFraction)
         {
             PlayerName = playerName;
