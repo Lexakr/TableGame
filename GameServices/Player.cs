@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using TableGame.Units;
 
 namespace TableGame.GameServices
 {
-    public class Player : IObserver
+    public partial class Player : ObservableObject, IObserver
     {
         public string PlayerName { get; set; }
         public Fraction PlayerFraction { get; set; }
