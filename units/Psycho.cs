@@ -8,9 +8,9 @@ namespace TableGame.Units
 {
     internal class Psycho : Unit
     {
-        public override void MeleeAttack()
+        public override bool MeleeAttack(ref Unit target)
         {
-
+            return false;
         }
     }
 
