@@ -12,15 +12,34 @@ namespace TableGame.Units
 {
     public abstract class Unit : MapObject
     {
-        public string FractionName { get; set; } // 
-        public int Health { get; set; } // а надо ли?
-        public int MaxHealth { get; } // количество урона, которое модель выдержит и не погибнет
-        public int Price { get; } // "стоимость" юнита в очках
-        public bool IsMelee { get; set; } // может ли ближний бой
-        public bool IsRange { get; set; } // может ли дальний бой
-        public int Power { get; set; } // физическая сила модели и вероятность нанесения урона в рукопашном бою
-        public int MeleeAttacks { get; set; } // Количество ударов, которые модель может нанести в рукопашном бою
+        /// <summary>Фракция юнита</summary>
+        public string FractionName { get; set; }
+
+        /// <summary>Текущий уровень здоровья</summary>
+        public int Health { get; set; }
+
+        /// <summary>Максимальное здоровье</summary>
+        public int MaxHealth { get; }
+
+        /// <summary>Цена покупки</summary>
+        public int Price { get; }
+
+        /// <summary>Навык ближнего боя 1-100%, 6-0%</summary>
+        public int MeleeSkill { get; set; }
+
+        /// <summary>Кол-во урона в ближнем бою</summary>
+        public int MeleeDamage { get; set; }
+
+        /// <summary>Навык дальнего боя 1-100%, 6-0%.</summary>
+        public int RangeSkill { get; set; }
+
+        /// <summary>Кол-во урона в ближнем бою</summary>
+        public int RangeDamage { get; set; }
+
+        /// <summary>Дальность хода</summary>
         public int MovePoints { get; set; }
+
+        /// <summary>Способности юнита</summary>
         public List<Ability>? Abilities { get; set; }
 
         /// <summary>
@@ -31,17 +50,10 @@ namespace TableGame.Units
             MaxHealth = 4;
             Health = MaxHealth; // полное здоровье
             Price = 50;
-            IsMelee = true;
-            IsRange = true;
-            Power = 4;
-            MeleeAttacks = 2;
+            MeleeDamage = 2;
             MovePoints = 3;
             FractionName = "FractionName";
         }
-/*        Name = "Name";
-            PosX = -1;
-            PosY = -1;
-            CurrentLocation = null;*/
 
         [System.Text.Json.Serialization.JsonConstructor]
         public Unit(string Name, int PosX, int PosY, Tile? CurrentLocation, string UnitFraction, int Health, int MaxHealth, int Price, 
@@ -50,34 +62,56 @@ namespace TableGame.Units
             this.Name = Name;
             this.PosX = PosX;
             this.PosY = PosY;
-            this.CurrentLocation = CurrentLocation;
             this.FractionName = UnitFraction;
             this.Health = Health;
             this.MaxHealth = MaxHealth;
             this.Price = Price;
-            this.IsMelee = IsMelee;
-            this.IsRange = IsRange;
-            this.Power = Power;
-            this.MeleeAttacks = MeleeAttacks;
+            this.MeleeDamage = MeleeAttacks;
             this.MovePoints = MovePoints;
             this.Abilities = Abilities;
         }
 
         /// <summary>
-        /// Перемещение Unit на новый Tile
+        /// Обновляет координаты юнита и добавляет юнита в тайл.
         /// </summary>
         /// <param name="t">Тайл на который перемещаемся</param>
-        public void MoveTo(Tile t)
-        { 
-            ((ICoordinates)t).GetLocation(); // Приведение к интерфейсу
-            if (UnitUtility.IsMovable(t))
-            {
-                CurrentLocation = t;
-                PosX = t.PosX;
-                PosY = t.PosY;
-            }
+        public void MoveTo(ref Tile t)
+        {
+            t.AddObj(this);
+            PosX = t.PosX;
+            PosY = t.PosY;
         }
 
-        public abstract void Attack();
+        /// <summary>
+        /// Атака в ближнем бою выделенного юнита
+        /// </summary>
+        /// <returns>Успех или неуспех</returns>
+        public virtual bool MeleeAttack(ref Unit target)
+        {
+            // Бросаем кубик, чтобы определить, нанесли ли мы урон
+            if(UnitUtility.RollDice() > this.MeleeSkill)
+            {
+                target.Health -= this.MeleeDamage;
+                return true;
+            }
+            // Урон не был нанесен
+            return false;
+        }
+
+        /// <summary>
+        /// Атака в дальнем бою выделенного юнита
+        /// </summary>
+        /// <returns>Успех или неуспех</returns>
+        public virtual bool RangeAttack(ref Unit target)
+        {
+            // Бросаем кубик, чтобы определить, нанесли ли мы урон
+            if (UnitUtility.RollDice() > this.RangeSkill)
+            {
+                target.Health -= this.RangeDamage;
+                return true;
+            }
+            // Урон не был нанесен
+            return false;
+        }
     }
 }

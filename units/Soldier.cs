@@ -20,7 +20,7 @@ namespace TableGame.Units
             PosY= posY;
         }
 
-        public override void Attack()
+        public override void MeleeAttack()
         {
 
         }

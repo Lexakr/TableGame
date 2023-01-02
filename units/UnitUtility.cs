@@ -15,5 +15,14 @@ namespace TableGame.Units
             else
                 return false;
         }
+
+        /// <summary>
+        /// Подброс кубика 1D6
+        /// </summary>
+        /// <returns>Выпавшее число</returns>
+        public static int RollDice()
+        {
+            return new Random().Next(1, 7);
+        }
     }
 }

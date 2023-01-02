@@ -11,7 +11,6 @@ namespace TableGame.MapServices
         public string Name { get; set; }
         public int PosX { get; set; }
         public int PosY { get; set; }
-        public Tile? CurrentLocation { get; set; } // ref to Tile
         public string Icon { get; set; }
 
         /// <summary>
@@ -21,7 +20,6 @@ namespace TableGame.MapServices
         public MapObject()
         {
             Name = "Name";
-            CurrentLocation = null;
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
@@ -30,7 +28,6 @@ namespace TableGame.MapServices
             Name = name;
             PosX = posX;
             PosY = posY;
-            CurrentLocation = currentLocation;
         }
 
         /// <summary>
