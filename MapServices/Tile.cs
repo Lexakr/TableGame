@@ -57,9 +57,8 @@ namespace TableGame
             }
         }
 
-#if DEBUG
         public string Hash { set;  get; }
-#endif
+
 
         public string StringCoordinates { get { return $"{PosX},{PosY}"; } }
 
@@ -69,10 +68,7 @@ namespace TableGame
             this.posX = posX;
             this.posY = posY;
             State = TileStates.Default;
-
-#if DEBUG
             Hash = this.GetHashCode().ToString();
-#endif
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
