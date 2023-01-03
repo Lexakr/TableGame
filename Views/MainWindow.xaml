@@ -105,12 +105,28 @@
             </ListBox>
             </StackPanel>
 
-            <ScrollViewer 
+            <ScrollViewer MinWidth="300" MinHeight="100"
             HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
             <!--<Viewbox Stretch="UniformToFill">-->
             <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
             <!--</Viewbox>-->
         </ScrollViewer>
+
+            <StackPanel Orientation="Vertical">
+                <ListView Width="auto"
+                         ItemsSource="{Binding Logger.LogsOnlyInfo, UpdateSourceTrigger=PropertyChanged}"
+                          HorizontalContentAlignment="Stretch"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding }" TextWrapping="Wrap" Width="300" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 

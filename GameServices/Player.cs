@@ -12,7 +12,7 @@ namespace TableGame.GameServices
 {
     public partial class Player : ObservableObject, IObserver
     {
-        public string PlayerName { get; set; }
+        public string Name { get; set; }
         public Fraction PlayerFraction { get; set; }
 
         [ObservableProperty]
@@ -20,7 +20,7 @@ namespace TableGame.GameServices
 
         public Player(string playerName, Fraction playerFraction)
         {
-            PlayerName = playerName;
+            Name = playerName;
             PlayerFraction = playerFraction;
             PlayerUnits = new ObservableCollection<Unit> { new SoldierImperium(), new SoldierImperium(), new SoldierOrks() }; // TODO: CLEAR TEMP | Solder FOR TEST
         }
@@ -28,7 +28,7 @@ namespace TableGame.GameServices
         [System.Text.Json.Serialization.JsonConstructor]
         public Player(string PlayerName, string PlayerFraction, ObservableCollection<Unit>? PlayerUnits)
         {
-            this.PlayerName = PlayerName;
+            this.Name = PlayerName;
             //this.PlayerFraction = PlayerFraction;
             this.PlayerUnits = PlayerUnits;
         }

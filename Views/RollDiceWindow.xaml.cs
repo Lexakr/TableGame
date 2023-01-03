@@ -20,6 +20,7 @@ namespace TableGame.Views
     /// </summary>
     public partial class RollDiceWindow : Window
     {
+
         public int RollResult { get; set; } = 0;
 
         public RollDiceWindow(string textToTitle)
@@ -33,7 +34,7 @@ namespace TableGame.Views
                 Thread.Sleep(1000);
 
                 Dispatcher.Invoke(() => {
-                    RollResult = new Random().Next(1, 6);
+                    RollResult = new Random().Next(1, 7); // 7 потому что меньше чем
                     DiceText.Text = RollResult.ToString();
 
 #if DEBUG
