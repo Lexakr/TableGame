@@ -35,6 +35,7 @@ namespace TableGame.Views
                 Dispatcher.Invoke(() => {
                     RollResult = new Random().Next(1, 6);
                     DiceText.Text = RollResult.ToString();
+                    this.Close();
                 });
 
             }).Start();

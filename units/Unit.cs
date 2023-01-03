@@ -37,7 +37,10 @@ namespace TableGame.Units
         public int RangeDamage { get; set; }
 
         /// <summary>Дальность хода</summary>
-        public int MovePoints { get; set; }
+        public int MovePointsTotal { get; set; }
+
+        /// <summary>Дальность хода</summary>
+        public int MovePointsCurrent { get; set; } = 0;
 
         /// <summary>Способности юнита</summary>
         public List<Ability>? Abilities { get; set; }
@@ -51,7 +54,7 @@ namespace TableGame.Units
             Health = MaxHealth; // полное здоровье
             Price = 50;
             MeleeDamage = 2;
-            MovePoints = 3;
+            MovePointsTotal = 3;
             FractionName = "FractionName";
         }
 
@@ -67,19 +70,26 @@ namespace TableGame.Units
             this.MaxHealth = MaxHealth;
             this.Price = Price;
             this.MeleeDamage = MeleeAttacks;
-            this.MovePoints = MovePoints;
+            //this.MovePoints = MovePoints;
             this.Abilities = Abilities;
         }
 
         /// <summary>
         /// Обновляет координаты юнита и добавляет юнита в тайл.
         /// </summary>
-        /// <param name="t">Тайл на который перемещаемся</param>
-        public void MoveTo(ref Tile t)
+        /// <param name="t">Tile куда переместить юнита</param>
+        /// <returns></returns>
+        public void MoveTo(ref Tile t, int changeMovePoints = -1)
         {
             t.AddObj(this);
             PosX = t.PosX;
             PosY = t.PosY;
+
+            if (changeMovePoints == -1)
+                return;
+
+            // Проверка на возможность операции нужно реализовать ДО вызова этого метода
+            MovePointsCurrent = MovePointsTotal - changeMovePoints;
         }
 
         /// <summary>

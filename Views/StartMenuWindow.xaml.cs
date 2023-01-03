@@ -43,6 +43,7 @@ namespace TableGame.Views
             TextBoxTotalSteps.Text = "100";
             ComboBoxPlayer1.SelectedValue = "Orks";
             ComboBoxPlayer2.SelectedValue = "Imperium";
+            ButtonStart_Click(null, null);
 #endif
         }
 

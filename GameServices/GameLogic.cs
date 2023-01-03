@@ -112,6 +112,7 @@ namespace TableGame.GameServices
             ((Unit)startTile.TileObject).MoveTo(ref endTile);
             // TODO: отнимать MovePoints
             startTile.RemoveObj();
+            // TODO: Вызвать функцию отрисовки ShowActionTiles ЕСЛИ есть ещё movePoints
         }
 
         public void AttackTargetUnit(ref Unit unit, ref Unit targetUnit)
@@ -123,16 +124,16 @@ namespace TableGame.GameServices
         private void ShowActionTiles(ref Tile tile)
         {
             var unit = tile.TileObject as Unit;
-            Debug.WriteLine($"Show action: unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePoints}");
+            Debug.WriteLine($"Show action: unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePointsCurrent}");
 
             // List INDEX
-            int left = unit.PosX - 1 - unit.MovePoints;
-            int right = unit.PosX - 1 + unit.MovePoints;
-            int top = unit.PosY - 1 + unit.MovePoints;
-            int bottom = unit.PosY - 1 - unit.MovePoints;
+            int left = unit.PosX - 1 - unit.MovePointsCurrent;
+            int right = unit.PosX - 1 + unit.MovePointsCurrent;
+            int top = unit.PosY - 1 + unit.MovePointsCurrent;
+            int bottom = unit.PosY - 1 - unit.MovePointsCurrent;
 
             // кол-во шагов - спиралей
-            for(int i = 0; i < unit.MovePoints; i++)
+            for(int i = 0; i < unit.MovePointsCurrent; i++)
             {
                 // left-right
                 for (int x = left; x <= right; x++)
@@ -230,7 +231,7 @@ namespace TableGame.GameServices
             // TODO: проверка на участок карты, выделен ли он под стартовое размещение юнитов
             if (tile.IsMovable())
             {
-                unit.MoveTo(ref tile);
+                unit.MoveTo(ref tile, 0); // 0 - это снять MovePoints
                 return true;
             }
             return false;

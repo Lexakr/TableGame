@@ -47,8 +47,6 @@ namespace TableGame.ViewModels
             var newMap = new Map(32, 32, "test_map");
             var counter = new StepCounter(totalSteps);
 
-            player1.PlayerUnits.Add(new SoldierImperium()); // TEMP
-
             currentGame = new Game(newMap,
                 new GameStat(16),
                 player1,
@@ -102,14 +100,18 @@ namespace TableGame.ViewModels
             // Если это первый клик игрока будет null (ранее не выбирал юнита для действия)
             if (previosTile == null)
             {
-                if (CurrentGame.Counter.Current < 2 & ListBoxSelectedItem != null)
+                if (CurrentGame.Counter.Current < 2)
                 {
-                    if (gameLogic.PutUnitOnMap(ref listBoxSelectedItem, ref tile))
+                    if (ListBoxSelectedItem != null)
                     {
-                        var result = CurrentGame.ActivePlayer.PlayerUnits.Remove(ListBoxSelectedItem);
-                        previosTile = null;
-                        return;
+                        if (gameLogic.PutUnitOnMap(ref listBoxSelectedItem, ref tile))
+                        {
+                            var result = CurrentGame.ActivePlayer.PlayerUnits.Remove(ListBoxSelectedItem);
+                            previosTile = null;
+                            return;
+                        }
                     }
+
                     return;
                 }
 

@@ -80,6 +80,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                 <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerName, StringFormat=Текущий игрок: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
+                <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerFraction.Name, StringFormat=Фракция: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
                 <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10"/>
                 <TextBlock Text="{Binding CurrentGame.TotalSteps, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
                 <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10" />
