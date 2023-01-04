@@ -114,8 +114,9 @@
         </ScrollViewer>
 
             <StackPanel Orientation="Vertical">
-                <ListView Width="auto"
-                         ItemsSource="{Binding Logger.Logs, UpdateSourceTrigger=PropertyChanged}"
+                <ListView Name="ListTrackPlayers"
+                          Width="auto"
+                          ItemsSource="{Binding Logger.LogsOnlyInfo, UpdateSourceTrigger=PropertyChanged}"
                           HorizontalContentAlignment="Stretch"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           ScrollViewer.VerticalScrollBarVisibility="Auto">
