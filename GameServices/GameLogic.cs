@@ -247,6 +247,7 @@ namespace TableGame.GameServices
             if (tile.IsMovable())
             {
                 unit.MoveTo(ref tile, 0); // 0 - это снять MovePoints
+                CurrentGame.Counter.Attach(unit);
                 return true;
             }
             return false;

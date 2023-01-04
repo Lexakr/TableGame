@@ -10,7 +10,7 @@ using TableGame.Fractions;
 
 namespace TableGame.Units
 {
-    public abstract class Unit : MapObject
+    public abstract class Unit : MapObject, IObserver
     {
         /// <summary>Фракция юнита</summary>
         public string FractionName { get; set; }
@@ -122,6 +122,11 @@ namespace TableGame.Units
             }
             // Урон не был нанесен
             return false;
+        }
+
+        public void Update(ISubject counter)
+        {
+            MovePointsCurrent = MovePointsTotal;
         }
     }
 }
