@@ -20,6 +20,8 @@ namespace TableGame.ViewModels
     /// </summary>
     internal partial class MainWindowVM : ObservableValidator
     {
+        [ObservableProperty]
+        private Logger logger;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ClickMapButtonCommand))]
@@ -44,6 +46,8 @@ namespace TableGame.ViewModels
 
         public MainWindowVM(Player player1, Player player2, int totalSteps)
         {
+            logger= Logger.GetInstance();
+
             var newMap = new Map(32, 32, "test_map");
             var counter = new StepCounter(totalSteps);
 
@@ -64,8 +68,10 @@ namespace TableGame.ViewModels
         }
 
         private void StartGame()
-        {   
-            if(RollDice("Выбор игрока/чей ход\n\n(Игрок 1: 1-3\nИгрок 2: 4-6)") > 3)
+        {
+            var rollResult = RollDice("Выбор игрока/чей ход\n\n(Игрок 1: 1-3\nИгрок 2: 4-6)");
+
+            if (rollResult > 3)
             {
                 CurrentGame.ActivePlayer = CurrentGame.FirstPlayer;
             }
@@ -74,14 +80,10 @@ namespace TableGame.ViewModels
                 CurrentGame.ActivePlayer = CurrentGame.SecondPlayer;
             }
 
-            Debug.Write("ACTIVE PLAYER: " + CurrentGame.ActivePlayer.PlayerName);
+            logger.Info($"На костях выпало: {rollResult}. Первым совершает действия игрок: {CurrentGame.ActivePlayer.Name}");
 
-
-            // назначение первого игрока? (вызов окна костей в диалоге)
 
             // TODO: вызов магазина в диалоговом окне + в последовательности активного игрока
-
-            // TODO: ЛОГИКА ИГРЫ - если шаг 0 - выбор юнитов чтобы ставить
         }
 
         [RelayCommand]
@@ -106,7 +108,7 @@ namespace TableGame.ViewModels
                     {
                         if (gameLogic.PutUnitOnMap(ref listBoxSelectedItem, ref tile))
                         {
-                            var result = CurrentGame.ActivePlayer.PlayerUnits.Remove(ListBoxSelectedItem);
+                            var result = CurrentGame.ActivePlayer.UnitsInInvertory.Remove(ListBoxSelectedItem);
                             previosTile = null;
                             return;
                         }

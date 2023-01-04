@@ -80,6 +80,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                 <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerName, StringFormat=Текущий игрок: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
+                <TextBlock Text="Фракция: " Margin="10,10,10,10"/>
                 <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerFraction.Name, StringFormat=Фракция: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
                 <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10"/>
                 <TextBlock Text="{Binding CurrentGame.TotalSteps, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
@@ -93,7 +94,7 @@
 
             <StackPanel Orientation="Vertical">
                 <ListBox MinWidth="150"
-                         ItemsSource="{Binding CurrentGame.ActivePlayer.PlayerUnits, UpdateSourceTrigger=PropertyChanged}"
+                         ItemsSource="{Binding CurrentGame.ActivePlayer.UnitsInInvertory, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding ListBoxSelectedItem, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -105,12 +106,29 @@
             </ListBox>
             </StackPanel>
 
-            <ScrollViewer 
+            <ScrollViewer MinWidth="300" MinHeight="100"
             HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
             <!--<Viewbox Stretch="UniformToFill">-->
             <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
             <!--</Viewbox>-->
         </ScrollViewer>
+
+            <StackPanel Orientation="Vertical">
+                <ListView Width="auto"
+                         ItemsSource="{Binding Logger.Logs, UpdateSourceTrigger=PropertyChanged}"
+                          HorizontalContentAlignment="Stretch"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding }" TextWrapping="Wrap" Width="300" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 
