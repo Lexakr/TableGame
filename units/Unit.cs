@@ -54,6 +54,8 @@ namespace TableGame.Units
             Health = MaxHealth; // полное здоровье
             Price = 50;
             MeleeDamage = 2;
+            RangeSkill = 6;
+            RangeDamage = 3;
             MovePointsTotal = 3;
             FractionName = "FractionName";
         }
@@ -99,9 +101,10 @@ namespace TableGame.Units
         public virtual bool MeleeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
-            if(UnitUtility.RollDice1D6() > this.MeleeSkill)
+            if(this.MeleeSkill >= UnitUtility.RollDice1D6())
             {
                 target.Health -= this.MeleeDamage;
+                this.MovePointsCurrent = 0;
                 return true;
             }
             // Урон не был нанесен
@@ -115,9 +118,10 @@ namespace TableGame.Units
         public virtual bool RangeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
-            if (UnitUtility.RollDice1D6() > this.RangeSkill)
+            if (this.RangeSkill >= UnitUtility.RollDice1D6())
             {
                 target.Health -= this.RangeDamage;
+                this.MovePointsCurrent = 0;
                 return true;
             }
             // Урон не был нанесен
