@@ -10,7 +10,7 @@ using TableGame.Units;
 
 namespace TableGame.GameServices
 {
-    public partial class Player : ObservableObject, IObserver
+    public partial class Player : ObservableObject
     {
         public string Name { get; set; }
         public Fraction PlayerFraction { get; set; }
@@ -31,20 +31,6 @@ namespace TableGame.GameServices
             this.Name = PlayerName;
             //this.PlayerFraction = PlayerFraction;
             this.UnitsInInvertory = PlayerUnits;
-        }
-
-        public void Update(ISubject stepCounter)
-        {
-            if (UnitsInInvertory != null)
-            {
-                foreach (Unit u in UnitsInInvertory)
-                {
-                    if (u.Health <= 0)
-                    {
-                        UnitsInInvertory.Remove(u);
-                    }
-                }
-            }
         }
     }
 }

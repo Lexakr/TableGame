@@ -11,6 +11,8 @@ namespace TableGame
         // Присоединяет наблюдателя к издателю.
         void Attach(IObserver observer);
 
+        void Detach(IObserver observer);
+
         // Уведомляет всех наблюдателей о событии.
         void Notify();
     }

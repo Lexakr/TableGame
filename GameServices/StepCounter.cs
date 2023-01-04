@@ -31,6 +31,11 @@ namespace TableGame.GameServices
             observers.Add(observer);
         }
 
+        public void Detach(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
         public void Notify()
         {
             foreach (var o in observers)
@@ -46,7 +51,11 @@ namespace TableGame.GameServices
             {
                 // end game
             }
-            Notify();
+            if (Current % 2 == 0)
+            {
+                Notify();
+            }
+            
         }
     }
 }

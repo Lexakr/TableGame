@@ -10,7 +10,7 @@ using TableGame.Fractions;
 
 namespace TableGame.Units
 {
-    public abstract class Unit : MapObject
+    public abstract class Unit : MapObject, IObserver
     {
         /// <summary>Фракция юнита</summary>
         public string FractionName { get; set; }
@@ -99,7 +99,7 @@ namespace TableGame.Units
         public virtual bool MeleeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
-            if(UnitUtility.RollDice() > this.MeleeSkill)
+            if(UnitUtility.RollDice1D6() > this.MeleeSkill)
             {
                 target.Health -= this.MeleeDamage;
                 return true;
@@ -115,13 +115,18 @@ namespace TableGame.Units
         public virtual bool RangeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
-            if (UnitUtility.RollDice() > this.RangeSkill)
+            if (UnitUtility.RollDice1D6() > this.RangeSkill)
             {
                 target.Health -= this.RangeDamage;
                 return true;
             }
             // Урон не был нанесен
             return false;
+        }
+
+        public void Update(ISubject counter)
+        {
+            MovePointsCurrent = MovePointsTotal;
         }
     }
 }
