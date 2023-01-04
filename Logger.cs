@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,17 +21,17 @@ namespace TableGame
     {
         private static readonly Logger instance = new Logger();
 
-        public List<string> Logs { get; private set; }
+        public ObservableCollection<string> Logs { get; private set; }
 
         /// <summary>
         /// Поле чисто для ИНФО сообщений - для отображения в интерфейс
         /// </summary>
-        public List<string> LogsOnlyInfo { get; private set; }
+        public ObservableCollection<string> LogsOnlyInfo { get; private set; }
 
         public Logger()
         {
-            Logs = new List<string>();
-            LogsOnlyInfo = new List<string>();
+            Logs = new ObservableCollection<string>();
+            LogsOnlyInfo = new ObservableCollection<string>();
         }
 
         public static Logger GetInstance()
@@ -42,7 +43,7 @@ namespace TableGame
         {
             var normalMessage = $"[{level.ToString()}] [{DateTime.Now}] {message}";
 
-            Logs.Add (normalMessage);
+            Logs.Add(normalMessage);
 
             if(LogLevel.Info == level)
                 LogsOnlyInfo.Add ($"{DateTime.Now} - {message}");

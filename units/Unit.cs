@@ -89,7 +89,7 @@ namespace TableGame.Units
                 return;
 
             // Проверка на возможность операции нужно реализовать ДО вызова этого метода
-            MovePointsCurrent = MovePointsTotal - changeMovePoints;
+            MovePointsCurrent -= changeMovePoints;
         }
 
         /// <summary>

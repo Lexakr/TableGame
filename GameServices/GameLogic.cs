@@ -16,6 +16,8 @@ namespace TableGame.GameServices
     /// </summary>
     internal class GameLogic
     {
+        private Logger logger = Logger.GetInstance();
+
         private List<Tile> tilesToClear = new();
         /// <summary>
         /// Нужен для синглтона
@@ -109,10 +111,23 @@ namespace TableGame.GameServices
         /// <param name="endTile">Выбранный на карте тайл</param>
         public void MoveUnit(ref Tile startTile, ref Tile endTile)
         {
-            ((Unit)startTile.TileObject).MoveTo(ref endTile);
-            // TODO: отнимать MovePoints
+            // просчитать MovePoints - хватит или нет
+            int xDiffrent = endTile.PosX - startTile.PosX;
+            int yDiffrent = endTile.PosY - startTile.PosY;
+            logger.Info($"До инверсий: Разница Х: {xDiffrent} Разница Y {yDiffrent}");
+
+            xDiffrent = xDiffrent < 0 ? -xDiffrent : xDiffrent;
+            yDiffrent = yDiffrent < 0 ? -yDiffrent : yDiffrent;
+            logger.Debug($"После инверсий: Разница Х: {xDiffrent} Разница Y {yDiffrent}");
+
+            var movePoints = xDiffrent > yDiffrent ? xDiffrent : yDiffrent;
+            logger.Debug($"Разница (movePoints): {movePoints}");
+
+            ((Unit)startTile.TileObject).MoveTo(ref endTile, movePoints); // Отнимать MovePoints
+
             startTile.RemoveObj();
             // TODO: Вызвать функцию отрисовки ShowActionTiles ЕСЛИ есть ещё movePoints
+
         }
 
         public void AttackTargetUnit(ref Unit unit, ref Unit targetUnit)

@@ -83,11 +83,7 @@ namespace TableGame.ViewModels
             logger.Info($"На костях выпало: {rollResult}. Первым совершает действия игрок: {CurrentGame.ActivePlayer.Name}");
 
 
-            // назначение первого игрока? (вызов окна костей в диалоге)
-
             // TODO: вызов магазина в диалоговом окне + в последовательности активного игрока
-
-            // TODO: ЛОГИКА ИГРЫ - если шаг 0 - выбор юнитов чтобы ставить
         }
 
         [RelayCommand]
@@ -112,7 +108,7 @@ namespace TableGame.ViewModels
                     {
                         if (gameLogic.PutUnitOnMap(ref listBoxSelectedItem, ref tile))
                         {
-                            var result = CurrentGame.ActivePlayer.PlayerUnits.Remove(ListBoxSelectedItem);
+                            var result = CurrentGame.ActivePlayer.UnitsInInvertory.Remove(ListBoxSelectedItem);
                             previosTile = null;
                             return;
                         }
