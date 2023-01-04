@@ -99,7 +99,7 @@ namespace TableGame.Units
         public virtual bool MeleeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
-            if(UnitUtility.RollDice() > this.MeleeSkill)
+            if(UnitUtility.RollDice1D6() > this.MeleeSkill)
             {
                 target.Health -= this.MeleeDamage;
                 return true;
@@ -115,7 +115,7 @@ namespace TableGame.Units
         public virtual bool RangeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
-            if (UnitUtility.RollDice() > this.RangeSkill)
+            if (UnitUtility.RollDice1D6() > this.RangeSkill)
             {
                 target.Health -= this.RangeDamage;
                 return true;

@@ -20,7 +20,7 @@ namespace TableGame.Units
         /// Подброс кубика 1D6
         /// </summary>
         /// <returns>Выпавшее число</returns>
-        public static int RollDice()
+        public static int RollDice1D6()
         {
             return new Random().Next(1, 7);
         }
