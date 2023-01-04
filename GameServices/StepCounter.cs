@@ -46,7 +46,11 @@ namespace TableGame.GameServices
             {
                 // end game
             }
-            Notify();
+            if (Current % 2 == 0)
+            {
+                Notify();
+            }
+            
         }
     }
 }

@@ -111,8 +111,12 @@ namespace TableGame.GameServices
         {
             ((Unit)startTile.TileObject).MoveTo(ref endTile);
             // TODO: отнимать MovePoints
+            ((Unit)startTile.TileObject).MovePointsCurrent -= Math.Max(Math.Abs(startTile.PosX - endTile.PosX), Math.Abs(startTile.PosY - endTile.PosY));
+
             startTile.RemoveObj();
             // TODO: Вызвать функцию отрисовки ShowActionTiles ЕСЛИ есть ещё movePoints
+            ClearActionTiles();
+            ShowActionTiles(ref endTile);
         }
 
         public void AttackTargetUnit(ref Unit unit, ref Unit targetUnit)

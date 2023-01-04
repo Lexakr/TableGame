@@ -22,6 +22,9 @@ namespace TableGame.GameServices
             this.firstPlayer = firstPlayer;
             this.secondPlayer = secondPlayer;
             this.counter = counter;
+
+            counter.Attach(firstPlayer);
+            counter.Attach(secondPlayer);
         }
 
         [System.Text.Json.Serialization.JsonConstructor]

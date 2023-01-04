@@ -43,6 +43,8 @@ namespace TableGame.GameServices
                     {
                         PlayerUnits.Remove(u);
                     }
+
+                    u.MovePointsCurrent = u.MovePointsTotal;
                 }
             }
         }
