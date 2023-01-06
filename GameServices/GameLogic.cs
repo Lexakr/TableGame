@@ -124,6 +124,7 @@ namespace TableGame.GameServices
             logger.Debug($"Разница (movePoints): {movePoints}");
 
             ((Unit)startTile.TileObject).MoveTo(ref endTile, movePoints); // Отнимать MovePoints
+            logger.Debug($"Текущие (movePoints) юнита: {(endTile.TileObject as Unit).MovePointsCurrent}");
 
             startTile.RemoveObj();
             // TODO: Вызвать функцию отрисовки ShowActionTiles ЕСЛИ есть ещё movePoints

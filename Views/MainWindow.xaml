@@ -16,7 +16,7 @@
     <Window.Resources>
         <converters:EnumToColorConverter x:Key="enumToColorConverter" />
         <converters:TileNullToRandomFloreConverter x:Key="tileNullFloreRandom" />
-        <converters:UnitNameFromListConverter x:Key="unitNameFromListConverter" />
+        <converters:UnitInfoFromMapObject x:Key="unitInfoFromMapObject" />
 
         <DataTemplate x:Key="DataTemplate_Level1">
             <ItemsControl ItemsSource="{Binding }" ItemTemplate="{DynamicResource DataTemplate_Level2}">
@@ -41,9 +41,9 @@
                 </Button>
             </ItemsControl>
         </DataTemplate>
-    
 
-    <DataTemplate x:Key="UnitList">
+
+        <DataTemplate x:Key="UnitList">
             <ItemsControl ItemsSource="{Binding }">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -53,16 +53,16 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-    </DataTemplate>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.25*"/>
         </Grid.RowDefinitions>
-        
+
         <DockPanel Grid.Row="0">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Start new game" Click="MenuItemStartNewGame_Click"/>
@@ -96,26 +96,40 @@
                 <ListBox MinWidth="150"
                          ItemsSource="{Binding CurrentGame.ActivePlayer.UnitsInInvertory, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding ListBoxSelectedItem, UpdateSourceTrigger=PropertyChanged}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Name}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
 
             <ScrollViewer MinWidth="300" MinHeight="100"
             HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
-            <!--<Viewbox Stretch="UniformToFill">-->
-            <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
-            <!--</Viewbox>-->
-        </ScrollViewer>
+                <!--<Viewbox Stretch="UniformToFill">-->
+                <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
+                <!--</Viewbox>-->
+            </ScrollViewer>
 
-            <StackPanel Orientation="Vertical">
+            <StackPanel Grid.Row="2"
+                        x:Name="StackPanelLogs"
+                        Orientation="Vertical"
+                        Width="auto"
+                        Height="auto">
+
+                <StackPanel x:Name="DebugInfoTile"
+                            Orientation="Vertical">
+                    <TextBlock Text="Debug info Tile: " />
+                    <TextBlock Text="{Binding SelectedMapButtonForDebug.StringCoordinates, StringFormat=Кординаты: {0}}" />
+                    <TextBlock Text="{Binding SelectedMapButtonForDebug.TileObject, StringFormat=TileObject: {0}}" />
+                    <TextBlock Text="{Binding SelectedMapButtonForDebug.TileObject, Converter={StaticResource unitInfoFromMapObject}}" />
+                </StackPanel>
+                
                 <ListView Name="ListTrackPlayers"
                           Width="auto"
+                          Height="auto"
                           ItemsSource="{Binding Logger.LogsOnlyInfo, UpdateSourceTrigger=PropertyChanged}"
                           HorizontalContentAlignment="Stretch"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"

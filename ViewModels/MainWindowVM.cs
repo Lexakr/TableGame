@@ -27,6 +27,9 @@ namespace TableGame.ViewModels
         [NotifyCanExecuteChangedFor(nameof(ClickMapButtonCommand))]
         private Tile? selectedMapButton;
 
+        [ObservableProperty]
+        private Tile selectedMapButtonForDebug;
+
         /// <summary>
         /// Логика обработки 1го поля и второго поля на которое нажмёт игрок
         /// Если поле = null = это первый клик на поле, если есть = начать взаимодействие с вторым
@@ -95,7 +98,8 @@ namespace TableGame.ViewModels
         [RelayCommand]
         private void ClickMapButton(Tile tile)
         {
-            Debug.WriteLine($"Command ClickMapButton: x:{tile.PosX} y:{tile.PosY} Hash:{tile.Hash}");
+            // FOR DEBUG INFO
+            SelectedMapButtonForDebug = tile;
 
             // ТРИГГЕРНАЯ СИСИТЕМА:
             //

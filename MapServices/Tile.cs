@@ -32,11 +32,20 @@ namespace TableGame
     {
         private readonly int posX, posY; // координаты тайла
 
-        [ObservableProperty]
-        private MapObject? tileObject; // объект на тайле
-
         public int PosX { get => posX; }
         public int PosY { get => posY; }
+
+        public string sPosX { get => posX.ToString(); }
+        public string sPosY { get => posY.ToString(); }
+
+        /*[ObservableProperty]
+        private int posX;
+
+        [ObservableProperty]
+        private int posY;*/
+
+        [ObservableProperty]
+        private MapObject? tileObject; // объект на тайле
 
         [ObservableProperty]
         private TileStates state; 
@@ -59,8 +68,7 @@ namespace TableGame
 
         public string Hash { set;  get; }
 
-
-        public string StringCoordinates { get { return $"{PosX},{PosY}"; } }
+        public string StringCoordinates { get { return $"x: {PosX}, y: {PosY}"; } }
 
         public Tile(int posX, int posY)
         {
