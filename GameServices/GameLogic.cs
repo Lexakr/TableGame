@@ -83,7 +83,28 @@ namespace TableGame.GameServices
             // клетка с врагом
             if (endTile.State == TileStates.CanAttack)
             {
-                // TODO: melee/range attack атака требует MovePoints и обнуляет их
+                // TODO: проверка можно ли melee атаку
+                var target = (Unit)endTile.TileObject;
+
+                // TODO: логи, открывание меню только с возможными атаками
+                List<string> variances = new() { "Range Attack", "Melee Attack" };
+                var result = OpenMenu(variances);
+
+                switch (result)
+                {
+                    case 0:
+                        ((Unit)startTile.TileObject).RangeAttack(ref target);
+                        break;
+                    case 1:
+                        ((Unit)startTile.TileObject).MeleeAttack(ref target);
+                        break;
+
+                }
+
+                if (target.Health <= 0)
+                {
+                    endTile.TileObject = null;
+                }
             }
 
             // клетка с союзником
