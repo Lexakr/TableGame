@@ -21,7 +21,7 @@ namespace TableGame.Units
 
             Abilities = new List<Ability>
             {
-                new IncreasedLuck("Lucker"),
+                new PassiveRegeneration("Lucker"),
             };
         }
         [System.Text.Json.Serialization.JsonConstructor]

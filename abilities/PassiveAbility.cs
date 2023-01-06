@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TableGame.Units;
 
 namespace TableGame.Abilities
 {
-    internal class PassiveAbility : Ability, IAbility
+    internal abstract class PassiveAbility : Ability, IAbility
     {
-        public PassiveAbility(string Name) : base(Name)
+        public PassiveAbility()
         {
+
         }
+
+        /// <summary>
+        /// Действие пассивной способности, выполняемое каждый ход
+        /// </summary>
+        public abstract void Process(ref Unit unit);
     }
 }

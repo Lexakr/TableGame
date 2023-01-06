@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace TableGame.Abilities
 {
-    public class Ability
+    public abstract class Ability
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public static string Name { get; set; }
+        public static string Description { get; set; }
 
-        [System.Text.Json.Serialization.JsonConstructor]
+/*        [System.Text.Json.Serialization.JsonConstructor]
         public Ability(string name, string description)
         {
             Name = name;
             Description = description;
-        }
+        }*/
 
     }
 }
