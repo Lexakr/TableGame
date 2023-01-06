@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TableGame.Abilities;
 
 namespace TableGame.Units
 {
@@ -23,6 +24,47 @@ namespace TableGame.Units
         public static int RollDice1D6()
         {
             return new Random().Next(1, 7);
+        }
+
+        public static string DisplayUnitInfo(this Unit unit)
+        {
+            return $"Имя: {unit.Name}, фракция: {unit.FractionName}\n" +
+                $"Здоровье: {unit.Health}/{unit.MaxHealth}" +
+                $"Навык ближнего боя: {unit.MeleeSkill}, урон: {unit.MeleeDamage}" +
+                $"Навык дальнего боя: {unit.RangeSkill}, урон: {unit.RangeDamage}" +
+                $"Очки передвижения: {unit.MovePointsCurrent}/{unit.MovePointsTotal}" +
+                $"{unit.ShowAbilitiesList}";
+        }
+
+        public static string ShowAbilitiesList(this Unit unit)
+        {
+            if (unit.Abilities == null)
+            {
+                return "У юнита нет способностей";
+            }
+
+            var abilities = string.Empty;
+            if (unit.Abilities.Any(x => x is ActiveAbility))
+            {
+                abilities += "Активные способности:\n";
+                foreach (var ability in unit.Abilities.Where(x => x is ActiveAbility))
+                {
+                    abilities += $"{ability.Name}: {ability.Description}";
+                }
+                abilities += "\n";
+            }
+
+            if (unit.Abilities.Any(x => x is PassiveAbility))
+            {
+                abilities += "Пассивки:\n";
+                foreach (var ability in unit.Abilities.Where(x => x is PassiveAbility))
+                {
+                    abilities += $"{ability.Name}: {ability.Description}";
+                }
+            }
+
+            return abilities;
+
         }
     }
 }

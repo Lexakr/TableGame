@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TableGame.Abilities;
-using TableGame.Units;
 using TableGame.MapServices;
-using TableGame.Fractions;
 
 namespace TableGame.Units
 {
@@ -61,7 +58,7 @@ namespace TableGame.Units
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
-        public Unit(string Name, int PosX, int PosY, Tile? CurrentLocation, string UnitFraction, int Health, int MaxHealth, int Price, 
+        public Unit(string Name, int PosX, int PosY, Tile? CurrentLocation, string UnitFraction, int Health, int MaxHealth, int Price,
             bool IsMelee, bool IsRange, int Power, int MeleeAttacks, int MovePoints, List<Ability>? Abilities)
         {
             this.Name = Name;
@@ -101,7 +98,7 @@ namespace TableGame.Units
         public virtual bool MeleeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
-            if(this.MeleeSkill >= UnitUtility.RollDice1D6())
+            if (this.MeleeSkill >= UnitUtility.RollDice1D6())
             {
                 target.Health -= this.MeleeDamage;
                 this.MovePointsCurrent = 0;
@@ -141,6 +138,15 @@ namespace TableGame.Units
         public void Update(ISubject counter)
         {
             MovePointsCurrent = MovePointsTotal;
+
+            if (Abilities != null)
+            {
+                foreach (var ab in Abilities.Where(x => x is PassiveAbility))
+                {
+                    (ab as PassiveAbility).ProcessPassiveAbility(this);
+                }
+            }
+
         }
     }
 }
