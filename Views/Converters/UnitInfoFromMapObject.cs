@@ -18,8 +18,10 @@ namespace TableGame.Views.Converters
 #if DEBUG
             if(unit != null)
                 return unit.Data();
+#else
+            if (unit != null)
+                return unit.Data(); // TODO: сменить имя метода на новый
 #endif
-
 
             return null;
         }
