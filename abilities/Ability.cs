@@ -9,11 +9,13 @@ namespace TableGame.Abilities
     public class Ability
     {
         public string Name { get; set; }
+        public string Description { get; set; }
 
         [System.Text.Json.Serialization.JsonConstructor]
-        public Ability(string Name)
+        public Ability(string name, string description)
         {
-            this.Name = Name;
+            Name = name;
+            Description = description;
         }
 
     }
