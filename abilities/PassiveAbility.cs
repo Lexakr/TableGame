@@ -17,6 +17,6 @@ namespace TableGame.Abilities
         /// <summary>
         /// Действие пассивной способности, выполняемое каждый ход
         /// </summary>
-        public abstract void Process(ref Unit unit);
+        public abstract void ProcessPassiveAbility(Unit unit);
     }
 }

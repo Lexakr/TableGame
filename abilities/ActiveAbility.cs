@@ -8,7 +8,7 @@ namespace TableGame.Abilities
 {
     internal class ActiveAbility : Ability
     {
-        public ActiveAbility(string name, string description) : base(name, description)
+        public ActiveAbility()
         {
 
         }

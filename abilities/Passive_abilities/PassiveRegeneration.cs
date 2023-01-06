@@ -16,7 +16,7 @@ namespace TableGame.Abilities.Passive_abilities
             Description = "Регенерирует очко здоровья каждый ход";
         }
 
-        public override void Process(ref Unit unit)
+        public override void ProcessPassiveAbility(Unit unit)
         {
             counter++;
 
