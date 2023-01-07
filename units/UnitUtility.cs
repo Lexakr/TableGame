@@ -33,7 +33,7 @@ namespace TableGame.Units
                 $"Навык ближнего боя: {unit.MeleeSkill}, урон: {unit.MeleeDamage}\n" +
                 $"Навык дальнего боя: {unit.RangeSkill}, урон: {unit.RangeDamage}\n" +
                 $"Очки передвижения: {unit.MovePointsCurrent}/{unit.MovePointsTotal}\n" +
-                $"{unit.ShowAbilitiesList}";
+                $"{unit.ShowAbilitiesList()}";
         }
 
         public static string ShowAbilitiesList(this Unit unit)

@@ -123,9 +123,9 @@
                         MinHeight="200">
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Debug info Tile: " />
+                    <!--<TextBlock Text="Debug info Tile: " />
                     <TextBlock Text="{Binding SelectedMapButtonForDebug.StringCoordinates, StringFormat=Кординаты: {0}}" />
-                    <TextBlock Text="{Binding SelectedMapButtonForDebug.TileObject, StringFormat=TileObject: {0}}" />
+                    <TextBlock Text="{Binding SelectedMapButtonForDebug.TileObject, StringFormat=TileObject: {0}}" />-->
                     <TextBlock Text="{Binding SelectedMapButtonForDebug.TileObject, Converter={StaticResource unitInfoFromMapObject}}" />
                 </StackPanel>
 
