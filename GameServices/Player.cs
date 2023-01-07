@@ -25,7 +25,7 @@ namespace TableGame.GameServices
         {
             Name = playerName;
             PlayerFraction = playerFraction;
-            UnitsInInvertory = new ObservableCollection<Unit> { new SoldierImperium(), new SoldierImperium(), new SoldierOrks() }; // TODO: CLEAR TEMP | Solder FOR TEST
+            UnitsInInvertory = new ObservableCollection<Unit> {  }; 
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
