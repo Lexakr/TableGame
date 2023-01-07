@@ -49,7 +49,7 @@ namespace TableGame.Units
                 abilities += "Активные способности:\n";
                 foreach (var ability in unit.Abilities.Where(x => x is ActiveAbility))
                 {
-                    abilities += $"{ability.Name}: {ability.Description}";
+                    abilities += $"{ability.Name}: {ability.Description}\n";
                 }
                 abilities += "\n";
             }
@@ -59,7 +59,7 @@ namespace TableGame.Units
                 abilities += "Пассивки:\n";
                 foreach (var ability in unit.Abilities.Where(x => x is PassiveAbility))
                 {
-                    abilities += $"{ability.Name}: {ability.Description}";
+                    abilities += $"{ability.Name}: {ability.Description}\n";
                 }
             }
 
