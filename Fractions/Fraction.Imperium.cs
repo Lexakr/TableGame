@@ -11,7 +11,7 @@ namespace TableGame.Fractions
     {
         public Imperium()
         {
-            Name = "Imperium";
+            Name = "Империум Человечества";
 
             FractionUnits = new List<Type>
             {

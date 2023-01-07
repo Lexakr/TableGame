@@ -11,7 +11,7 @@ namespace TableGame.Fractions
     {
         public Orks()
         {
-            Name = "Orks";
+            Name = "Орки";
             FractionUnits = new List<Type>
             {
                 typeof(SoldierOrks),

@@ -12,9 +12,9 @@ namespace TableGame.Units
     {
         public SoldierOrks()
         {
-            Name = "Orks Soldier";
+            Name = "Орк Воин";
 
-            FractionName = "Orks";
+            FractionName = "Орки";
 
             Icon = "/Resources/enemyTest3.png";
 

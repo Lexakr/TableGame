@@ -14,9 +14,9 @@ namespace TableGame.Units
     {
         public SoldierImperium()
         {
-            Name = "Imperium Soldier";
+            Name = "Имперский Пехотинец";
 
-            FractionName = "Imperium";
+            FractionName = "Империум Человечества";
 
             Icon = "/Resources/enemyTest1.png";
 
