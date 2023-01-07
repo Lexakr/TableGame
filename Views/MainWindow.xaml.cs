@@ -36,8 +36,6 @@ namespace TableGame.Views
             // FULL LOGS
             ListTrackPlayers.ItemsSource = _dataContext.Logger.Logs;
 
-            // UNIT INFO
-            DebugInfoTile.Visibility = Visibility.Visible;
 #endif
 
         }

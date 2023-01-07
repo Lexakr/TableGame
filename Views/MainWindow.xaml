@@ -90,9 +90,11 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
+        
+        <DockPanel Grid.Row="2">
 
-            <StackPanel Orientation="Vertical">
+            <StackPanel DockPanel.Dock="Left"
+                        Orientation="Vertical">
                 <ListBox MinWidth="150"
                          ItemsSource="{Binding CurrentGame.ActivePlayer.UnitsInInvertory, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding ListBoxSelectedItem, UpdateSourceTrigger=PropertyChanged}">
@@ -113,27 +115,29 @@
                 <!--</Viewbox>-->
             </ScrollViewer>
 
-            <StackPanel Grid.Row="2"
+
+            <StackPanel DockPanel.Dock="Right"
                         x:Name="StackPanelLogs"
                         Orientation="Vertical"
-                        Width="auto"
-                        Height="auto">
+                        MinWidth="200"
+                        MinHeight="200">
 
-                <StackPanel x:Name="DebugInfoTile"
-                            Orientation="Vertical">
+                <StackPanel Orientation="Vertical">
                     <TextBlock Text="Debug info Tile: " />
                     <TextBlock Text="{Binding SelectedMapButtonForDebug.StringCoordinates, StringFormat=Кординаты: {0}}" />
                     <TextBlock Text="{Binding SelectedMapButtonForDebug.TileObject, StringFormat=TileObject: {0}}" />
                     <TextBlock Text="{Binding SelectedMapButtonForDebug.TileObject, Converter={StaticResource unitInfoFromMapObject}}" />
                 </StackPanel>
-                
+
                 <ListView Name="ListTrackPlayers"
                           Width="auto"
-                          Height="auto"
+                          Height="450"
                           ItemsSource="{Binding Logger.LogsOnlyInfo, UpdateSourceTrigger=PropertyChanged}"
                           HorizontalContentAlignment="Stretch"
+                          VerticalAlignment="Stretch"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ScrollViewer.CanContentScroll="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -142,9 +146,13 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+
             </StackPanel>
 
-        </StackPanel>
+            
+        </DockPanel>
+        
+        
     </Grid>
 
 </Window>

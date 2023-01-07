@@ -32,6 +32,7 @@ namespace TableGame
         {
             Logs = new ObservableCollection<string>();
             LogsOnlyInfo = new ObservableCollection<string>();
+            
         }
 
         public static Logger GetInstance()
