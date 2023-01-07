@@ -20,7 +20,7 @@ namespace TableGame.Views.Converters
                 return unit.Data();
 #else
             if (unit != null)
-                return unit.Data(); // TODO: сменить имя метода на новый
+                return unit.DisplayUnitInfo(); ; // TODO: сменить имя метода на новый
 #endif
 
             return null;
