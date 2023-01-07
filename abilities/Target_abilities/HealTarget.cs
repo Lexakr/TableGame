@@ -22,12 +22,17 @@ namespace TableGame.Abilities.Target_abilities
         /// </summary>
         public override string ApplyAbilityOnTarget(ref Unit caster, ref Unit target)
         {
+            if (target.Health == target.MaxHealth)
+            {
+                return $"{caster.Name}: {caster.StringCoordinates} применил {Name} на {target.Name}: {target.StringCoordinates}, но он был полностью здоров";
+            }
+
             target.Health += HealPoints;
-            // Если здоровье больше максимального
+
+            // Если здоровье стало больше максимального
             if (target.Health > target.MaxHealth)
             {
                 target.Health = target.MaxHealth;
-                return $"{caster.Name}: {caster.StringCoordinates} применил {Name} на {target.Name}: {target.StringCoordinates}, но он был полностью здоров";
             }
               
             return $"{caster.Name}: {caster.StringCoordinates} вылечил {target.Name}: {target.StringCoordinates} {HealPoints} здоровья";
