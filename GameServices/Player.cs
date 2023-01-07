@@ -16,6 +16,9 @@ namespace TableGame.GameServices
         public Fraction PlayerFraction { get; set; }
 
         [ObservableProperty]
+        private int money = 100;
+
+        [ObservableProperty]
         private ObservableCollection<Unit> unitsInInvertory;
 
         public Player(string playerName, Fraction playerFraction)

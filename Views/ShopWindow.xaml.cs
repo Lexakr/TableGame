@@ -11,17 +11,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TableGame.GameServices;
+using TableGame.ViewModels;
 
 namespace TableGame.Views
 {
     /// <summary>
     /// Interaction logic for ShowWindow.xaml
     /// </summary>
-    public partial class ShowWindow : Window
+    public partial class ShopWindow : Window
     {
-        public ShowWindow()
+        public ShopWindow(Player activePlayer)
         {
             InitializeComponent();
+
+            DataContext = new ShopWindowVM(activePlayer);
+
+#if DEBUG
+            DebugMenu.Visibility = Visibility.Visible;
+#endif
         }
     }
 }
