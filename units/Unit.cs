@@ -19,7 +19,7 @@ namespace TableGame.Units
         public int MaxHealth { get; }
 
         /// <summary>Цена покупки</summary>
-        public int Price { get; }
+        public int Price { set;  get; } = 1;
 
         /// <summary>Навык ближнего боя 1-100%, 6-0%</summary>
         public int MeleeSkill { get; set; }

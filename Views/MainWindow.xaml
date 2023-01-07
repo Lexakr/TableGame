@@ -137,8 +137,7 @@
                           VerticalAlignment="Stretch"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
-                          ScrollViewer.CanContentScroll="True"
-                          ScrollViewer.PanningMode="VerticalFirst" >
+                          ScrollViewer.CanContentScroll="True" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

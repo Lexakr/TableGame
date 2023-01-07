@@ -85,8 +85,15 @@ namespace TableGame.ViewModels
 
             logger.Info($"На костях выпало: {rollResult}. Первым совершает действия игрок: {CurrentGame.ActivePlayer.Name}");
 
-
             // TODO: вызов магазина в диалоговом окне + в последовательности активного игрока
+            var shop1 = new ShopWindow(CurrentGame.ActivePlayer);
+            shop1.ShowDialog();
+
+            var secondPlayer = CurrentGame.ActivePlayer == CurrentGame.FirstPlayer ? CurrentGame.SecondPlayer : CurrentGame.FirstPlayer;
+            // и открыть магазин для второго игрока
+            var shop2 = new ShopWindow(secondPlayer);
+            shop2.ShowDialog();
+
         }
 
         [RelayCommand]

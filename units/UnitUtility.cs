@@ -7,7 +7,7 @@ using TableGame.Abilities;
 
 namespace TableGame.Units
 {
-    internal static class UnitUtility
+    public static class UnitUtility
     {
         public static bool IsMovable(this Tile t)
         {
@@ -64,7 +64,6 @@ namespace TableGame.Units
             }
 
             return abilities;
-
         }
     }
 }
