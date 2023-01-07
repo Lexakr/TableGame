@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,12 +10,10 @@ namespace TableGame.Abilities.Passive_abilities
 {
     internal class PassiveRegeneration : PassiveAbility
     {
+        public override string Name { get; } = "Пассивная Регенерация";
+        public override string Description { get; } = "Восстанавливает 1 единицу здоровья каждый ход";
+
         private int counter = 0;
-        public PassiveRegeneration()
-        {
-            Name = "Пассивная Регенерация";
-            Description = "Регенерирует очко здоровья каждый ход";
-        }
 
         public override void ProcessPassiveAbility(Unit unit)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TableGame.Abilities
 {
-    internal class ActiveAbility : Ability
+    internal abstract class ActiveAbility : Ability
     {
         public ActiveAbility()
         {
