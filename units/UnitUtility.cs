@@ -44,12 +44,12 @@ namespace TableGame.Units
             }
 
             var abilities = string.Empty;
-            if (unit.Abilities.Any(x => x is ActiveAbility))
+            if (unit.Abilities.Any(x => x is TargetAbility))
             {
                 abilities += "Активные способности:\n";
-                foreach (var ability in unit.Abilities.Where(x => x is ActiveAbility))
+                foreach (var ability in unit.Abilities.Where(x => x is TargetAbility))
                 {
-                    abilities += $"{ability.Name}: {ability.Description}";
+                    abilities += $"{ability.Name}: {ability.Description}\n";
                 }
                 abilities += "\n";
             }
@@ -59,7 +59,7 @@ namespace TableGame.Units
                 abilities += "Пассивки:\n";
                 foreach (var ability in unit.Abilities.Where(x => x is PassiveAbility))
                 {
-                    abilities += $"{ability.Name}: {ability.Description}";
+                    abilities += $"{ability.Name}: {ability.Description}\n";
                 }
             }
 

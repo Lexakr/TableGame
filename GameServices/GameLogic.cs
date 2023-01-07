@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using TableGame.Abilities;
 using TableGame.MapServices;
 using TableGame.Units;
 
@@ -85,21 +86,51 @@ namespace TableGame.GameServices
             {
                 // TODO: проверка можно ли melee атаку
                 var target = (Unit)endTile.TileObject;
+                var attacker = (Unit)startTile.TileObject;
 
                 // TODO: логи, открывание меню только с возможными атаками
                 List<string> variances = new() { "Range Attack", "Melee Attack" };
+
+                List<TargetAbility> targetAbilities = new();
+
+                if (attacker.Abilities != null)
+                {
+                    foreach (TargetAbility ability in attacker.Abilities.Where(x => x is TargetAbility).Where(x => (x as TargetAbility).CanUseOnEnemy))
+                    {
+                        targetAbilities.Add(ability);
+                        variances.Add(ability.Name);
+                    }
+                }
+
                 var result = OpenMenu(variances);
 
                 switch (result)
                 {
+                    // Закрыли окно - не выбрали действие
+                    case -1:
+                        ClearActionTiles();
+                        return false;
                     case 0:
-                        ((Unit)startTile.TileObject).RangeAttack(ref target);
+                        attacker.RangeAttack(ref target);
+                        logger.Info($"{attacker.Name}: {startTile.StringCoordinates} нанес {target.Name}: {endTile.StringCoordinates} {attacker.RangeDamage} урона выстрелом");
                         break;
                     case 1:
-                        ((Unit)startTile.TileObject).MeleeAttack(ref target);
+                        attacker.MeleeAttack(ref target);
+                        logger.Info($"{attacker.Name}: {startTile.StringCoordinates} нанес {target.Name}: {endTile.StringCoordinates} {attacker.MeleeDamage} урона");
                         break;
-
+                    default:
+                        foreach (var ability in targetAbilities)
+                        {
+                            if (variances[result] == ability.Name)
+                            {
+                                logger.Info(ability.ApplyAbilityOnTarget(ref attacker, ref target));
+                            }
+                        }
+                        break;
                 }
+
+                // Перевод в ноль очков хода после атаки
+                attacker.MovePointsCurrent = 0;
 
                 if (target.Health <= 0)
                 {
@@ -160,6 +191,7 @@ namespace TableGame.GameServices
 
         private void ShowActionTiles(ref Tile tile)
         {
+
             var unit = tile.TileObject as Unit;
             Debug.WriteLine($"Show action: unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePointsCurrent}");
 
