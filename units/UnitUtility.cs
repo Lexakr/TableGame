@@ -29,10 +29,10 @@ namespace TableGame.Units
         public static string DisplayUnitInfo(this Unit unit)
         {
             return $"Имя: {unit.Name}, фракция: {unit.FractionName}\n" +
-                $"Здоровье: {unit.Health}/{unit.MaxHealth}" +
-                $"Навык ближнего боя: {unit.MeleeSkill}, урон: {unit.MeleeDamage}" +
-                $"Навык дальнего боя: {unit.RangeSkill}, урон: {unit.RangeDamage}" +
-                $"Очки передвижения: {unit.MovePointsCurrent}/{unit.MovePointsTotal}" +
+                $"Здоровье: {unit.Health}/{unit.MaxHealth}\n" +
+                $"Навык ближнего боя: {unit.MeleeSkill}, урон: {unit.MeleeDamage}\n" +
+                $"Навык дальнего боя: {unit.RangeSkill}, урон: {unit.RangeDamage}\n" +
+                $"Очки передвижения: {unit.MovePointsCurrent}/{unit.MovePointsTotal}\n" +
                 $"{unit.ShowAbilitiesList}";
         }
 
