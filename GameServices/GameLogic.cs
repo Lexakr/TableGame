@@ -44,12 +44,15 @@ namespace TableGame.GameServices
                 return false;
             }
 
-            if (((Unit)startTile.TileObject).FractionName != CurrentGame.ActivePlayer.PlayerFraction.Name)
+            if ((startTile.TileObject as Unit).FractionName != CurrentGame.ActivePlayer.PlayerFraction.Name)
             {
                 return false;
             }
 
-            // проверка фракции юнита в тайле и фракции игрока
+            if ((startTile.TileObject as Unit).MovePointsCurrent == 0)
+            {
+                return false;
+            }
 
             // красим тайлы кого атаковать можно и куда дойти можно
             ShowActionTiles(ref startTile);
@@ -141,14 +144,86 @@ namespace TableGame.GameServices
             // клетка с союзником
             if (endTile.State == TileStates.Ally)
             {
-                // TODO: интеракт с союзником
+                var ally = (Unit)endTile.TileObject;
+                var unit = (Unit)startTile.TileObject;
+
+                List<string> variances = new();
+
+                List<TargetAbility> targetAbilities = new();
+
+                if (unit.Abilities != null && unit.Abilities.Find(x => x is TargetAbility) != null)
+                {
+                    foreach (TargetAbility ability in unit.Abilities.Where(x => x is TargetAbility).Where(x => !(x as TargetAbility).CanUseOnEnemy))
+                    {
+                        targetAbilities.Add(ability);
+                        variances.Add(ability.Name);
+                    }
+                }
+
+                var result = OpenMenu(variances);
+
+                switch (result)
+                {
+                    // Закрыли окно - не выбрали действие
+                    case -1:
+                        ClearActionTiles();
+                        return false;
+                    default:
+                        foreach (var ability in targetAbilities)
+                        {
+                            if (variances[result] == ability.Name)
+                            {
+                                logger.Info(ability.ApplyAbilityOnTarget(ref unit, ref ally));
+                            }
+                        }
+                        break;
+                }
+
+                // Перевод в ноль очков хода после каста на союзника
+                unit.MovePointsCurrent = 0;
             }
 
             // клетка изначальная
             // TODO: Выделение активного юнита белым цветом, add Tilestate.SelectedUnit
             if (startTile == endTile)
             {
-                // меню что можно делать юниту с самим собой
+                var unit = (Unit)startTile.TileObject;
+
+                if (unit.Abilities == null || unit.Abilities.Find(x => x is TargetAbility) == null)
+                {
+                    return false;
+                }
+
+                List<string> variances = new();
+                List<TargetAbility> targetAbilities = new();
+
+                foreach (TargetAbility ability in unit.Abilities.Where(x => x is TargetAbility).Where(x => !(x as TargetAbility).CanUseOnEnemy))
+                {
+                    targetAbilities.Add(ability);
+                    variances.Add(ability.Name);
+                }
+
+                var result = OpenMenu(variances);
+
+                switch (result)
+                {
+                    // Закрыли окно - не выбрали действие
+                    case -1:
+                        ClearActionTiles();
+                        return false;
+                    default:
+                        foreach (var ability in targetAbilities)
+                        {
+                            if (variances[result] == ability.Name)
+                            {
+                                logger.Info(ability.ApplyAbilityOnTarget(ref unit, ref unit));
+                            }
+                        }
+                        break;
+                }
+
+                // Перевод в ноль очков хода после каста на союзника
+                unit.MovePointsCurrent = 0;
             }
 
             ClearActionTiles();
@@ -191,6 +266,9 @@ namespace TableGame.GameServices
 
         private void ShowActionTiles(ref Tile tile)
         {
+            // Тайл с юнитом
+            tile.State = TileStates.SelectedUnit;
+            tilesToClear.Add(tile);
 
             var unit = tile.TileObject as Unit;
             Debug.WriteLine($"Show action: unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePointsCurrent}");

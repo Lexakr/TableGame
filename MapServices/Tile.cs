@@ -22,7 +22,9 @@ namespace TableGame
         /// <summary>Подсветка красным тайла, который может атаковать юнит</summary>
         CanAttack,
         /// <summary>В клетке союзник</summary>
-        Ally
+        Ally,
+        /// <summary>В клетке сам юнит</summary>
+        SelectedUnit
     }
 
     /// <summary>
