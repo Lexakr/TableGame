@@ -14,6 +14,6 @@ namespace TableGame.Abilities
         /// </summary>
         public abstract bool CanUseOnEnemy { get; }
 
-        public abstract void ApplyAbilityOnTarget(ref Unit caster, ref Unit target);
+        public abstract string ApplyAbilityOnTarget(ref Unit caster, ref Unit target);
     }
 }

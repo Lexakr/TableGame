@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TableGame.Abilities;
-using TableGame.Abilities.Active_abilities;
 using TableGame.Abilities.Passive_abilities;
+using TableGame.Abilities.Target_abilities;
 using TableGame.Fractions;
 
 namespace TableGame.Units
@@ -24,6 +24,7 @@ namespace TableGame.Units
             {
                 new PassiveRegeneration(),
                 new HealTarget(),
+                new Fireball(),
             };
         }
         [System.Text.Json.Serialization.JsonConstructor]
