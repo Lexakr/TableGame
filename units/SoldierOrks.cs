@@ -10,13 +10,13 @@ namespace TableGame.Units
 {
     internal class SoldierOrks : Soldier
     {
-        public string Icon { get { return "/Resources/enemyTest3.png"; } }
-
         public SoldierOrks()
         {
             Name = "Orks Soldier";
 
             FractionName = "Orks";
+
+            Icon = "/Resources/enemyTest3.png";
 
             Abilities = new List<Ability>
             {
