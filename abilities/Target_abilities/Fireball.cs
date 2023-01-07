@@ -17,7 +17,7 @@ namespace TableGame.Abilities.Target_abilities
         public override string ApplyAbilityOnTarget(ref Unit caster, ref Unit target)
         {
             target.Health -= Damage;
-            if (target.Health >= 0)
+            if (target.Health <= 0)
                 return $"{caster.Name}: {caster.StringCoordinates} запустил в {target.Name}: {target.StringCoordinates} {Name}, нанес {Damage} урона и убил его";
 
             return $"{caster.Name}: {caster.StringCoordinates} запустил в {target.Name}: {target.StringCoordinates} {Name} и нанес {Damage} урона";
