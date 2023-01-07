@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TableGame.Abilities;
+using TableGame.Abilities.Active_abilities;
 using TableGame.Abilities.Passive_abilities;
 using TableGame.Fractions;
 
@@ -22,12 +23,13 @@ namespace TableGame.Units
             Abilities = new List<Ability>
             {
                 new PassiveRegeneration(),
+                new HealTarget(),
             };
         }
         [System.Text.Json.Serialization.JsonConstructor]
         public SoldierImperium(string name, string unitfraction, List<Ability>? abilities)
         {
-            Name =name;
+            Name = name;
             FractionName = unitfraction;
             Abilities = abilities;
         }

@@ -30,8 +30,11 @@ namespace TableGame.Units
         /// <summary>Навык дальнего боя 1-100%, 6-0%.</summary>
         public int RangeSkill { get; set; }
 
-        /// <summary>Кол-во урона в ближнем бою</summary>
+        /// <summary>Кол-во урона в дальнем бою</summary>
         public int RangeDamage { get; set; }
+
+        /// <summary>Радиус атаки</summary>
+        public int AttackRadius { get; set; }
 
         /// <summary>Дальность хода</summary>
         public int MovePointsTotal { get; set; }
@@ -101,7 +104,6 @@ namespace TableGame.Units
             if (this.MeleeSkill >= UnitUtility.RollDice1D6())
             {
                 target.Health -= this.MeleeDamage;
-                this.MovePointsCurrent = 0;
                 return true;
             }
             // Урон не был нанесен
@@ -118,7 +120,6 @@ namespace TableGame.Units
             if (this.RangeSkill >= UnitUtility.RollDice1D6())
             {
                 target.Health -= this.RangeDamage;
-                this.MovePointsCurrent = 0;
                 return true;
             }
             // Урон не был нанесен
@@ -141,9 +142,9 @@ namespace TableGame.Units
 
             if (Abilities != null)
             {
-                foreach (var ab in Abilities.Where(x => x is PassiveAbility))
+                foreach (PassiveAbility ab in Abilities.Where(x => x is PassiveAbility))
                 {
-                    (ab as PassiveAbility).ProcessPassiveAbility(this);
+                    ab.ProcessPassiveAbility(this);
                 }
             }
 

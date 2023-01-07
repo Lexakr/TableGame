@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abilities\Active_abilities\" />
     <Folder Include="Resources\Floors\" />
   </ItemGroup>
 

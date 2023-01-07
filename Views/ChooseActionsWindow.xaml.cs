@@ -20,7 +20,7 @@ namespace TableGame.Views
     /// </summary>
     public partial class ChooseActionsWindow : Window
     {
-        public int ResultChoice { get; set; }
+        public int ResultChoice { get; set; } = -1;
 
         public ChooseActionsWindow(List<string> choices)
         {
