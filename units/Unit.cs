@@ -45,6 +45,8 @@ namespace TableGame.Units
         /// <summary>Способности юнита</summary>
         public List<Ability>? Abilities { get; set; }
 
+        public string StringCoordinates { get { return $"x: {PosX}, y: {PosY}"; } }
+
         /// <summary>
         /// Юнит по умолчанию соответствует Imperium Soldier
         /// </summary>

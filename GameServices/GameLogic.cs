@@ -123,8 +123,7 @@ namespace TableGame.GameServices
                         {
                             if (variances[result] == ability.Name)
                             {
-                                ability.ApplyAbilityOnTarget(ref attacker, ref target);
-                                logger.Info($"{attacker.Name}: {startTile.StringCoordinates} применил {ability.Name} на {target.Name}: {endTile.StringCoordinates}");
+                                logger.Info(ability.ApplyAbilityOnTarget(ref attacker, ref target));
                             }
                         }
                         break;
