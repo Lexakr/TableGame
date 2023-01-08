@@ -35,6 +35,10 @@ namespace TableGame.Views.Converters
                     color = "#00df98";
                     borderThickness = 3;
                     break;
+                case TileStates.CanInteract:
+                    color = "#07f700";
+                    borderThickness = 1.5;
+                    break;
             }
 
             if (targetType.GetTypeInfo().Name == typeof(Thickness).Name)

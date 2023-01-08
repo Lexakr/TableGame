@@ -38,19 +38,25 @@ namespace TableGame.GameServices
         /// <param name="tile"></param>
         public bool TileAction(ref Tile startTile)
         {
+            // нада
+            ClearAllTilesOnMap();
+
             Debug.WriteLine("INSIDE GAMELOGIC" + CurrentGame.GetHashCode().ToString());
             if (!startTile.IsInteractable())
             {
+                ShowInteractTiles();
                 return false;
             }
 
             if ((startTile.TileObject as Unit).FractionName != CurrentGame.ActivePlayer.PlayerFraction.Name)
             {
+                ShowInteractTiles();
                 return false;
             }
 
             if ((startTile.TileObject as Unit).MovePointsCurrent == 0)
             {
+                ShowInteractTiles();
                 return false;
             }
 
@@ -72,6 +78,7 @@ namespace TableGame.GameServices
             if (endTile.State == TileStates.Default)
             {
                 ClearActionTiles();
+                ShowInteractTiles();
                 return false;
             }
 
@@ -81,6 +88,7 @@ namespace TableGame.GameServices
             {
                 MoveUnit(ref startTile, ref endTile);
                 ClearActionTiles();
+                ShowInteractTiles();
                 return true;
             }
 
@@ -112,6 +120,7 @@ namespace TableGame.GameServices
                     // Закрыли окно - не выбрали действие
                     case -1:
                         ClearActionTiles();
+                        ShowInteractTiles();
                         return false;
                     case 0:
                         attacker.RangeAttack(ref target);
@@ -167,6 +176,7 @@ namespace TableGame.GameServices
                         // Закрыли окно - не выбрали действие
                         case -1:
                             ClearActionTiles();
+                            ShowInteractTiles();
                             return false;
                         default:
                             foreach (var ability in targetAbilities)
@@ -193,6 +203,7 @@ namespace TableGame.GameServices
                 if (unit.Abilities == null || unit.Abilities.Find(x => x is TargetAbility) == null)
                 {
                     ClearActionTiles();
+                    ShowInteractTiles();
                     return false;
                 }
 
@@ -212,6 +223,7 @@ namespace TableGame.GameServices
                     // Закрыли окно - не выбрали действие
                     case -1:
                         ClearActionTiles();
+                        ShowInteractTiles();
                         return false;
                     default:
                         foreach (var ability in targetAbilities)
@@ -229,6 +241,7 @@ namespace TableGame.GameServices
             }
 
             ClearActionTiles();
+            ShowInteractTiles();
             return true;
         }
 
@@ -264,6 +277,26 @@ namespace TableGame.GameServices
         {
             // что-то типа targetUnit.OnAttack(unit); наоборот
             // void Attack(this unit, targetUnit);
+        }
+
+        /// <summary>
+        /// Показать всех юнитов которыми можно ходить
+        /// </summary>
+        public void ShowInteractTiles()
+        {
+            foreach(var x in CurrentGame.GameMap.Tiles)
+            {
+                foreach(var y in x)
+                {
+                    var unit = y.TileObject as Unit;
+
+                    if (unit != null && unit.FractionName == CurrentGame.ActivePlayer.PlayerFraction.Name)
+                    {
+                        if(unit.MovePointsCurrent != 0)
+                            y.State = TileStates.CanInteract;
+                    }
+                }
+            }
         }
 
         private void ShowActionTiles(ref Tile tile)
@@ -376,7 +409,7 @@ namespace TableGame.GameServices
         /// <summary>
         /// Принудительная очистка всех тайлов
         /// </summary>
-        private void ClearAllTilesOnMap()
+        public void ClearAllTilesOnMap()
         {
             foreach (var item1 in CurrentGame.GameMap.Tiles)
             {

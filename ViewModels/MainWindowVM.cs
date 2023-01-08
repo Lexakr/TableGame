@@ -128,6 +128,11 @@ namespace TableGame.ViewModels
 
             if (CurrentGame.Counter.Current < 2)
                 gameLogic.ShowTilesToPutUnit();
+            else
+            {
+                gameLogic.ClearAllTilesOnMap();
+                gameLogic.ShowInteractTiles();
+            }
         }
 
         [RelayCommand]

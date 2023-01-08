@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TableGame.GameServices;
 using TableGame.MapServices;
 using TableGame.Units;
 
@@ -24,7 +25,11 @@ namespace TableGame
         /// <summary>В клетке союзник</summary>
         Ally,
         /// <summary>В клетке сам юнит</summary>
-        SelectedUnit
+        SelectedUnit,
+        /// <summary>
+        /// Юниты у которых есть MovePoints
+        /// </summary>
+        CanInteract
     }
 
     /// <summary>
@@ -46,8 +51,13 @@ namespace TableGame
         [ObservableProperty]
         private int posY;*/
 
-        [ObservableProperty]
         private MapObject? tileObject; // объект на тайле
+
+        public MapObject TileObject
+        {
+            get => tileObject;
+            set => SetProperty(ref tileObject, value);
+        }
 
         [ObservableProperty]
         private TileStates state; 
