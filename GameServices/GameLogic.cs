@@ -376,7 +376,6 @@ namespace TableGame.GameServices
 
         public bool PutUnitOnMap(ref Unit unit, ref Tile tile)
         {
-            ShowTilesToPutUnit();
             // TODO: проверка на участок карты, выделен ли он под стартовое размещение юнитов
             if (tile.State == TileStates.CanMove && tile.IsMovable())
             {
@@ -388,9 +387,40 @@ namespace TableGame.GameServices
             return false;
         }
 
-        private void ShowTilesToPutUnit()
+        public void ShowTilesToPutUnit()
         {
+            // 20% от общей высоты карты
+            int height = CurrentGame.GameMap.Size_y / 5;
 
+            // верхняя часть поля
+            if (CurrentGame.ActivePlayer == CurrentGame.FirstPlayer)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < CurrentGame.GameMap.Size_x; x++)
+                    {
+                        if (CurrentGame.GameMap.Tiles[x][y].IsMovable())
+                        {
+                            CurrentGame.GameMap.Tiles[x][y].State = TileStates.CanMove;
+                        }
+                    }
+                }
+            }
+
+            // нижняя часть поля
+            if (CurrentGame.ActivePlayer == CurrentGame.SecondPlayer)
+            {
+                for (int y = CurrentGame.GameMap.Size_y; y < CurrentGame.GameMap.Size_y - height; y--)
+                {
+                    for (int x = 0; x < CurrentGame.GameMap.Size_x; x++)
+                    {
+                        if (CurrentGame.GameMap.Tiles[x][y].IsMovable())
+                        {
+                            CurrentGame.GameMap.Tiles[x][y].State = TileStates.CanMove;
+                        }
+                    }
+                }
+            }
         }
     }
 }
