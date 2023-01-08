@@ -29,10 +29,5 @@ namespace TableGame.MapServices
             PosX = posX;
             PosY = posY;
         }
-
-        /// <summary>
-        /// Описание объекта и его характеристики
-        /// </summary>
-        //TODO: public abstract string Desciption { get; set; }
     }
 }

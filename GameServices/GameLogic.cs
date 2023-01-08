@@ -36,7 +36,7 @@ namespace TableGame.GameServices
         /// </summary>
         /// <param name="unit"></param>
         /// <param name="tile"></param>
-        public bool TileAction(ref Tile startTile) // TODO: REF проверить что передается ссылка на место в памяти!!!
+        public bool TileAction(ref Tile startTile)
         {
             Debug.WriteLine("INSIDE GAMELOGIC" + CurrentGame.GetHashCode().ToString());
             if (!startTile.IsInteractable())
@@ -373,11 +373,9 @@ namespace TableGame.GameServices
             }
         }
 
-        // TODO: IMPORTANT - ADD func for MOVE unit on start game
 
         public bool PutUnitOnMap(ref Unit unit, ref Tile tile)
         {
-            // TODO: проверка на участок карты, выделен ли он под стартовое размещение юнитов
             if (tile.State == TileStates.CanMove && tile.IsMovable())
             {
                 unit.MoveTo(ref tile, 0); // 0 - это снять MovePoints

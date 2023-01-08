@@ -17,7 +17,6 @@ namespace TableGame.GameServices
         public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer, StepCounter counter)
         {
             this.gameMap = gameMap;
-            mapStats = new(gameMap);
             this.gameStats = gameStats;
             this.firstPlayer = firstPlayer;
             this.secondPlayer = secondPlayer;
@@ -25,24 +24,21 @@ namespace TableGame.GameServices
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
-        public Game(Map gameMap, MapStat mapStats, GameStat gameStats, Player firstPlayer, Player secondPlayer)
+        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer)
         {
             this.gameMap = gameMap;
-            this.mapStats = mapStats;
             this.gameStats = gameStats;
             this.firstPlayer = firstPlayer;
             this.secondPlayer = secondPlayer;
         }
 
         private readonly Map gameMap;
-        private readonly MapStat mapStats;
         private readonly GameStat gameStats;
 
         private readonly Player firstPlayer;
         private readonly Player secondPlayer;
 
         public Map GameMap { get => gameMap; }
-        public MapStat MapStats { get => mapStats; }
         public GameStat GameStats { get => gameStats; }
         public Player FirstPlayer { get => firstPlayer; }
         public Player SecondPlayer { get => secondPlayer; }
