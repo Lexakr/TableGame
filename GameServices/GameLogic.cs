@@ -276,34 +276,47 @@ namespace TableGame.GameServices
             Debug.WriteLine($"Show action: unit pos: {unit.PosX},{unit.PosY}. MOVE POINTS: {unit.MovePointsCurrent}");
 
             // List INDEX
-            int left = unit.PosX - 1 - unit.MovePointsCurrent;
-            int right = unit.PosX - 1 + unit.MovePointsCurrent;
-            int top = unit.PosY - 1 + unit.MovePointsCurrent;
-            int bottom = unit.PosY - 1 - unit.MovePointsCurrent;
+            int left = unit.PosX - 1;
+            int right = unit.PosX + 1;
+            int top = unit.PosY - 1;
+            int bottom = unit.PosY + 1;
 
-            // кол-во шагов - спиралей
-            for(int i = 0; i < unit.MovePointsCurrent; i++)
+            // система триггеров, для областей (область атаки и когда false - отмечать всё как обычную зону)
+            bool rangeAttack = false;
+
+            // получаем максимальный радиус для врагов
+            var circles = unit.MovePointsCurrent > unit.AttackRadius ? unit.MovePointsCurrent : unit.AttackRadius;
+            circles = unit.AttackRadius > circles ? unit.AttackRadius : circles;
+            circles = unit.RangeSkill > circles ? unit.RangeSkill : circles;
+
+            // кол-во шагов - спиралей НАРУЖУ
+            for (int i = 0; i < circles; i++)
             {
+                // т.к. спирали отрисовуются ОТ игрока
+                // начит и включаем ренж позже
+                if(i >= unit.MovePointsCurrent)
+                    rangeAttack = true;
+
                 // left-right
                 for (int x = left; x <= right; x++)
                 {
                     // заполнение
-                    ChangeStateForAction(x, top, ref unit);
-                    ChangeStateForAction(x, bottom, ref unit);
+                    ChangeStateForAction(x, top, ref unit, rangeAttack);
+                    ChangeStateForAction(x, bottom, ref unit, rangeAttack);
                 }
 
                 // top-bottom
-                for (int y = bottom; y <= top; y++)
+                for (int y = top; y <= bottom; y++)
                 {
                     // заполненеие
-                    ChangeStateForAction(left, y, ref unit);
-                    ChangeStateForAction(right, y, ref unit);
+                    ChangeStateForAction(left, y, ref unit, rangeAttack);
+                    ChangeStateForAction(right, y, ref unit, rangeAttack);
                 }
 
                 top -= 1;
                 bottom += 1;
-                left += 1;
-                right -= 1;
+                left -= 1;
+                right += 1;
             }
 
         }
@@ -314,16 +327,17 @@ namespace TableGame.GameServices
         /// <param name="x">ИНДЕКС объекта на карте</param>
         /// <param name="y">ИНДЕКС ОБЪЕКТА НА КАРТЕ</param>
         /// <param name="unit"></param>
-        private void ChangeStateForAction(int x, int y, ref Unit unit)
+        /// <param name="RangeAttack"></param> if true - проверка и отметить цель для атаки. Никаких больше проверок
+        private void ChangeStateForAction(int x, int y, ref Unit unit, bool rangeAttack = false)
         {
-            if (x < 0 || y < 0 || x >= CurrentGame.GameMap.Size_x || y >= CurrentGame.GameMap.Size_y)
+            if (x <= 0 || y <= 0 || x >= CurrentGame.GameMap.Size_x || y >= CurrentGame.GameMap.Size_y)
                 return;
 
             //Debug.WriteLine($"Обрабатываю клетку в ренже: {x},{y}");
 
-            var tile = CurrentGame.GameMap.Tiles[x][y];
+            var tile = CurrentGame.GameMap.Tiles[x - 1][y - 1]; // INDEX с 0
 
-            if (tile.Passability)
+            if (tile.Passability && !rangeAttack)
             {
                 // green state
                 tile.State = TileStates.CanMove;

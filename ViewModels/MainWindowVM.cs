@@ -81,7 +81,7 @@ namespace TableGame.ViewModels
                 gameLogic.PutUnitOnMap(ref ork, ref tile);
                 tile.State = TileStates.Default;
 
-                tile = item[item.Count - 5];
+                tile = item[10];
                 tile.State = TileStates.CanMove;
                 Unit imper = new SoldierImperium();
                 gameLogic.PutUnitOnMap(ref imper, ref tile);
