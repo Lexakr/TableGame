@@ -15,6 +15,11 @@ namespace TableGame.GameServices
         public string Name { get; set; }
         public Fraction PlayerFraction { get; set; }
 
+        /// <summary>
+        /// Очки игрока. дающиеся за действия (убийство и тд)
+        /// </summary>
+        public int Points { get; set; } = 0;
+
         [ObservableProperty]
         private int money = 100;
 

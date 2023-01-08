@@ -100,32 +100,32 @@ namespace TableGame.Units
         /// Атака в ближнем бою выделенного юнита
         /// </summary>
         /// <returns>Успех или неуспех</returns>
-        public virtual bool MeleeAttack(ref Unit target)
+        public virtual string MeleeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
             if (this.MeleeSkill >= UnitUtility.RollDice1D6())
             {
                 target.Health -= this.MeleeDamage;
-                return true;
+                return $"{this.Name}: {this.StringCoordinates} нанес {target.Name}: {target.StringCoordinates} {this.MeleeDamage} урона в ближнем бою";
             }
             // Урон не был нанесен
-            return false;
+            return $"{this.Name}: {this.StringCoordinates} не поразил {target.Name}: {target.StringCoordinates}";
         }
 
         /// <summary>
         /// Атака в дальнем бою выделенного юнита
         /// </summary>
         /// <returns>Успех или неуспех</returns>
-        public virtual bool RangeAttack(ref Unit target)
+        public virtual string RangeAttack(ref Unit target)
         {
             // Бросаем кубик, чтобы определить, нанесли ли мы урон
             if (this.RangeSkill >= UnitUtility.RollDice1D6())
             {
                 target.Health -= this.RangeDamage;
-                return true;
+                return $"{this.Name}: {this.StringCoordinates} нанес {target.Name}: {target.StringCoordinates} {this.RangeDamage} урона выстрелом";
             }
             // Урон не был нанесен
-            return false;
+            return $"{this.Name}: {this.StringCoordinates} не попал в {target.Name}: {target.StringCoordinates}";
         }
 
         public string Data()
@@ -149,7 +149,6 @@ namespace TableGame.Units
                     ab.ProcessPassiveAbility(this);
                 }
             }
-
         }
     }
 }
