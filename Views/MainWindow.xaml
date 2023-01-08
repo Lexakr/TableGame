@@ -22,7 +22,7 @@
             <ItemsControl ItemsSource="{Binding }" ItemTemplate="{DynamicResource DataTemplate_Level2}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <StackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
@@ -125,7 +125,13 @@
             <ScrollViewer MinWidth="300" MinHeight="100"
             HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
                 <!--<Viewbox Stretch="UniformToFill">-->
-                <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}"/>
+                <ItemsControl ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentGame.GameMap.Tiles}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
                 <!--</Viewbox>-->
             </ScrollViewer>
 
