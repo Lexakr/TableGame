@@ -376,14 +376,21 @@ namespace TableGame.GameServices
 
         public bool PutUnitOnMap(ref Unit unit, ref Tile tile)
         {
+            ShowTilesToPutUnit();
             // TODO: проверка на участок карты, выделен ли он под стартовое размещение юнитов
-            if (tile.IsMovable())
+            if (tile.State == TileStates.CanMove && tile.IsMovable())
             {
                 unit.MoveTo(ref tile, 0); // 0 - это снять MovePoints
                 CurrentGame.Counter.Attach(unit);
+                ClearActionTiles();
                 return true;
             }
             return false;
+        }
+
+        private void ShowTilesToPutUnit()
+        {
+
         }
     }
 }
