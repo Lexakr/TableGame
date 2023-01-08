@@ -349,7 +349,7 @@ namespace TableGame.GameServices
         /// <summary>
         /// Очистка окрашенных тайлов после завершения хода юнитом
         /// </summary>
-        private void ClearActionTiles()
+        public void ClearActionTiles()
         {
             foreach (Tile t in tilesToClear)
             {
