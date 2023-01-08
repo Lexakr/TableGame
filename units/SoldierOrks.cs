@@ -22,6 +22,10 @@ namespace TableGame.Units
             {
                 new PassiveRegeneration(),
             };
+
+            RangeSkill = 7;
+            AttackRadius = 7;
+            RangeSkill = 7;
         }
         [System.Text.Json.Serialization.JsonConstructor]
         public SoldierOrks(string name, string unitfraction, List<Ability>? abilities)
