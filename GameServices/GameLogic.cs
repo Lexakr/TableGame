@@ -410,7 +410,7 @@ namespace TableGame.GameServices
             // нижняя часть поля
             if (CurrentGame.ActivePlayer == CurrentGame.SecondPlayer)
             {
-                for (int y = CurrentGame.GameMap.Size_y; y < CurrentGame.GameMap.Size_y - height; y--)
+                for (int y = CurrentGame.GameMap.Size_y - 1; y > CurrentGame.GameMap.Size_y - height; y--)
                 {
                     for (int x = 0; x < CurrentGame.GameMap.Size_x; x++)
                     {
