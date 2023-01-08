@@ -94,12 +94,18 @@ namespace TableGame.ViewModels
             var shop2 = new ShopWindow(secondPlayer);
             shop2.ShowDialog();
 
+            gameLogic.ShowTilesToPutUnit();
         }
 
         [RelayCommand]
         private void NextStep()
         {
             CurrentGame.NextStep();
+
+            gameLogic.ClearActionTiles();
+
+            if (CurrentGame.Counter.Current < 2)
+                gameLogic.ShowTilesToPutUnit();
         }
 
         [RelayCommand]
