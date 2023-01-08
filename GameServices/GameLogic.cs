@@ -192,6 +192,7 @@ namespace TableGame.GameServices
 
                 if (unit.Abilities == null || unit.Abilities.Find(x => x is TargetAbility) == null)
                 {
+                    ClearActionTiles();
                     return false;
                 }
 
