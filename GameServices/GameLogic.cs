@@ -399,9 +399,9 @@ namespace TableGame.GameServices
                 {
                     for (int x = 0; x < CurrentGame.GameMap.Size_x; x++)
                     {
-                        if (CurrentGame.GameMap.Tiles[x][y].IsMovable())
+                        if (CurrentGame.GameMap.Tiles[y][x].IsMovable())
                         {
-                            CurrentGame.GameMap.Tiles[x][y].State = TileStates.CanMove;
+                            CurrentGame.GameMap.Tiles[y][x].State = TileStates.CanMove;
                         }
                     }
                 }
@@ -414,9 +414,9 @@ namespace TableGame.GameServices
                 {
                     for (int x = 0; x < CurrentGame.GameMap.Size_x; x++)
                     {
-                        if (CurrentGame.GameMap.Tiles[x][y].IsMovable())
+                        if (CurrentGame.GameMap.Tiles[y][x].IsMovable())
                         {
-                            CurrentGame.GameMap.Tiles[x][y].State = TileStates.CanMove;
+                            CurrentGame.GameMap.Tiles[y][x].State = TileStates.CanMove;
                         }
                     }
                 }
