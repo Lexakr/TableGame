@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TableGame.Structures;
 using TableGame.Units;
+using Windows.Networking.Vpn;
 
 namespace TableGame.MapServices
 {
@@ -27,12 +29,16 @@ namespace TableGame.MapServices
         /// <param name="size_x">ширина</param>
         /// <param name="size_y">высота</param>
         /// <param name="name">имя</param>
-        public Map(int size_x, int size_y, string name)
+        /// /// <param name="genRandomStructure">Указать квадрат например 5х5 = 5. Генерации структур</param>
+        public Map(int size_x, int size_y, string name, int genRandomStructure)
         {
             this.name = name;
             this.size_x = size_x;
             this.size_y = size_y;
             tiles = TileCreator(size_x, size_y);
+
+            // добавить случайные структуры на карту зонами 5х5
+            StructureGeneratorOnMap(genRandomStructure);
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
@@ -57,24 +63,51 @@ namespace TableGame.MapServices
 
                 for (int y = 0; y < size_y; y++)
                 {
-                    // DEBUG - PLEASE DELETE
-                    if(y == 6)
-                    {
-                        newListX.Add(new Tile(x + 1, y + 1) { TileObject = new SoldierImperium() });
-                        continue;
-                    }
-                    if (y == 8)
-                    {
-                        newListX.Add(new Tile(x + 1, y + 1) { TileObject = new SoldierOrks() });
-                        continue;
-                    }
-
                     newListX.Add(new Tile(x + 1, y + 1));
                 }
 
                 newMap.Add(newListX);
             }
+
             return newMap;
+        }
+
+        /// <summary>
+        /// Генерация структур на карте. Блочная. Int указывает зону (квадрат)
+        /// где будет структура например 5х5 = 5
+        /// </summary>
+        private void StructureGeneratorOnMap(int sideOfSquare)
+        {
+            var test = Math.Ceiling(Convert.ToDecimal(Tiles.Count) / sideOfSquare);
+
+            // по Х
+            var blockX = 0;
+
+            // приведение к большему числу - чтобы на границах поля корректно формировались структуры
+            for (int i = 0; i < Math.Ceiling(Convert.ToDecimal(Tiles.Count) / sideOfSquare); i++)
+            {
+                // спускаемся ниже
+                var blockY = 0;
+
+                for (int j = 0; j < Math.Ceiling(Convert.ToDecimal(Tiles[0].Count) / sideOfSquare); j++)
+                {
+                    var x = new Random().Next(0, sideOfSquare) + blockX;
+                    var y = new Random().Next(0, sideOfSquare) + blockY;
+
+                    if (x >= Tiles.Count || y >= Tiles[0].Count)
+                    {
+                        blockY += sideOfSquare;
+                        continue;
+                    }
+
+                    Tiles[x][y].AddObj(new Rock());
+
+                    blockY += sideOfSquare;
+                }
+
+                blockX += sideOfSquare;
+            }
+
         }
 
         public void AddObject(MapObject o)

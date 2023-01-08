@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TableGame.MapServices
+namespace TableGame.Structures
 {
     internal class Rock : Structure
     {
         public Rock()
         {
-            Icon = "/Resources/Rocks/rock" + new Random().Next(1,5).ToString() + ".png";
+            Icon = "/Resources/Rocks/rock" + new Random().Next(1, 5).ToString() + ".png";
         }
     }
 }

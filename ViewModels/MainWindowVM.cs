@@ -51,7 +51,7 @@ namespace TableGame.ViewModels
         {
             logger= Logger.GetInstance();
 
-            var newMap = new Map(32, 32, "test_map");
+            var newMap = new Map(32, 32, "test_map", 4);
             var counter = new StepCounter(totalSteps);
 
             currentGame = new Game(newMap,
@@ -67,7 +67,29 @@ namespace TableGame.ViewModels
             counter.GameEnded += GameOver;
 
             StartGame();
-            
+
+
+#if DEBUG
+            // DEBUG - PLEASE DELETE
+
+            // add unit for test
+            foreach(var item in currentGame.GameMap.Tiles)
+            {
+                var tile = item[4];
+                tile.State = TileStates.CanMove;
+                Unit ork = new SoldierOrks();
+                gameLogic.PutUnitOnMap(ref ork, ref tile);
+                tile.State = TileStates.Default;
+
+                tile = item[item.Count - 5];
+                tile.State = TileStates.CanMove;
+                Unit imper = new SoldierImperium();
+                gameLogic.PutUnitOnMap(ref imper, ref tile);
+                tile.State = TileStates.Default;
+            }
+
+#endif
+
         }
 
         private void StartGame()

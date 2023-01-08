@@ -21,6 +21,10 @@
     <None Remove="Resources\Grass\grass2.png" />
     <None Remove="Resources\Grass\grass3.png" />
     <None Remove="Resources\Grass\grass4.png" />
+    <None Remove="Resources\Rocks\rock1.png" />
+    <None Remove="Resources\Rocks\rock2.png" />
+    <None Remove="Resources\Rocks\rock3.png" />
+    <None Remove="Resources\Rocks\rock4.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +56,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Grass\grass4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Rocks\rock1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Rocks\rock2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Rocks\rock3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Rocks\rock4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
