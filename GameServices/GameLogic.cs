@@ -402,6 +402,7 @@ namespace TableGame.GameServices
                         if (CurrentGame.GameMap.Tiles[y][x].IsMovable())
                         {
                             CurrentGame.GameMap.Tiles[y][x].State = TileStates.CanMove;
+                            tilesToClear.Add(CurrentGame.GameMap.Tiles[y][x]);
                         }
                     }
                 }
@@ -417,6 +418,7 @@ namespace TableGame.GameServices
                         if (CurrentGame.GameMap.Tiles[y][x].IsMovable())
                         {
                             CurrentGame.GameMap.Tiles[y][x].State = TileStates.CanMove;
+                            tilesToClear.Add(CurrentGame.GameMap.Tiles[y][x]);
                         }
                     }
                 }
