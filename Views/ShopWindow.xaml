@@ -9,7 +9,7 @@
         xmlns:viewmodels="clr-namespace:TableGame.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:ShopWindowVM}"
-        Title="ShowWindow" Height="450" Width="800"
+        Title="Магазин" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
@@ -42,7 +42,7 @@
 
                 <StackPanel Margin="40,40,40,40"
                             Orientation="Vertical">
-                    <TextBlock Text="Player staff"
+                    <TextBlock Text="Юниты игрока"
                                HorizontalAlignment="Center"
                                FontSize="20"/>
                     <ListBox ItemsSource="{Binding ActivePlayer.UnitsInInvertory}"
@@ -72,7 +72,7 @@
                 <StackPanel Margin="40,40,40,40"
                             Orientation="Vertical" Grid.Row="1">
 
-                    <TextBlock Text="SHOP"
+                    <TextBlock Text="Купить"
                                HorizontalAlignment="Center"
                                FontSize="20"/>
                     <ListBox ItemsSource="{Binding ShopUnits}"

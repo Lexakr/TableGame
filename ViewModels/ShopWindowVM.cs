@@ -48,6 +48,9 @@ namespace TableGame.ViewModels
         [RelayCommand]
         public void BuyUnit(Unit unit)
         {
+            if (unit == null)
+                return;
+
             if((ActivePlayer.Money - unit.Price) < 0)
             {
                 MessageBox.Show("Недостаточно денег", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -61,6 +64,9 @@ namespace TableGame.ViewModels
         [RelayCommand]
         public void SellUnit(Unit unit)
         {
+            if (unit == null)
+                return;
+
             ActivePlayer.UnitsInInvertory.Remove(unit);
             ActivePlayer.Money += unit.Price;
         }

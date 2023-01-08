@@ -18,7 +18,8 @@ namespace TableGame.GameServices
         /// <summary>
         /// Очки игрока. дающиеся за действия (убийство и тд)
         /// </summary>
-        public int Points { get; set; } = 0;
+        [ObservableProperty]
+        private int score = 0;
 
         [ObservableProperty]
         private int money = 100;

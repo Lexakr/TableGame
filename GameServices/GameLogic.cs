@@ -137,7 +137,7 @@ namespace TableGame.GameServices
 
                 if (target.Health <= 0)
                 {
-                    CurrentGame.ActivePlayer.Points += target.Price;
+                    CurrentGame.ActivePlayer.Score += target.Price;
                     endTile.TileObject = null;
                 }
             }
