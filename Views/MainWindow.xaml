@@ -87,14 +87,14 @@
                     <TextBlock Text="{Binding CurrentGame.TotalSteps, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
                     <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10" />
 
-                    
+
                 </StackPanel>
-                
+
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    
+
                     <Button Content="Следующий ход" Command="{Binding NextStepCommand}" />
                 </StackPanel>
-                
+
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Text="{Binding CurrentGame.FirstPlayer.Name, StringFormat=Очки игрока {0}}" Margin="10,10,10,10" />
                     <TextBlock Text="{Binding CurrentGame.FirstPlayer.Score}" Margin="10,10,10,10" />
@@ -105,7 +105,7 @@
         </StackPanel>
 
 
-        <DockPanel Grid.Row="2">
+        <DockPanel Grid.Row="2" VerticalAlignment="Top" Margin="0,0,0,0">
 
             <StackPanel DockPanel.Dock="Left"
                         Orientation="Vertical">
@@ -134,7 +134,9 @@
                         x:Name="StackPanelLogs"
                         Orientation="Vertical"
                         MinWidth="200"
-                        MinHeight="200">
+                        MinHeight="200"
+                        VerticalAlignment="Stretch"
+                        Margin="0,0,0,0">
 
                 <StackPanel Orientation="Vertical">
                     <!--<TextBlock Text="Debug info Tile: " />
@@ -145,13 +147,13 @@
 
                 <ListView Name="ListTrackPlayers"
                           Width="auto"
-                          Height="450"
+                          
                           ItemsSource="{Binding Logger.LogsOnlyInfo, UpdateSourceTrigger=PropertyChanged}"
-                          HorizontalContentAlignment="Stretch"
-                          VerticalAlignment="Stretch"
+                          VerticalContentAlignment="Top"
+                          VerticalAlignment="Top"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
-                          ScrollViewer.CanContentScroll="True" >
+                          ScrollViewer.CanContentScroll="False" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -165,8 +167,8 @@
 
 
         </DockPanel>
-        
-        
+
+
 
     </Grid>
 
