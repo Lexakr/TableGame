@@ -159,29 +159,29 @@ namespace TableGame.GameServices
                         targetAbilities.Add(ability);
                         variances.Add(ability.Name);
                     }
-                }
 
-                var result = OpenMenu(variances);
+                    var result = OpenMenu(variances);
 
-                switch (result)
-                {
-                    // Закрыли окно - не выбрали действие
-                    case -1:
-                        ClearActionTiles();
-                        return false;
-                    default:
-                        foreach (var ability in targetAbilities)
-                        {
-                            if (variances[result] == ability.Name)
+                    switch (result)
+                    {
+                        // Закрыли окно - не выбрали действие
+                        case -1:
+                            ClearActionTiles();
+                            return false;
+                        default:
+                            foreach (var ability in targetAbilities)
                             {
-                                logger.Info(ability.ApplyAbilityOnTarget(ref unit, ref ally));
+                                if (variances[result] == ability.Name)
+                                {
+                                    logger.Info(ability.ApplyAbilityOnTarget(ref unit, ref ally));
+                                }
                             }
-                        }
-                        break;
-                }
+                            break;
+                    }
 
-                // Перевод в ноль очков хода после каста на союзника
-                unit.MovePointsCurrent = 0;
+                    // Перевод в ноль очков хода после каста на союзника
+                    unit.MovePointsCurrent = 0;
+                }
             }
 
             // клетка изначальная
