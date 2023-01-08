@@ -20,9 +20,9 @@ namespace TableGame.Units
             PosY= posY;
         }
 
-        public override bool MeleeAttack(ref Unit target)
+        public override string MeleeAttack(ref Unit target)
         {
-            return false;
+            return null;
         }
     }
 

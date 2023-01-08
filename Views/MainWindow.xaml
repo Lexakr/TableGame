@@ -60,6 +60,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="0.25*"/>
         </Grid.RowDefinitions>
 
@@ -76,21 +77,34 @@
 
         <StackPanel Grid.Row="1" Orientation="Vertical" >
 
-            <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerName, StringFormat=Текущий игрок: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
-                <TextBlock Text="Фракция: " Margin="10,10,10,10"/>
-                <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerFraction.Name, StringFormat=Фракция: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
-                <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10"/>
-                <TextBlock Text="{Binding CurrentGame.TotalSteps, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
-                <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10" />
+                    <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerName, StringFormat=Текущий игрок: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
+                    <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerFraction.Name, StringFormat=Ход фракции: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
+                    <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10"/>
+                    <TextBlock Text="{Binding CurrentGame.TotalSteps, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
+                    <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10" />
 
-                <Button Content="Следующий ход" Command="{Binding NextStepCommand}" />
+                    
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    
+                    <Button Content="Следующий ход" Command="{Binding NextStepCommand}" />
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding CurrentGame.FirstPlayer.Name, StringFormat=Очки игрока {0}}" Margin="10,10,10,10" />
+                    <TextBlock Text="{Binding CurrentGame.FirstPlayer.Score}" Margin="10,10,10,10" />
+                    <TextBlock Text="{Binding CurrentGame.SecondPlayer.Name, StringFormat=Очки игрока {0}}" Margin="10,10,10,10" />
+                    <TextBlock Text="{Binding CurrentGame.SecondPlayer.Score}" Margin="10,10,10,10" />
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
-        
+
         <DockPanel Grid.Row="2">
 
             <StackPanel DockPanel.Dock="Left"
@@ -149,10 +163,11 @@
 
             </StackPanel>
 
-            
+
         </DockPanel>
         
         
+
     </Grid>
 
 </Window>
