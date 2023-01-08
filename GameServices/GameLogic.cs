@@ -381,7 +381,7 @@ namespace TableGame.GameServices
             {
                 unit.MoveTo(ref tile, 0); // 0 - это снять MovePoints
                 CurrentGame.Counter.Attach(unit);
-                ClearActionTiles();
+                tile.State = TileStates.Default;
                 return true;
             }
             return false;
