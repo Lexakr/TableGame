@@ -13,7 +13,7 @@ namespace TableGame.GameServices
     public partial class Player : ObservableObject
     {
         public string Name { get; set; }
-        public Fraction PlayerFraction { get; set; }
+        public Fraction Fraction { get; set; }
 
         /// <summary>
         /// Очки игрока. дающиеся за действия (убийство и тд)
@@ -27,19 +27,21 @@ namespace TableGame.GameServices
         [ObservableProperty]
         private ObservableCollection<Unit> unitsInInvertory;
 
-        public Player(string playerName, Fraction playerFraction)
+        public Player(string name, Fraction fraction)
         {
-            Name = playerName;
-            PlayerFraction = playerFraction;
+            Name = name;
+            Fraction = fraction;
             UnitsInInvertory = new ObservableCollection<Unit> {  }; 
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
-        public Player(string PlayerName, string PlayerFraction, ObservableCollection<Unit>? PlayerUnits)
+        public Player(string name, Fraction fraction, ObservableCollection<Unit>? unitsInInvertory, int score, int money)
         {
-            this.Name = PlayerName;
-            //this.PlayerFraction = PlayerFraction;
-            this.UnitsInInvertory = PlayerUnits;
+            this.Name = name;
+            this.Fraction = fraction;
+            this.UnitsInInvertory = unitsInInvertory;
+            this.score = score;
+            this.money = money;
         }
     }
 }

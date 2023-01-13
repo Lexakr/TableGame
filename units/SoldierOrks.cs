@@ -27,12 +27,5 @@ namespace TableGame.Units
             AttackRadius = 7;
             RangeSkill = 7;
         }
-        [System.Text.Json.Serialization.JsonConstructor]
-        public SoldierOrks(string name, string unitfraction, List<Ability>? abilities)
-        {
-            Name = name;
-            FractionName = unitfraction;
-            Abilities = abilities;
-        }
     }
 }

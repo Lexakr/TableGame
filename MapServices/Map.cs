@@ -44,8 +44,6 @@ namespace TableGame.MapServices
         [System.Text.Json.Serialization.JsonConstructor]
         public Map(int size_x, int size_y, string name, List<List<Tile>> coordinates)
         {
-            tiles = new();
-
             this.name = name;
             this.size_x = size_x;
             this.size_y = size_y;

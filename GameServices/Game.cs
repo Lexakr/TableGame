@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TableGame.MapServices;
 
@@ -14,6 +15,7 @@ namespace TableGame.GameServices
     /// </summary>
     internal partial class Game : ObservableObject
     {
+        
         public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer, StepCounter counter)
         {
             this.gameMap = gameMap;
@@ -23,16 +25,21 @@ namespace TableGame.GameServices
             this.counter = counter;
         }
 
-        [System.Text.Json.Serialization.JsonConstructor]
-        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer)
+        // TODO: activePlayer нужно через ссылку на firstPlayer или secondPlayer, ReferenceHandler
+        [JsonConstructor]
+        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer, StepCounter counter, Player activePlayer)
         {
             this.gameMap = gameMap;
             this.gameStats = gameStats;
             this.firstPlayer = firstPlayer;
             this.secondPlayer = secondPlayer;
+            Counter = counter;
+            ActivePlayer = activePlayer;
         }
 
         private readonly Map gameMap;
+
+        // TODO: Понять, нужно ли это поле и свойство ваще
         private readonly GameStat gameStats;
 
         private readonly Player firstPlayer;

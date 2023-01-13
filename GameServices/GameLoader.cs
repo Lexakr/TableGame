@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 
 namespace TableGame.GameServices
 {
@@ -12,6 +13,8 @@ namespace TableGame.GameServices
         /// <summary>
         /// Загрузка игровой сессии. JSON десериализация из массива байтов UTF-8.
         /// </summary>
+        /// <param name="fileName">Имя файла</param>
+        /// <returns>Экземпляр Game или null, если неуспех</returns>
         public static Game? LoadGame(string fileName)
         {
             try
@@ -20,14 +23,13 @@ namespace TableGame.GameServices
                 // Обрабатывать поля, использовать конвертер для 2D массивов
                 var options = new JsonSerializerOptions
                 {
-                    Converters = { new Array2DConverter() },
                     IncludeFields = true
                 };
                 return JsonSerializer.Deserialize<Game>(stream, options);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message, "Ошибка загрузки");
                 // Возвращаем null как неудачу операции
                 return null;
             }
@@ -40,7 +42,6 @@ namespace TableGame.GameServices
             var options = new JsonSerializerOptions
             {
                 IncludeFields = true,
-                Converters = { new Array2DConverter() },
             };
             try
             {
@@ -50,7 +51,7 @@ namespace TableGame.GameServices
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message, "Ошибка сохранения");
                 return false;
             }
         }

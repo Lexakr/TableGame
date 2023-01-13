@@ -92,12 +92,13 @@ namespace TableGame
         }
 
         [System.Text.Json.Serialization.JsonConstructor]
-        public Tile(int posX, int posY, MapObject? tileObject, bool Passability)
+        public Tile(int posX, int posY, MapObject? tileObject, TileStates state, string picture)
         {
             this.posX = posX;
             this.posY = posY;
             this.tileObject = tileObject;
-            State = TileStates.Default;
+            State = state;
+            Picture = picture;
         }
 
         public void AddObj(MapObject e) => TileObject = e;

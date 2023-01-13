@@ -27,12 +27,5 @@ namespace TableGame.Units
                 new Fireball(),
             };
         }
-        [System.Text.Json.Serialization.JsonConstructor]
-        public SoldierImperium(string name, string unitfraction, List<Ability>? abilities)
-        {
-            Name = name;
-            FractionName = unitfraction;
-            Abilities = abilities;
-        }
     }
 }

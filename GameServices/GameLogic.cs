@@ -48,7 +48,7 @@ namespace TableGame.GameServices
                 return false;
             }
 
-            if ((startTile.TileObject as Unit).FractionName != CurrentGame.ActivePlayer.PlayerFraction.Name)
+            if ((startTile.TileObject as Unit).FractionName != CurrentGame.ActivePlayer.Fraction.Name)
             {
                 ShowInteractTiles();
                 return false;
@@ -290,7 +290,7 @@ namespace TableGame.GameServices
                 {
                     var unit = y.TileObject as Unit;
 
-                    if (unit != null && unit.FractionName == CurrentGame.ActivePlayer.PlayerFraction.Name)
+                    if (unit != null && unit.FractionName == CurrentGame.ActivePlayer.Fraction.Name)
                     {
                         if(unit.MovePointsCurrent != 0)
                             y.State = TileStates.CanInteract;

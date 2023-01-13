@@ -62,22 +62,6 @@ namespace TableGame.Units
             FractionName = "FractionName";
         }
 
-        [System.Text.Json.Serialization.JsonConstructor]
-        public Unit(string Name, int PosX, int PosY, Tile? CurrentLocation, string UnitFraction, int Health, int MaxHealth, int Price,
-            bool IsMelee, bool IsRange, int Power, int MeleeAttacks, int MovePoints, List<Ability>? Abilities)
-        {
-            this.Name = Name;
-            this.PosX = PosX;
-            this.PosY = PosY;
-            this.FractionName = UnitFraction;
-            this.Health = Health;
-            this.MaxHealth = MaxHealth;
-            this.Price = Price;
-            this.MeleeDamage = MeleeAttacks;
-            //this.MovePoints = MovePoints;
-            this.Abilities = Abilities;
-        }
-
         /// <summary>
         /// Обновляет координаты юнита и добавляет юнита в тайл.
         /// </summary>

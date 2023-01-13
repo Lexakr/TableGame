@@ -13,13 +13,6 @@ namespace TableGame.Units
 
         }
 
-        [System.Text.Json.Serialization.JsonConstructor]
-        public Soldier(int posX, int posY)
-        {
-            PosX= posX;
-            PosY= posY;
-        }
-
         public override string MeleeAttack(ref Unit target)
         {
             return null;

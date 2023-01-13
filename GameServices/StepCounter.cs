@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace TableGame.GameServices
@@ -24,6 +25,13 @@ namespace TableGame.GameServices
         {
             current = 0;
             this.total = total;
+        }
+
+        [JsonConstructor]
+        public StepCounter(int current, int total)
+        {
+            Current = current;
+            Total = total;
         }
 
         public void Attach(IObserver observer)

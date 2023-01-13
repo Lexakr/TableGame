@@ -28,7 +28,7 @@ namespace TableGame.ViewModels
             shopUnits = new ObservableCollection<Unit>();
             
             // загрузка доступных типов юнита для игрока
-            foreach(var unitType in activePlayer.PlayerFraction.FractionUnits)
+            foreach(var unitType in activePlayer.Fraction.FractionUnits)
             {
                 // создание объекта на базе допусного типа юнита для игрока
                 var unit = Activator.CreateInstance(unitType) as Unit;
