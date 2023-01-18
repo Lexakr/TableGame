@@ -66,11 +66,11 @@
 
         <DockPanel Grid.Row="0">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Start new game" Click="MenuItemStartNewGame_Click"/>
+                <MenuItem Header="Start new game" />
                 <Separator />
-                <MenuItem Header="Save game"/>
+                <MenuItem Header="Save game" Command="{Binding SaveGameCommand}"/>
                 <Separator />
-                <MenuItem Header="Load game"/>
+                <MenuItem Header="Load game" Command="{Binding LoadGameCommand}"/>
             </Menu>
         </DockPanel>
 
@@ -81,12 +81,10 @@
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                    <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerName, StringFormat=Текущий игрок: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
-                    <TextBlock Text="{Binding CurrentGame.ActivePlayer.PlayerFraction.Name, StringFormat=Ход фракции: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
-                    <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10"/>
-                    <TextBlock Text="{Binding CurrentGame.TotalSteps, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
-                    <TextBlock Text="{Binding CurrentGame.CurrentStep, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10" />
-
+                    <TextBlock Text="{Binding CurrentGame.ActivePlayer.Name, StringFormat=Текущий игрок: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
+                    <TextBlock Text="{Binding CurrentGame.ActivePlayer.Fraction.Name, StringFormat=Ход фракции: {0}}" FontWeight="Bold" Margin="10,10,10,10"/>
+                    <TextBlock Text="{Binding CurrentGame.Counter.Current, StringFormat=Текущий ход: {0}}" Margin="10,10,10,10"/>
+                    <TextBlock Text="{Binding CurrentGame.Counter.Total, StringFormat=Всего ходов: {0}}" Margin="10,10,10,10" />
 
                 </StackPanel>
 

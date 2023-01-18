@@ -40,10 +40,5 @@ namespace TableGame.Views
 
         }
 
-        private void MenuItemStartNewGame_Click(object sender, RoutedEventArgs e)
-        {
-            new StartMenuWindow().Show();
-            this.Close();
-        }
     }
 }

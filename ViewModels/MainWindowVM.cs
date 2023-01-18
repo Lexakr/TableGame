@@ -12,6 +12,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using TableGame.Views;
 using TableGame.Units;
+using Microsoft.Win32;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 
 namespace TableGame.ViewModels
 {
@@ -46,6 +49,11 @@ namespace TableGame.ViewModels
         private Unit listBoxSelectedItem;
 
         private GameLogic gameLogic;
+
+        public MainWindowVM()
+        {
+
+        }
 
         public MainWindowVM(Player player1, Player player2, int totalSteps)
         {
@@ -117,6 +125,44 @@ namespace TableGame.ViewModels
             shop2.ShowDialog();
 
             gameLogic.ShowTilesToPutUnit();
+        }
+
+        [RelayCommand]
+        private void SaveGame()
+        {
+            SaveFileDialog oSaveFileDialog = new SaveFileDialog();
+            oSaveFileDialog.Filter = "JSON files|*.json";
+
+            if (oSaveFileDialog.ShowDialog() == false)
+                return;
+
+            string fileName = oSaveFileDialog.FileName;
+
+            GameLoader.SaveGame(CurrentGame, fileName);
+        }
+
+        [RelayCommand]
+        private void LoadGame()
+        {
+            OpenFileDialog theDialog = new OpenFileDialog();
+            //choofdlog.Filter = "All Files (*.*)|*.*";
+            theDialog.Filter = "JSON files|*.json";
+            theDialog.FilterIndex = 1;
+            theDialog.Multiselect = false; // important
+
+            if (theDialog.ShowDialog() == false)
+                return;
+
+            string sFileName = theDialog.FileName;
+            //string[] arrAllFiles = theDialog.FileNames; //used when Multiselect = true
+            CurrentGame = GameLoader.LoadGame(sFileName);
+
+            gameLogic = new GameLogic();
+            gameLogic.CurrentGame = currentGame;
+            gameLogic.OpenMenu += OpenChooseMenu;
+
+            CurrentGame.Counter.GameEnded += GameOver;
+
         }
 
         [RelayCommand]
