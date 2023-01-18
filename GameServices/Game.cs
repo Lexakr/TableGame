@@ -37,14 +37,14 @@ namespace TableGame.GameServices
             ActivePlayer = activePlayer;
         }
 
+        private Logger logger = Logger.GetInstance();
         private readonly Map gameMap;
-
         // TODO: Понять, нужно ли это поле и свойство ваще
         private readonly GameStat gameStats;
-
         private readonly Player firstPlayer;
         private readonly Player secondPlayer;
 
+        public Logger Logger { get => logger; set => value = logger; }
         public Map GameMap { get => gameMap; }
         public GameStat GameStats { get => gameStats; }
         public Player FirstPlayer { get => firstPlayer; }

@@ -17,7 +17,7 @@ namespace TableGame.GameServices
     /// </summary>
     internal class GameLogic
     {
-        private Logger logger = Logger.GetInstance();
+        //private Logger logger = Logger.GetInstance();
 
         private List<Tile> tilesToClear = new();
         /// <summary>
@@ -124,18 +124,18 @@ namespace TableGame.GameServices
                         return false;
                     case 0:
                         attacker.RangeAttack(ref target);
-                        logger.Info($"{attacker.Name}: {startTile.StringCoordinates} нанес {target.Name}: {endTile.StringCoordinates} {attacker.RangeDamage} урона выстрелом");
+                        CurrentGame.Logger.Info($"{attacker.Name}: {startTile.StringCoordinates} нанес {target.Name}: {endTile.StringCoordinates} {attacker.RangeDamage} урона выстрелом");
                         break;
                     case 1:
                         attacker.MeleeAttack(ref target);
-                        logger.Info($"{attacker.Name}: {startTile.StringCoordinates} нанес {target.Name}: {endTile.StringCoordinates} {attacker.MeleeDamage} урона");
+                        CurrentGame.Logger.Info($"{attacker.Name}: {startTile.StringCoordinates} нанес {target.Name}: {endTile.StringCoordinates} {attacker.MeleeDamage} урона");
                         break;
                     default:
                         foreach (var ability in targetAbilities)
                         {
                             if (variances[result] == ability.Name)
                             {
-                                logger.Info(ability.ApplyAbilityOnTarget(ref attacker, ref target));
+                                CurrentGame.Logger.Info(ability.ApplyAbilityOnTarget(ref attacker, ref target));
                             }
                         }
                         break;
@@ -183,7 +183,7 @@ namespace TableGame.GameServices
                             {
                                 if (variances[result] == ability.Name)
                                 {
-                                    logger.Info(ability.ApplyAbilityOnTarget(ref unit, ref ally));
+                                    CurrentGame.Logger.Info(ability.ApplyAbilityOnTarget(ref unit, ref ally));
                                 }
                             }
                             break;
@@ -230,7 +230,7 @@ namespace TableGame.GameServices
                         {
                             if (variances[result] == ability.Name)
                             {
-                                logger.Info(ability.ApplyAbilityOnTarget(ref unit, ref unit));
+                                CurrentGame.Logger.Info(ability.ApplyAbilityOnTarget(ref unit, ref unit));
                             }
                         }
                         break;
@@ -256,17 +256,17 @@ namespace TableGame.GameServices
             // просчитать MovePoints - хватит или нет
             int xDiffrent = endTile.PosX - startTile.PosX;
             int yDiffrent = endTile.PosY - startTile.PosY;
-            logger.Info($"До инверсий: Разница Х: {xDiffrent} Разница Y {yDiffrent}");
+            CurrentGame.Logger.Info($"До инверсий: Разница Х: {xDiffrent} Разница Y {yDiffrent}");
 
             xDiffrent = xDiffrent < 0 ? -xDiffrent : xDiffrent;
             yDiffrent = yDiffrent < 0 ? -yDiffrent : yDiffrent;
-            logger.Debug($"После инверсий: Разница Х: {xDiffrent} Разница Y {yDiffrent}");
+            CurrentGame.Logger.Debug($"После инверсий: Разница Х: {xDiffrent} Разница Y {yDiffrent}");
 
             var movePoints = xDiffrent > yDiffrent ? xDiffrent : yDiffrent;
-            logger.Debug($"Разница (movePoints): {movePoints}");
+            CurrentGame.Logger.Debug($"Разница (movePoints): {movePoints}");
 
             ((Unit)startTile.TileObject).MoveTo(ref endTile, movePoints); // Отнимать MovePoints
-            logger.Debug($"Текущие (movePoints) юнита: {(endTile.TileObject as Unit).MovePointsCurrent}");
+            CurrentGame.Logger.Debug($"Текущие (movePoints) юнита: {(endTile.TileObject as Unit).MovePointsCurrent}");
 
             startTile.RemoveObj();
             // TODO: Вызвать функцию отрисовки ShowActionTiles ЕСЛИ есть ещё movePoints
