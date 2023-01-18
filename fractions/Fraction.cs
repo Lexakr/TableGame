@@ -17,15 +17,14 @@ namespace TableGame.Fractions
         /// <summary>
         /// Список типов юнитов фракции
         /// </summary>
-        public List<Type> FractionUnits { get; set; }
+        public List<Type> FractionUnits { get; set; } = new();
 
         public Fraction() { }
 
         [System.Text.Json.Serialization.JsonConstructor]
-        public Fraction (string name, List<Type> fractionUnits)
+        public Fraction (string name)
         {
             Name = name;
-            FractionUnits = fractionUnits;
         }
     }
 }
