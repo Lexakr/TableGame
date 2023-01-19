@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -41,13 +42,13 @@ namespace TableGame.MapServices
             StructureGeneratorOnMap(genRandomStructure);
         }
 
-        [System.Text.Json.Serialization.JsonConstructor]
-        public Map(int size_x, int size_y, string name, List<List<Tile>> coordinates)
+        [JsonConstructor]
+        public Map(int size_x, int size_y, string name, List<List<Tile>> tiles)
         {
             this.name = name;
             this.size_x = size_x;
             this.size_y = size_y;
-            this.tiles = coordinates;
+            this.tiles = tiles;
         }
 
         //public Map()

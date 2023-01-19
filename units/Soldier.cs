@@ -8,10 +8,6 @@ namespace TableGame.Units
 {
     internal class Soldier : Unit
     {
-        public Soldier() 
-        {
-
-        }
 
         public override string MeleeAttack(ref Unit target)
         {

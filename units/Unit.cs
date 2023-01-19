@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -10,40 +11,41 @@ namespace TableGame.Units
     public abstract class Unit : MapObject, IObserver
     {
         /// <summary>Фракция юнита</summary>
-        public string FractionName { get; set; }
+        public virtual string FractionName { get; set; } = "Fraction";
 
         /// <summary>Текущий уровень здоровья</summary>
         public int Health { get; set; }
 
         /// <summary>Максимальное здоровье</summary>
-        public int MaxHealth { get; }
+        public virtual int MaxHealth { get; } = 4;
 
         /// <summary>Цена покупки</summary>
-        public int Price { set;  get; } = 1;
+        public virtual int Price { set;  get; } = 1;
 
         /// <summary>Навык ближнего боя 1-100%, 6-0%</summary>
-        public int MeleeSkill { get; set; }
+        public virtual int MeleeSkill { get; set; } = 1;
 
         /// <summary>Кол-во урона в ближнем бою</summary>
-        public int MeleeDamage { get; set; }
+        public virtual int MeleeDamage { get; set; } = 3;
 
         /// <summary>Навык дальнего боя 1-100%, 6-0%.</summary>
-        public int RangeSkill { get; set; }
+        public virtual int RangeSkill { get; set; } = 1; 
 
         /// <summary>Кол-во урона в дальнем бою</summary>
-        public int RangeDamage { get; set; }
+        public virtual int RangeDamage { get; set; } = 2;
 
         /// <summary>Радиус атаки</summary>
-        public int AttackRadius { get; set; }
+        public virtual int AttackRadius { get; set; } = 5;
 
         /// <summary>Дальность хода</summary>
-        public int MovePointsTotal { get; set; }
+        public virtual int MovePointsTotal { get; set; } = 2;
 
         /// <summary>Дальность хода</summary>
         public int MovePointsCurrent { get; set; } = 0;
 
         /// <summary>Способности юнита</summary>
-        public List<Ability>? Abilities { get; set; }
+        [JsonIgnore]
+        public virtual List<Ability>? Abilities { get; set; } = null;
 
         public string StringCoordinates { get { return $"x: {PosX}, y: {PosY}"; } }
 
@@ -52,14 +54,8 @@ namespace TableGame.Units
         /// </summary>
         public Unit()
         {
-            MaxHealth = 4;
-            Health = MaxHealth; // полное здоровье
-            Price = 50;
-            MeleeDamage = 2;
-            RangeSkill = 6;
-            RangeDamage = 3;
-            MovePointsTotal = 3;
-            FractionName = "FractionName";
+            Health = MaxHealth; // полное здоровье при создании юнита
+            MovePointsCurrent = MovePointsTotal;
         }
 
         /// <summary>

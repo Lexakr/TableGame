@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace TableGame.GameServices
             Points = 0;
         }
 
-        [System.Text.Json.Serialization.JsonConstructor]
+        [JsonConstructor]
         public GameStat(int MovesNum, int Points)
         {
             this.MovesNum = MovesNum;

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,7 +92,7 @@ namespace TableGame
             Hash = this.GetHashCode().ToString();
         }
 
-        [System.Text.Json.Serialization.JsonConstructor]
+        [JsonConstructor]
         public Tile(int posX, int posY, MapObject? tileObject, TileStates state, string picture)
         {
             this.posX = posX;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TableGame.Units;
 
@@ -12,19 +13,12 @@ namespace TableGame.Fractions
         /// <summary>
         /// Имя фракции
         /// </summary>
-        public string Name { get; set; }
+        public abstract string Name { get; }
 
         /// <summary>
         /// Список типов юнитов фракции
         /// </summary>
-        public List<Type> FractionUnits { get; set; } = new();
-
-        public Fraction() { }
-
-        [System.Text.Json.Serialization.JsonConstructor]
-        public Fraction (string name)
-        {
-            Name = name;
-        }
+        [JsonIgnore]
+        public abstract List<Type> FractionUnits { get; }
     }
 }

@@ -12,20 +12,14 @@ namespace TableGame.Units
 {
     internal class SoldierImperium : Soldier
     {
-        public SoldierImperium()
-        {
-            Name = "Имперский Пехотинец";
-
-            FractionName = "Империум Человечества";
-
-            Icon = "/Resources/enemyTest1.png";
-
-            Abilities = new List<Ability>
+        public override string Name { get; set; } = "Имперский Пехотинец";
+        public override string FractionName { get; set; } = "Империум Человечества";
+        public override string Icon { get; set; } = "/Resources/enemyTest1.png";
+        public override List<Ability>? Abilities { get; set; } = new()
             {
                 new PassiveRegeneration(),
                 new HealTarget(),
                 new Fireball(),
             };
-        }
     }
 }

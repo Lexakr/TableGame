@@ -34,8 +34,8 @@ namespace TableGame
             Logs = new ObservableCollection<string>();
             LogsOnlyInfo = new ObservableCollection<string>();
 
-            for (int i = 0; i < 200; i++)
-                Info("test");
+/*            for (int i = 0; i < 200; i++)
+                Info("test");*/
         }
 
         public static Logger GetInstance()

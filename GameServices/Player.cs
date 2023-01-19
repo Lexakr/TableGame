@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,7 +35,7 @@ namespace TableGame.GameServices
             UnitsInInvertory = new ObservableCollection<Unit> {  }; 
         }
 
-        [System.Text.Json.Serialization.JsonConstructor]
+        [JsonConstructor]
         public Player(string name, Fraction fraction, ObservableCollection<Unit>? unitsInInvertory, int score, int money)
         {
             this.Name = name;

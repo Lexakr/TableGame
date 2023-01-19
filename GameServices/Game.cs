@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TableGame.MapServices;
 
@@ -27,8 +27,9 @@ namespace TableGame.GameServices
 
         // TODO: activePlayer нужно через ссылку на firstPlayer или secondPlayer, ReferenceHandler
         [JsonConstructor]
-        public Game(Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer, StepCounter counter, Player activePlayer)
+        public Game(Logger logger, Map gameMap, GameStat gameStats, Player firstPlayer, Player secondPlayer, StepCounter counter, Player activePlayer)
         {
+            this.logger = logger;
             this.gameMap = gameMap;
             this.gameStats = gameStats;
             this.firstPlayer = firstPlayer;

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using System.Text.Json;
 using System.Windows;
+using System.Windows.Input;
 
 namespace TableGame.GameServices
 {
@@ -19,13 +20,19 @@ namespace TableGame.GameServices
         {
             try
             {
-                using var stream = new FileStream(fileName, FileMode.Open);
+                using StreamReader stream = File.OpenText(fileName);
                 // Обрабатывать поля, использовать конвертер для 2D массивов
-                var options = new JsonSerializerOptions
-                {
-                    IncludeFields = true
-                };
-                return JsonSerializer.Deserialize<Game>(stream, options);
+                //var options = new JsonSerializerOptions
+                //{
+                //    IncludeFields = true,
+                //    PropertyNameCaseInsensitive = true,
+                //    WriteIndented = true,
+                //};
+                JsonSerializer serializer = new();
+                serializer.TypeNameHandling = TypeNameHandling.Auto;
+                
+                return (Game)serializer.Deserialize(stream, typeof(Game));
+                //return JsonSerializer.Deserialize<Game>(stream, settings);
             }
             catch (Exception e)
             {
@@ -39,15 +46,24 @@ namespace TableGame.GameServices
         /// </summary>
         public static bool SaveGame(Game o, string fileName)
         {
-            var options = new JsonSerializerOptions
-            {
-                IncludeFields = true,
-            };
+            //var options = new JsonSerializerOptions
+            //{
+            //    IncludeFields = true,
+            //    PropertyNameCaseInsensitive = true,
+            //    WriteIndented = true,
+            //};
             try
             {
-                using var stream = new FileStream(fileName, FileMode.Create);
-                JsonSerializer.Serialize(stream, o, options);
+                // serialize JSON directly to a file
+                using StreamWriter file = File.CreateText(fileName);
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.TypeNameHandling = TypeNameHandling.Auto;
+                serializer.Formatting = Formatting.Indented;
+                serializer.Serialize(file, o);
                 return true;
+                //using var stream = new FileStream(fileName, FileMode.Create);
+                //JsonSerializer.Serialize(stream, o, options);
+                //return true;
             }
             catch (Exception e)
             {

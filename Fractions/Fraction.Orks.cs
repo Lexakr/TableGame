@@ -9,14 +9,11 @@ namespace TableGame.Fractions
 {
     internal class Orks : Fraction
     {
-        public Orks()
-        {
-            Name = "Орки";
-            FractionUnits = new List<Type>
-            {
-                typeof(SoldierOrks),
-            };
-        }
+        public override string Name { get; } = "Орки";
 
+        public override List<Type> FractionUnits { get; } = new List<Type>
+        {
+            typeof(SoldierOrks),
+        };
     }
 }
